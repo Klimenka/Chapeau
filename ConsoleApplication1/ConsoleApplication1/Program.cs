@@ -10,6 +10,8 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Thanks for the tutorial Nadia!");
+            Console.ReadLine();
             int i = 7;
             int f = 4;
             int d = i + f;
