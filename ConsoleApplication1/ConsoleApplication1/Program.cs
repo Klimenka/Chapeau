@@ -12,10 +12,10 @@ namespace ConsoleApplication1
         {
             Console.WriteLine("Thanks for the tutorial Nadia!");
             
-            int i = 7;
+            int i = 0;
             int f = 4;
             int d = i + f;
-            Console.WriteLine("Adonis is a dictator ", d);
+            Console.WriteLine("Adonis is the best project leader {0}ever", d);
             Console.ReadKey();
         }
     }
