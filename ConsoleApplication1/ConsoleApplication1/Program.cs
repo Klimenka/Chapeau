@@ -10,13 +10,7 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Thanks for the tutorial Nadia!");
-            
-            int i = 7;
-            int f = 4;
-            int d = i + f;
-            Console.WriteLine("Adonis is a dictator ", d);
-            Console.ReadKey();
+
         }
     }
 }
