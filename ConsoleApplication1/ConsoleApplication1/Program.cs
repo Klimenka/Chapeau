@@ -10,13 +10,8 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Thanks for the tutorial Nadia!");
             
-            int i = 0;
-            int f = 4;
-            int d = i + f;
-            Console.WriteLine("Adonis is the best project leader {0}ever", d);
-            Console.ReadKey();
+
         }
     }
 }
