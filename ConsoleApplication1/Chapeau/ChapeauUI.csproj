@@ -79,6 +79,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogicLayer\ChapeauLogic.csproj">
+      <Project>{1f5a5524-40a1-459e-913f-54dc633425ca}</Project>
+      <Name>ChapeauLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelLayer\ChapeauModel.csproj">
+      <Project>{0ca1f993-953c-49d7-be90-4227149d0068}</Project>
+      <Name>ChapeauModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
