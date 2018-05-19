@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChapeauModel
 {
-    class Login
+    public class Login
     {
         public string loginName { get; set; }
         public string password { get; set; }
