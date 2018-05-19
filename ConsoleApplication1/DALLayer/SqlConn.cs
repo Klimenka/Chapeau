@@ -8,10 +8,10 @@ using System.Configuration;
 
 namespace CahpeauDAL
 {
-    public class SQLconnection
+    public static class SqlConn
     {
 
-        public SqlConnection OpeConnection()
+        public static SqlConnection OpeConnection()
         {
             try
             {
@@ -38,7 +38,7 @@ namespace CahpeauDAL
         }
 
         // a methos for closing the sql connection
-        public void CloseConnection(SqlConnection connection)
+        public static void CloseConnection(SqlConnection connection)
         {
             connection.Close();
         }
