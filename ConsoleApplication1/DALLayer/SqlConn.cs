@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace CahpeauDAL
+namespace ChapeauDAL
 {
     public static class SqlConn
     {
