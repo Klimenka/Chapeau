@@ -46,6 +46,7 @@
             this.loginBtn.TabIndex = 0;
             this.loginBtn.Text = "Log in";
             this.loginBtn.UseVisualStyleBackColor = true;
+            this.loginBtn.Click += new System.EventHandler(this.LoginBtn_click);
             // 
             // nameTxtBox
             // 

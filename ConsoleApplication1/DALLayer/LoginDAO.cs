@@ -12,7 +12,7 @@ namespace ChapeauDAL
     public class LoginDAO
     {
 
-        public Employess CheckCredentials(Login user)
+        public static Employess CheckCredentials(Login user)
         {
             // create a sql connection
             SqlConnection connection = SqlConn.OpeConnection();
@@ -49,7 +49,7 @@ namespace ChapeauDAL
             return employee;
         }
 
-        public int GetEmployeeID(Login loginInfo)
+        public static int GetEmployeeID(Login loginInfo)
         {
             // create a sql connection
             SqlConnection connection = SqlConn.OpeConnection();
