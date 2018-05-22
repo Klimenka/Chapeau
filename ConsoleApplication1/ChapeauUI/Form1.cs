@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ChapeauModel;
 using ChapeauLogic;
-using LogicLayer;
+using ChapeauLogic;
 
 namespace ChapeauUI
 {
+    
     public partial class LoginForm : Form
     {
         public LoginForm()
@@ -33,10 +34,11 @@ namespace ChapeauUI
             try
             {
                 Employess employee = LoginService.CheckCredentials(new Login(userName, password, 1));
-
+                
                 if (employee.positionID == Position.Waiter)
                 {
-                    orderForm orderForm = new orderForm();
+                    //add EmployeeID for the OrderFrom
+                    orderForm orderForm = new orderForm(employee.employeeID);
                     orderForm.Show();
                     this.Hide();
                 }

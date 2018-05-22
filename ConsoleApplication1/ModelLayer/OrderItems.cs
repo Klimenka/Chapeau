@@ -7,28 +7,33 @@ using System.Threading.Tasks;
 
 namespace ChapeauModel
 {
-    public class OrderItems
+    public class OrderItems:Order
     {
         public int orderItemID { get; set; }
-        public int orderID { get; set; }
         public int menuItemID { get; set; }
-        public DateTime dateTaken { get; set; }
+        public string itemName { get; set; }
         public int amount { get; set; }
         public bool isReady { get; set; }
-        public DateTime dateReady { get; set; }
+        public bool isServed { get; set; }
+        
+
+        private DateTime dateTaken { get; set; }
+        private DateTime dateReady { get; set; }
+
         public string comment { get; set; }
 
-        public OrderItems(int orderItemID, int orderID, int menuItemID, DateTime dateTaken, int amount, 
-            bool isReady, DateTime dateReady)
+        public OrderItems(int orderID, int employeeID, int tableID, int orderItemID, int menuItemID, DateTime dateTaken, int amount, 
+            bool isReady, DateTime dateReady):base(orderID, employeeID, tableID)
         {
             this.orderItemID = orderItemID;
-            this.orderID = orderID;
             this.menuItemID = menuItemID;
             this.dateTaken = dateTaken;
             this.amount = amount;
             this.isReady = isReady;
             this.dateReady = dateReady;
         }
-
+        public OrderItems()
+        {
+        }
     }
 }

@@ -33,6 +33,8 @@
             this.createNew = new System.Windows.Forms.Button();
             this.tablesView = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.employeeID = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ordersView
@@ -52,6 +54,7 @@
             this.createNew.TabIndex = 1;
             this.createNew.Text = "Create new";
             this.createNew.UseVisualStyleBackColor = true;
+            this.createNew.Click += new System.EventHandler(this.createNew_Click);
             // 
             // tablesView
             // 
@@ -69,11 +72,31 @@
             this.panel1.Size = new System.Drawing.Size(1110, 546);
             this.panel1.TabIndex = 3;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(955, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "EmployeeID";
+            // 
+            // employeeID
+            // 
+            this.employeeID.AutoSize = true;
+            this.employeeID.Location = new System.Drawing.Point(1070, 19);
+            this.employeeID.Name = "employeeID";
+            this.employeeID.Size = new System.Drawing.Size(0, 20);
+            this.employeeID.TabIndex = 5;
+            this.employeeID.Click += new System.EventHandler(this.label2_Click);
+            // 
             // orderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1218, 712);
+            this.Controls.Add(this.employeeID);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tablesView);
             this.Controls.Add(this.createNew);
@@ -83,6 +106,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Restaurant Chapeau-Ordering";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -92,5 +116,7 @@
         private System.Windows.Forms.Button createNew;
         private System.Windows.Forms.Button tablesView;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Label employeeID;
     }
 }
