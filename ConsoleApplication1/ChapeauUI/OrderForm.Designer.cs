@@ -29,38 +29,38 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(orderForm));
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.ordersView = new System.Windows.Forms.Button();
+            this.createNew = new System.Windows.Forms.Button();
+            this.tablesView = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // button1
+            // ordersView
             // 
-            this.button1.Location = new System.Drawing.Point(104, 69);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(166, 47);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Orders view";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ordersView.Location = new System.Drawing.Point(104, 69);
+            this.ordersView.Name = "ordersView";
+            this.ordersView.Size = new System.Drawing.Size(166, 47);
+            this.ordersView.TabIndex = 0;
+            this.ordersView.Text = "Orders view";
+            this.ordersView.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // createNew
             // 
-            this.button2.Location = new System.Drawing.Point(519, 69);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(166, 47);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Create new";
-            this.button2.UseVisualStyleBackColor = true;
+            this.createNew.Location = new System.Drawing.Point(519, 69);
+            this.createNew.Name = "createNew";
+            this.createNew.Size = new System.Drawing.Size(166, 47);
+            this.createNew.TabIndex = 1;
+            this.createNew.Text = "Create new";
+            this.createNew.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // tablesView
             // 
-            this.button3.Location = new System.Drawing.Point(917, 69);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(166, 47);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Tables view";
-            this.button3.UseVisualStyleBackColor = true;
+            this.tablesView.Location = new System.Drawing.Point(917, 69);
+            this.tablesView.Name = "tablesView";
+            this.tablesView.Size = new System.Drawing.Size(166, 47);
+            this.tablesView.TabIndex = 2;
+            this.tablesView.Text = "Tables view";
+            this.tablesView.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -75,9 +75,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1218, 712);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.tablesView);
+            this.Controls.Add(this.createNew);
+            this.Controls.Add(this.ordersView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "orderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -88,9 +88,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button ordersView;
+        private System.Windows.Forms.Button createNew;
+        private System.Windows.Forms.Button tablesView;
         private System.Windows.Forms.Panel panel1;
     }
 }
