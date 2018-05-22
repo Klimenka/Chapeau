@@ -14,7 +14,7 @@ namespace LogicLayer
         {
             if (string.IsNullOrEmpty(user.loginName) || string.IsNullOrEmpty(user.password))
             {
-                throw new Exception("There are no provided credentials");
+                throw new Exception("Please enter your username/password");
             }
             {
                 
