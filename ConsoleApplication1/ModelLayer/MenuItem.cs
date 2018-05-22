@@ -13,18 +13,18 @@ namespace ChapeauModel
         public float price { get; set; }
         public float vatPercentage { get; set; }
         public int amountOnStock { get; set; }
-        public bool barOrKitchen { get; set; }
+        public bool barOrKitchen { get; set; } // true is kitchen while false is bar
 
-        //public MenuItem(int menuItemID, string itemName, float price, float vatPercentage,
-        //    int amountOnStock, bool barOrKitchen)
-        //{
-        //    this.menuItemID = menuItemID;
-        //    this.itemName = itemName;
-        //    this.price = price;
-        //    this.vatPercentage = vatPercentage;
-        //    this.amountOnStock = amountOnStock;
-        //    this.barOrKitchen = barOrKitchen;
-        //}
+        public MenuItem(int menuItemID, string itemName, float price, float vatPercentage,
+            int amountOnStock, bool barOrKitchen)
+        {
+            this.menuItemID = menuItemID;
+            this.itemName = itemName;
+            this.price = price;
+            this.vatPercentage = vatPercentage;
+            this.amountOnStock = amountOnStock;
+            this.barOrKitchen = barOrKitchen;
+        }
 
 
     }

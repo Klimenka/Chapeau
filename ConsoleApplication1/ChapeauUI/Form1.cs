@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using ChapeauModel;
+using ChapeauLogic;
 
 namespace ChapeauUI
 {
@@ -20,7 +21,12 @@ namespace ChapeauUI
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            
+
         }
+
+
+
     }
+
+
 }

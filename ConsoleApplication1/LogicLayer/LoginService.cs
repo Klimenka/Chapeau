@@ -4,9 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChapeauLogic
+namespace LogicLayer
 {
-    public class Class1
+    public class LoginService
     {
+
+
+
+
+
+
+
+
     }
 }

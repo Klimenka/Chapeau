@@ -20,18 +20,22 @@ namespace ChapeauDAL
             SqlDataReader reader = command.ExecuteReader();
             List<MenuItem> menuItems = new List<MenuItem>();
 
+
             while (reader.Read())
             {
-                MenuItem menuItem = new MenuItem();
 
-                menuItem.menuItemID = (int)reader["MenuItemId"];
-                menuItem.itemName = (string) reader["ItemName"];
-                menuItems.Add(menuItem);
+                int menuItemID = Convert.ToInt32(reader["MenuItemId"]);
+                string itemName = Convert.ToString(reader["ItemName"]);
+                float price = Convert.ToSingle(reader["Price"]);
+                float vatPercentage = Convert.ToSingle(reader["VAT"]);
+                int amountOnStock = Convert.ToInt32(reader["AmountOnStock"]);
+                bool barOrKitchen = Convert.ToBoolean(reader["BarOrKitchen"]);
+
+                menuItems.Add(
+                    new MenuItem(menuItemID, itemName, price, vatPercentage, amountOnStock, barOrKitchen));
             }
             reader.Close();
             SqlConn.CloseConnection(connection);
-            
-
 
             return menuItems;
         }

@@ -13,6 +13,14 @@ namespace ChapeauModel
         public string lastName { get; set; }
         public Position positionID { get; set; }
 
+        public string EmployeeName
+        {
+            get
+            {
+                return $"{name} {lastName}";
+            }
+        }
+
         public Employess(int employeeID, string name, string lastName, Position positionID)
         {
             this.employeeID = employeeID;
@@ -21,6 +29,9 @@ namespace ChapeauModel
             this.positionID = positionID;
         }
 
+        public Employess()
+        {
+        }
     }
 
 

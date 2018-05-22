@@ -13,11 +13,12 @@ namespace test
         {
             MenuItemDAO menuItemDao= new MenuItemDAO();
 
-            List<ChapeauModel.MenuItem> menu= menuItemDao.GetMenuItems();
-
-            foreach (ChapeauModel.MenuItem menus in menu)
+            //List<ChapeauModel.MenuItem> menu= menuItemDao.GetMenuItems();
+           
+            foreach (ChapeauModel.MenuItem menus in menuItemDao.GetMenuItems())
             {
-                Console.WriteLine(menus.itemName);
+                Console.WriteLine(menus.menuItemID +" "+ menus.itemName + " " + menus.price + " " + menus.vatPercentage + " " +
+                                  menus.amountOnStock + " " + menus.barOrKitchen);
             }
 
             Console.ReadLine();
