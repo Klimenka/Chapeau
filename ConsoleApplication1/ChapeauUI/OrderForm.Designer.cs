@@ -45,6 +45,7 @@
             this.ordersView.TabIndex = 0;
             this.ordersView.Text = "Orders view";
             this.ordersView.UseVisualStyleBackColor = true;
+            this.ordersView.Click += new System.EventHandler(this.ordersView_Click);
             // 
             // createNew
             // 

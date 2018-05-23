@@ -20,9 +20,10 @@ namespace ChapeauLogic
             // Making a list and editing its format 
             ListView ordersListView = new ListView();
             ordersListView.Height = 250;
-            ordersListView.Width = 700;
+            ordersListView.Width = 450;
             ordersListView.View = View.Details;
             ordersListView.FullRowSelect = true;
+            ordersListView.CheckBoxes = true;
 
             ColumnHeader headerFirst = new ColumnHeader();
             ColumnHeader headerSecond = new ColumnHeader();
@@ -37,19 +38,19 @@ namespace ChapeauLogic
 
             headerSecond.TextAlign = HorizontalAlignment.Left;
             headerSecond.Text = "Table";
-            headerSecond.Width = 75;
+            headerSecond.Width = 45;
 
             headerThird.TextAlign = HorizontalAlignment.Left;
             headerThird.Text = "Name";
-            headerThird.Width = 250;
+            headerThird.Width = 150;
 
             headerFourth.TextAlign = HorizontalAlignment.Left;
             headerFourth.Text = "Is Ready?";
-            headerFourth.Width = 140;
+            headerFourth.Width = 75;
 
             headerFifth.TextAlign = HorizontalAlignment.Left;
             headerFifth.Text = "Is Served?";
-            headerFifth.Width = 140;
+            headerFifth.Width = 75;
 
             // adding colums to the list
             ordersListView.Columns.Add(headerFirst);
@@ -74,7 +75,16 @@ namespace ChapeauLogic
                 }
                 if (item.isServed == false)
                 {
-                    entryListItem.SubItems.Add("Not Served");
+                    
+                    if (item.isReady == true)
+                    {
+                        entryListItem.SubItems.Add("Needs to be served!");
+                    }
+                    else
+                    {
+                        
+                        entryListItem.SubItems.Add("Not Served");
+                    }
                 }
                 else
                 {
@@ -82,9 +92,16 @@ namespace ChapeauLogic
                 }
                 
             }
-
+            
             // return a list view 
             return ordersListView;
+        }
+
+        public static Order NewOrder(int EmpId, int tableID)
+        {
+            Order order = new Order();
+            order = OrderDAO.NewOrder(EmpId, tableID);
+            return order;
         }
 
        
