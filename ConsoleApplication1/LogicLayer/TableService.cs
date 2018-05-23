@@ -10,7 +10,7 @@ namespace ChapeauLogic
 {
     public class TableService
     {
-        public List<Table> GetTables()
+        public static List<Table> GetTables()
         {
             List<Table> tables = null;
             try
@@ -25,7 +25,7 @@ namespace ChapeauLogic
             return tables;
         }
 
-        public void ChangeTableStatus(Table table)
+        public static void ChangeTableStatus(Table table)
         {
             try
             {

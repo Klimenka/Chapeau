@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(orderForm));
             this.ordersView = new System.Windows.Forms.Button();
             this.createNew = new System.Windows.Forms.Button();
-            this.tablesView = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.tablesViewBtn = new System.Windows.Forms.Button();
+            this.orderViewPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // ordersView
@@ -53,29 +53,30 @@
             this.createNew.Text = "Create new";
             this.createNew.UseVisualStyleBackColor = true;
             // 
-            // tablesView
+            // tablesViewBtn
             // 
-            this.tablesView.Location = new System.Drawing.Point(917, 69);
-            this.tablesView.Name = "tablesView";
-            this.tablesView.Size = new System.Drawing.Size(166, 47);
-            this.tablesView.TabIndex = 2;
-            this.tablesView.Text = "Tables view";
-            this.tablesView.UseVisualStyleBackColor = true;
+            this.tablesViewBtn.Location = new System.Drawing.Point(917, 69);
+            this.tablesViewBtn.Name = "tablesViewBtn";
+            this.tablesViewBtn.Size = new System.Drawing.Size(166, 47);
+            this.tablesViewBtn.TabIndex = 2;
+            this.tablesViewBtn.Text = "Tables view";
+            this.tablesViewBtn.UseVisualStyleBackColor = true;
+            this.tablesViewBtn.Click += new System.EventHandler(this.TablesViewBtn_Click);
             // 
-            // panel1
+            // orderViewPanel
             // 
-            this.panel1.Location = new System.Drawing.Point(49, 154);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1110, 546);
-            this.panel1.TabIndex = 3;
+            this.orderViewPanel.Location = new System.Drawing.Point(49, 154);
+            this.orderViewPanel.Name = "orderViewPanel";
+            this.orderViewPanel.Size = new System.Drawing.Size(1110, 546);
+            this.orderViewPanel.TabIndex = 3;
             // 
             // orderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1218, 712);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.tablesView);
+            this.Controls.Add(this.orderViewPanel);
+            this.Controls.Add(this.tablesViewBtn);
             this.Controls.Add(this.createNew);
             this.Controls.Add(this.ordersView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -90,7 +91,7 @@
 
         private System.Windows.Forms.Button ordersView;
         private System.Windows.Forms.Button createNew;
-        private System.Windows.Forms.Button tablesView;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button tablesViewBtn;
+        private System.Windows.Forms.Panel orderViewPanel;
     }
 }
