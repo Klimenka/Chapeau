@@ -8,20 +8,20 @@ using ChapeauModel;
 
 namespace ChapeauDAL
 {
-    public class TableDAO
+    public class TableDAO : BaseDAO
     {
-        public static List<Table> GetTables()
+        public List<Table> GetTables()
         {
-            SqlConnection connection = SqlConn.OpeConnection();
+            SqlConnection connection = OpeConnection();
 
             string sqlQuery = @"SELECT TableId, Occupied FROM Tables";
 
-            SqlCommand command = new SqlCommand(sqlQuery,connection);
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
 
             SqlDataReader reader = command.ExecuteReader();
 
             List<Table> tables = new List<Table>();
-            
+
             while (reader.Read())
             {
                 int tableID = Convert.ToInt32(reader["TableId"]);
@@ -30,22 +30,22 @@ namespace ChapeauDAL
             }
 
             reader.Close();
-            SqlConn.CloseConnection(connection);
+            CloseConnection(connection);
 
             return tables;
         }
 
-        public static void ChangeTableStatus(Table table)
+        public void ChangeTableStatus(Table table)
         {
-            SqlConnection connection = SqlConn.OpeConnection();
+            SqlConnection connection = OpeConnection();
             string sqlQuery = @"UPDATE Tables SET Occupied = @Occupied WHERE TableId = @TableId";
 
             SqlCommand command = new SqlCommand(sqlQuery, connection);
-            command.Parameters.AddWithValue("@Occupied",table.occupied);
+            command.Parameters.AddWithValue("@Occupied", table.occupied);
             command.Parameters.AddWithValue("@TableId", table.tableID);
             command.ExecuteNonQuery();
 
-            SqlConn.CloseConnection(connection);
+            CloseConnection(connection);
         }
 
 

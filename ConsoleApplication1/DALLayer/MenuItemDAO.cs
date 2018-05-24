@@ -8,11 +8,11 @@ using ChapeauModel;
 
 namespace ChapeauDAL
 {
-    public class MenuItemDAO
+    public class MenuItemDAO : BaseDAO
     {
         public List<MenuItem> GetMenuItems()
         {
-            SqlConnection connection = SqlConn.OpeConnection();
+            SqlConnection connection = OpeConnection();
 
             string sqlQuery = @"SELECT * FROM MenuItems";
             SqlCommand command = new SqlCommand(sqlQuery, connection);
@@ -35,7 +35,7 @@ namespace ChapeauDAL
                     new MenuItem(menuItemID, itemName, price, vatPercentage, amountOnStock, barOrKitchen));
             }
             reader.Close();
-            SqlConn.CloseConnection(connection);
+            CloseConnection(connection);
 
             return menuItems;
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChapeauDAL
 {
-    public class PaymentDAO
+    public class PaymentDAO : BaseDAO
     {
     }
 }

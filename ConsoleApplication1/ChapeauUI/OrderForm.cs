@@ -21,7 +21,7 @@ namespace ChapeauUI
 
         }
 
-        public ListView tablesListView = new ListView();
+        public ListView tablesListView;
 
         private void TablesViewBtn_Click(object sender, EventArgs e)
         {
@@ -32,11 +32,12 @@ namespace ChapeauUI
 
         private Control ShowTables()
         {
+            tablesListView = new ListView();
             tablesListView.Width = orderViewPanel.Width;
             tablesListView.Height = 220;
             tablesListView.View = View.Details;
             tablesListView.FullRowSelect = true;
-            tablesListView.BackColor=Color.DarkCyan;
+            //tablesListView.BackColor=Color.DarkCyan;
 
             tablesListView.Columns.Add("Table Number", -2, HorizontalAlignment.Left);
             tablesListView.Columns.Add("Table Status", -2, HorizontalAlignment.Left);
@@ -46,7 +47,7 @@ namespace ChapeauUI
             //{
             //    string[] items = { tables[i].tableID.ToString(), tables[i].occupied.ToString() };
             //}
-
+            //tablesListView.Items.Clear();
             foreach (Table table in tables)
             {
                 ListViewItem entryItem = tablesListView.Items.Add(table.tableID.ToString());
@@ -92,11 +93,18 @@ namespace ChapeauUI
             }
 
             TableService.ChangeTableStatus(new Table(tableID, occuoied));
-           orderViewPanel.Controls.Clear();
+            orderViewPanel.Controls.Clear();
             orderViewPanel.Controls.Add(ShowTables());
 
         }
 
-
+        private void logoffLink_Click(object sender, EventArgs e)
+        {
+           
+           
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+            this.Close();
+        }
     }
 }

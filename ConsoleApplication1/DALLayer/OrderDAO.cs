@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChapeauDAL
 {
-    public class OrderDAO
+    public class OrderDAO : BaseDAO
     {
     }
 }
