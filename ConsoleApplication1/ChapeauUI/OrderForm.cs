@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace ChapeauUI
 {
     public partial class orderForm : Form
@@ -18,6 +19,8 @@ namespace ChapeauUI
         {
             InitializeComponent();
             Shown += orderForm_Load;
+
+            //save the employee ID on the form
             employeeID.Text = ID.ToString();
         }
         
@@ -65,6 +68,7 @@ namespace ChapeauUI
             throw new NotImplementedException();
         }
 
+        //new order button click
         private void createNew_Click(object sender, EventArgs e)
         {
             //creating of a new order in DB
@@ -77,7 +81,7 @@ namespace ChapeauUI
             //clear space for new data
             panel1.Controls.Clear();
 
-            //saving data on the panel
+            //saving data on the panel (creation of the buttons and labels)
             Label table = new Label();
             table.Text = "Table: ";
             table.AutoSize = true;
@@ -102,10 +106,20 @@ namespace ChapeauUI
             orderid.Location = new Point(290, 25);
             panel1.Controls.Add(orderid);
 
+            Label menuItemsText = new Label();
+            menuItemsText.Text = "Choose the menu item: ";
+            menuItemsText.AutoSize = true;
+            menuItemsText.Location = new Point(50, 60);
+            panel1.Controls.Add(menuItemsText);
+
+            panel1.Controls.Add(MenuItemService.ShowMenuItems());
+
+
+
 
         }
 
-        //new window for a table choice 
+        //new window for a table choice before a creation of a new order
         public static string ShowChooseTable()
         {
             Form message = new Form();

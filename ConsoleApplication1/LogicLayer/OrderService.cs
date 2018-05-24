@@ -11,6 +11,10 @@ namespace ChapeauLogic
 {
     public class OrderService
     {
+        Order order = new Order();
+
+
+
         public static Control ShowOrders(int ID)
         {
             List<OrderItems> orders = new List<OrderItems>();
@@ -97,11 +101,12 @@ namespace ChapeauLogic
             return ordersListView;
         }
 
+        //sending to DB request for the creation a new order and returning an object Order
         public static Order NewOrder(int EmpId, int tableID)
         {
-            Order order = new Order();
-            order = OrderDAO.NewOrder(EmpId, tableID);
-            return order;
+            
+            return OrderDAO.NewOrder(EmpId, tableID);
+           
         }
 
        
