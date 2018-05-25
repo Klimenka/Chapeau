@@ -172,7 +172,7 @@ namespace ChapeauUI
             confirm_btn.Text = "CONFIRM";
             confirm_btn.Width = 166;
             confirm_btn.Height = 47;
-            confirm_btn.Location = new Point(650, 280);
+            confirm_btn.Location = new Point(550, 280);
             orderViewPanel.Controls.Add(confirm_btn);
 
             confirm_btn.Click += (s, ee) =>
@@ -193,9 +193,10 @@ namespace ChapeauUI
             //add a new item to the order list (but not sending it to DB yet)
             add_btn.Click += (s, ee) =>
             {
-                if (amount_choice_box.SelectedIndex == -1)
+               // if (amount_choice_box.SelectedIndex == -1)
+               if(menu.SelectedItems.Count == 0)
                 {
-                    MessageBox.Show("Please select an amount");
+                    MessageBox.Show("Please select an item");
                     return;
                 }
 
@@ -203,14 +204,24 @@ namespace ChapeauUI
                 string amount_text = amount_choice_box.SelectedItem.ToString();
                 orderItemNew.amount = int.Parse(amount_text);
 
-                var index = menu.CheckedIndices;
-                int menuItemIndex = index[0];
-               
-                 
-                orderItemNew.menuItemID = menuItemIndex + 1;
+                ListViewItem selected = menu.SelectedItems[0];
+                string menuItemIdString = selected.SubItems[0].Text.ToString();
+                orderItemNew.menuItemID = int.Parse(menuItemIdString);
+                orderItemNew.itemName = selected.SubItems[1].Text.ToString();
+
+                string something = menu.SelectedItems[0].Tag.ToString();
+                ChapeauModel.MenuItem menuItemSelected = new ChapeauModel.MenuItem();
+
+                menuItemSelected = (ChapeauModel.MenuItem)menu.SelectedItems[0].Tag;
+                //orderItemNew.menuItemID = menuItemSelected.menuItemID;
+                // var index = menu.CheckedIndices;
+                // int menuItemIndex = index[0];
+
+                orderItemNew.itemName = menuItemSelected.itemName;
+                // orderItemNew.menuItemID = menuItemIndex + 1;
                 orderItemNew.comment = comment_txt_box.Text;
-                string itemName = menuItemService.FindItemNameByIndex(menuItemIndex);
-                orderItemNew.itemName = itemName;
+                //string itemName = menuItemService.FindItemNameByIndex(menuItemIndex);
+                //orderItemNew.itemName = itemName;
 
 
 

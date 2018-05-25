@@ -12,22 +12,24 @@ namespace ChapeauLogic
     public class MenuItemService
     {
         public MenuItemDAO menuItemDAO = new MenuItemDAO();
+        List<ChapeauModel.MenuItem> menuItems = new List<ChapeauModel.MenuItem>();
 
         public ListView ShowMenuItems()
         {
-            List<ChapeauModel.MenuItem> menuItems = new List<ChapeauModel.MenuItem>();
+            //List<ChapeauModel.MenuItem> menuItems = new List<ChapeauModel.MenuItem>();
             menuItems = menuItemDAO.GetAll();
-            //MenuItem(menuItemID, itemName, price, vatPercentage, amountOnStock, barOrKitchen, category));
+            
 
             // Making a list and editing its format 
             ListView MenuItemsListView = new ListView();
             MenuItemsListView.Height = 230;
             MenuItemsListView.Width = 365;
-           // MenuItemsListView.Left = 550;
             MenuItemsListView.View = View.Details;
             MenuItemsListView.FullRowSelect = true;
-            MenuItemsListView.CheckBoxes = true;
-           
+            //MenuItemsListView.CheckBoxes = true;
+            MenuItemsListView.HideSelection = false;
+            MenuItemsListView.Select();
+
 
             ColumnHeader headerFirst = new ColumnHeader();
             ColumnHeader headerSecond = new ColumnHeader();
