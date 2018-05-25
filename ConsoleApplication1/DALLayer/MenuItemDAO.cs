@@ -15,7 +15,8 @@ namespace ChapeauDAL
         {
             SqlConnection connection = SqlConn.OpeConnection();
 
-            string sqlQuery = @"SELECT MenuItemId, ItemName, Price,VAT,AmountOnStock, BarOrKitchen, CategoryId";
+            string sqlQuery = @"SELECT MenuItemId, ItemName, Price,VAT,AmountOnStock, BarOrKitchen, CategoryId
+                                FROM MenuItems";
             SqlCommand command = new SqlCommand(sqlQuery, connection);
 
             SqlDataReader reader = command.ExecuteReader();
