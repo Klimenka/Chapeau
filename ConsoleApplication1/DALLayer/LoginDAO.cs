@@ -9,13 +9,14 @@ using ChapeauModel;
 
 namespace ChapeauDAL
 {
-    public class LoginDAO
+    public class LoginDAO : BaseDAO
+
     {
 
-        public static Employess CheckCredentials(Login user)
+        public Employess CheckCredentials(Login user)
         {
             // create a sql connection
-            SqlConnection connection = SqlConn.OpeConnection();
+            SqlConnection connection = OpeConnection();
 
             // get a person ID
             int employeeID = GetEmployeeID(user);
@@ -44,15 +45,15 @@ namespace ChapeauDAL
 
             // close all connections
             reader.Close();
-            SqlConn.CloseConnection(connection);
+            CloseConnection(connection);
 
             return employee;
         }
 
-        public static int GetEmployeeID(Login loginInfo)
+        public int GetEmployeeID(Login loginInfo)
         {
             // create a sql connection
-            SqlConnection connection = SqlConn.OpeConnection();
+            SqlConnection connection = OpeConnection();
 
             // write a sql query 
             string sqlQuery = @"SELECT EmployeeId FROM Logins 
@@ -73,7 +74,7 @@ namespace ChapeauDAL
 
             // close all connections
             reader.Close();
-            SqlConn.CloseConnection(connection);
+            CloseConnection(connection);
 
             return employeeID;
         }
@@ -93,7 +94,7 @@ namespace ChapeauDAL
         public int GetEmployeeID(Position position, string name, string lastName)
         {
             // create a sql connection
-            SqlConnection connection = SqlConn.OpeConnection();
+            SqlConnection connection = OpeConnection();
 
             // write a sql query 
             string sqlQuery = @"INSERT INTO Employees(Name, LastName, PositionId) 
@@ -116,7 +117,7 @@ namespace ChapeauDAL
             int employeeID = (int)command1.ExecuteScalar();
 
             // close the connection
-            SqlConn.CloseConnection(connection);
+            CloseConnection(connection);
 
             return employeeID;
         }
@@ -124,7 +125,7 @@ namespace ChapeauDAL
         public void SetLoginInfo(Login loginInfo, int employeeID)
         {
             // create a sql connection
-            SqlConnection connection = SqlConn.OpeConnection();
+            SqlConnection connection = OpeConnection();
 
             // write a sql query 
             string sqlQuery = @"INSERT INTO Logins(Login, Password, EmployeeId) 
@@ -138,7 +139,7 @@ namespace ChapeauDAL
             command.ExecuteNonQuery();
 
             // close the connection
-            SqlConn.CloseConnection(connection);
+            CloseConnection(connection);
         }
 
 

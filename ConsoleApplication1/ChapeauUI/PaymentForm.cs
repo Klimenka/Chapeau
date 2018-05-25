@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ChapeauUI
 {
-    public partial class ManageForm : Form
+    public partial class PaymentForm : Form
     {
-        public ManageForm()
+        public PaymentForm()
         {
             InitializeComponent();
         }

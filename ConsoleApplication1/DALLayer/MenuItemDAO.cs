@@ -9,11 +9,11 @@ using ModelLayer;
 
 namespace ChapeauDAL
 {
-    public class MenuItemDAO
+    public class MenuItemDAO : BaseDAO
     {
         public List<MenuItem> GetMenuItems()
         {
-            SqlConnection connection = SqlConn.OpeConnection();
+            SqlConnection connection = OpeConnection();
 
             string sqlQuery = @"SELECT MenuItemId, ItemName, Price,VAT,AmountOnStock, BarOrKitchen, CategoryId
                                 FROM MenuItems";
@@ -37,7 +37,7 @@ namespace ChapeauDAL
                     new MenuItem(menuItemID, itemName, price, vatPercentage, amountOnStock, barOrKitchen, category));
             }
             reader.Close();
-            SqlConn.CloseConnection(connection);
+            CloseConnection(connection);
 
             return menuItems;
         }

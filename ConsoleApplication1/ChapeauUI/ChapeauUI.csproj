@@ -45,29 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BarForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BarForm.Designer.cs">
-      <DependentUpon>BarForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="KitchenForm.cs">
+    <Compile Include="KitchenBarForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KitchenForm.Designer.cs">
-      <DependentUpon>KitchenForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ManageForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ManageForm.Designer.cs">
-      <DependentUpon>ManageForm.cs</DependentUpon>
+    <Compile Include="KitchenBarForm.Designer.cs">
+      <DependentUpon>KitchenBarForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OrderForm.cs">
       <SubType>Form</SubType>
@@ -75,22 +63,25 @@
     <Compile Include="OrderForm.Designer.cs">
       <DependentUpon>OrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PaymentForm.Designer.cs">
+      <DependentUpon>PaymentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BarForm.resx">
-      <DependentUpon>BarForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KitchenForm.resx">
-      <DependentUpon>KitchenForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManageForm.resx">
-      <DependentUpon>ManageForm.cs</DependentUpon>
+    <EmbeddedResource Include="KitchenBarForm.resx">
+      <DependentUpon>KitchenBarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrderForm.resx">
       <DependentUpon>OrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PaymentForm.resx">
+      <DependentUpon>PaymentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

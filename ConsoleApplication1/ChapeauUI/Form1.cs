@@ -40,27 +40,16 @@ namespace ChapeauUI
                     //add EmployeeID for the OrderFrom
                     orderForm orderForm = new orderForm(employee.employeeID);
                     orderForm.Show();
-                    this.Hide();
+                    this.Close();
+
                 }
                 else if (employee.positionID == Position.Chef)
                 {
-                    KitchenForm kitchenForm = new KitchenForm();
+                    KitchenBarForm kitchenForm = new KitchenBarForm();
                     kitchenForm.Show();
-                    this.Hide();
+                    this.Close();
                 }
-                else if (employee.positionID == Position.Barman)
-                {
-                    BarForm barForm = new BarForm();
-                    barForm.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    ManageForm manageForm = new ManageForm();
-                    manageForm.Show();
-                    this.Hide();
-                }
-
+     
             }
             catch (Exception exception)
             {

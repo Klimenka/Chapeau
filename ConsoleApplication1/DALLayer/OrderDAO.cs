@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChapeauDAL
 {
-    public class OrderDAO
+    public class OrderDAO : BaseDAO
     {
         public static Order NewOrder(int empId, int tableID)
         
