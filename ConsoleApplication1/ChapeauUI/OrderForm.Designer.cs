@@ -35,11 +35,9 @@
             this.orderViewPanel = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.logoffLink = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStrip1.SuspendLayout();
-            this.tablesView = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.employeeID = new System.Windows.Forms.Label();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ordersView
@@ -132,8 +130,6 @@
             this.Controls.Add(this.tablesViewBtn);
             this.Controls.Add(this.employeeID);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.tablesView);
             this.Controls.Add(this.createNew);
             this.Controls.Add(this.ordersView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -155,8 +151,6 @@
         private System.Windows.Forms.Panel orderViewPanel;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel logoffLink;
-        private System.Windows.Forms.Button tablesView;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Label employeeID;
     }

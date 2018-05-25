@@ -10,10 +10,56 @@ namespace ChapeauDAL
 {
     public class OrderItemsDAO : BaseDAO
     {
-        public static List<OrderItems> getOrders(int ID)
+        public void UpdateOrderItems(List<OrderItems> orderItemsList, Order order)
+        {
+
+            SqlConnection connection = OpeConnection();
+
+            for (int i = 0; i < orderItemsList.Count; i++)
+
+            {
+                if (orderItemsList[i].comment == "")
+                {
+                    // write a sql query 
+                    string SQLquery = @"INSERT into OrderItems (OrderId, MenuItemId, DateTaken, Amount, IsReady, IsServed)
+                                VALUES (@OrderId, @MenuItemId, GETDATE(), @Amount, 0, 0)";
+
+                    // execute the sql query
+                    SqlCommand command = new SqlCommand(SQLquery, connection);
+                    command.Parameters.AddWithValue("@OrderId", order.orderID);
+                    command.Parameters.AddWithValue("@MenuItemId", orderItemsList[i].menuItemID);
+                    command.Parameters.AddWithValue("@Amount", orderItemsList[i].amount);
+                    
+                    command.ExecuteNonQuery();
+
+                }
+
+                else
+                {
+                    // write a sql query 
+                    string SQLquery = @"INSERT into OrderItems (OrderId, MenuItemId, DateTaken, Amount, IsReady, Comments, IsServed)
+                                VALUES (@OrderId, @MenuItemId, GETDATE(), @Amount, 0, @Comments, 0)";
+
+                    // execute the sql query
+                    SqlCommand command = new SqlCommand(SQLquery, connection);
+                    command.Parameters.AddWithValue("@OrderId", order.orderID);
+                    command.Parameters.AddWithValue("@MenuItemId", orderItemsList[i].menuItemID);
+                    command.Parameters.AddWithValue("@Amount", orderItemsList[i].amount);
+                    command.Parameters.AddWithValue("@Comments", orderItemsList[i].comment);
+                   
+                    command.ExecuteNonQuery();
+                }
+            }
+
+                // close all connections
+                
+                CloseConnection(connection);
+
+            }
+        public List<OrderItems> getOrders(int ID)
         {
             List<OrderItems> orders = new List<OrderItems>();
-            SqlConnection connection = SqlConn.OpeConnection();
+            SqlConnection connection = OpeConnection();
 
 
             // write a sql query 
@@ -44,7 +90,7 @@ namespace ChapeauDAL
 
             // close all connections
             reader.Close();
-            SqlConn.CloseConnection(connection);
+            CloseConnection(connection);
 
             return orders;
         }

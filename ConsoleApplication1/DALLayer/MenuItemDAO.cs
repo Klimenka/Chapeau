@@ -11,7 +11,8 @@ namespace ChapeauDAL
 {
     public class MenuItemDAO : BaseDAO
     {
-        public List<MenuItem> GetMenuItems()
+
+        public List<MenuItem> GetAll()
         {
             SqlConnection connection = OpeConnection();
 

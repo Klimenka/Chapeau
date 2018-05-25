@@ -10,12 +10,12 @@ namespace ChapeauDAL
 {
     public class OrderDAO : BaseDAO
     {
-        public static Order NewOrder(int empId, int tableID)
+        public Order NewOrder(int empId, int tableID)
         
         {
             Order order = new Order();
-            
-            SqlConnection connection = SqlConn.OpeConnection();
+
+            SqlConnection connection = OpeConnection();
 
 
             // write a sql query 
@@ -48,7 +48,7 @@ namespace ChapeauDAL
 
             // close all connections
             reader.Close();
-            SqlConn.CloseConnection(connection);
+            CloseConnection(connection);
 
             order.tableID = tableID;
             order.employeeID = empId;

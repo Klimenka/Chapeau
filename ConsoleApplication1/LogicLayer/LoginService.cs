@@ -9,8 +9,8 @@ namespace ChapeauLogic
 {
     public class LoginService
     {
-
-        public static Employess CheckCredentials(Login user)
+        LoginDAO login = new LoginDAO();
+        public Employess CheckCredentials(Login user)
         {
             if (string.IsNullOrEmpty(user.loginName) || string.IsNullOrEmpty(user.password))
             {
@@ -22,7 +22,7 @@ namespace ChapeauLogic
             Employess employeee = null;
             try
             {
-                employeee = LoginDAO.CheckCredentials(user);
+                employeee = login.CheckCredentials(user);
             }
             catch (Exception e)
             {

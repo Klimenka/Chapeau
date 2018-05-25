@@ -10,12 +10,14 @@ namespace ChapeauLogic
 {
     public class TableService
     {
-        public static List<Table> GetTables()
+        TableDAO tableDAO = new TableDAO();
+
+        public List<Table> GetTables()
         {
             List<Table> tables = null;
             try
             {
-                tables = TableDAO.GetTables();
+                tables = tableDAO.GetTables();
             }
             catch (Exception e)
             {
@@ -25,11 +27,11 @@ namespace ChapeauLogic
             return tables;
         }
 
-        public static void ChangeTableStatus(Table table)
+        public void ChangeTableStatus(Table table)
         {
             try
             {
-                TableDAO.ChangeTableStatus(table);
+                tableDAO.ChangeTableStatus(table);
             }
             catch (Exception e)
             {

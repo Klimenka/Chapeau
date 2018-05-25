@@ -16,6 +16,7 @@ namespace ChapeauUI
     
     public partial class LoginForm : Form
     {
+        LoginService loginService = new LoginService();
         public LoginForm()
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace ChapeauUI
 
             try
             {
-                Employess employee = LoginService.CheckCredentials(new Login(userName, password, 1));
+                Employess employee = loginService.CheckCredentials(new Login(userName, password, 1));
                 
                 if (employee.positionID == Position.Waiter)
                 {

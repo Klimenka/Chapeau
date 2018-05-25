@@ -11,11 +11,94 @@ namespace ChapeauLogic
 {
     public class MenuItemService
     {
-        public MenuItem menuItem = new MenuItem();
+        public MenuItemDAO menuItemDAO = new MenuItemDAO();
 
-        public static Control ShowMenuItems()
+        public ListView ShowMenuItems()
         {
-            return MenuItemDAO.GetAll();
+            List<ChapeauModel.MenuItem> menuItems = new List<ChapeauModel.MenuItem>();
+            menuItems = menuItemDAO.GetAll();
+            //MenuItem(menuItemID, itemName, price, vatPercentage, amountOnStock, barOrKitchen, category));
+
+            // Making a list and editing its format 
+            ListView MenuItemsListView = new ListView();
+            MenuItemsListView.Height = 230;
+            MenuItemsListView.Width = 365;
+           // MenuItemsListView.Left = 550;
+            MenuItemsListView.View = View.Details;
+            MenuItemsListView.FullRowSelect = true;
+            MenuItemsListView.CheckBoxes = true;
+           
+
+            ColumnHeader headerFirst = new ColumnHeader();
+            ColumnHeader headerSecond = new ColumnHeader();
+            ColumnHeader headerThird = new ColumnHeader();
+            ColumnHeader headerFourth = new ColumnHeader();
+            //ColumnHeader headerFifth = new ColumnHeader();
+
+            // Set the text, alignment and width for each column header.
+            headerFirst.Text = "ID";
+            headerFirst.TextAlign = HorizontalAlignment.Left;
+            headerFirst.Width = 45;
+
+            headerSecond.TextAlign = HorizontalAlignment.Left;
+            headerSecond.Text = "Name";
+            headerSecond.Width = 170;
+
+            headerThird.TextAlign = HorizontalAlignment.Left;
+            headerThird.Text = "Stock";
+            headerThird.Width = 50;
+
+            headerFourth.TextAlign = HorizontalAlignment.Left;
+            headerFourth.Text = "Bar Or Kitchen";
+            headerFourth.Width = 75;
+
+            //headerFifth.TextAlign = HorizontalAlignment.Left;
+            //headerFifth.Text = "Category";
+            //headerFifth.Width = 75;
+
+            // adding colums to the list
+            MenuItemsListView.Columns.Add(headerFirst);
+            MenuItemsListView.Columns.Add(headerSecond);
+            MenuItemsListView.Columns.Add(headerThird);
+            MenuItemsListView.Columns.Add(headerFourth);
+            //MenuItemsListView.Columns.Add(headerFifth);
+
+            // storing data into the list
+            foreach (ChapeauModel.MenuItem item in menuItems)
+            {
+
+                ListViewItem entryListItem = new ListViewItem();
+                entryListItem.Tag = item;
+                entryListItem = MenuItemsListView.Items.Add(item.menuItemID.ToString());
+                entryListItem.SubItems.Add(item.itemName);
+                entryListItem.SubItems.Add(item.amountOnStock.ToString());
+                if (item.barOrKitchen == false)
+                {
+                    entryListItem.SubItems.Add("Bar");
+                }
+                else
+                {
+                    entryListItem.SubItems.Add("Kitchen");
+                }
+               // entryListItem.SubItems.Add(item.category.ToString());
+ 
+            }
+
+            // return a list view 
+            return MenuItemsListView;
+            
+
+        }
+
+        public string FindItemNameByIndex(int menuItemIndex)
+        {
+            string itemName = "";
+            List<ChapeauModel.MenuItem> menuItems = new List<ChapeauModel.MenuItem>();
+            menuItems = menuItemDAO.GetAll();
+
+            itemName = menuItems[menuItemIndex].itemName;
+
+            return itemName;
         }
     }
 }

@@ -34,6 +34,7 @@ namespace ChapeauModel
         }
         public OrderItems()
         {
+
         }
     }
 }
