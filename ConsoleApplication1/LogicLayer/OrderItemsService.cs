@@ -101,57 +101,52 @@ namespace ChapeauLogic
             return ordersListView;
         }
 
-        public ListView ShowUncompleteOrder(List<OrderItems> items)
+        public ListView ShowIncompleteOrder(List<OrderItems> items)
         {
             ListView itemsListView = new ListView();
             itemsListView.Height = 230;
-            itemsListView.Width = 370;
+            itemsListView.Width = 350;
             itemsListView.View = View.Details;
             itemsListView.FullRowSelect = true;
             itemsListView.Left = 400;
-            //itemsListView. = 500;
+           
 
 
             ColumnHeader headerFirst = new ColumnHeader();
-           // ColumnHeader headerSecond = new ColumnHeader();
+            ColumnHeader headerSecond = new ColumnHeader();
             ColumnHeader headerThird = new ColumnHeader();
-            //ColumnHeader headerFourth = new ColumnHeader();
-            ColumnHeader headerFifth = new ColumnHeader();
-
+            ColumnHeader headerFourth = new ColumnHeader();
+            
             // Set the text, alignment and width for each column header.
-            headerFirst.Text = "Name";
+            headerFirst.Text = "ID";
             headerFirst.TextAlign = HorizontalAlignment.Left;
-            headerFirst.Width = 150;
+            headerFirst.Width = 30;
 
-            //headerSecond.TextAlign = HorizontalAlignment.Left;
-            //headerSecond.Text = "Price";
-            //headerSecond.Width = 45;
+            headerSecond.TextAlign = HorizontalAlignment.Left;
+            headerSecond.Text = "Name";
+            headerSecond.Width = 150;
 
             headerThird.TextAlign = HorizontalAlignment.Left;
             headerThird.Text = "Amount";
-            headerThird.Width = 30;
+            headerThird.Width = 40;
 
-            //headerFourth.TextAlign = HorizontalAlignment.Left;
-            //headerFourth.Text = "Total";
-            //headerFourth.Width = 75;
-
-            headerFifth.TextAlign = HorizontalAlignment.Left;
-            headerFifth.Text = "Comment";
-            headerFifth.Width = 100;
+            headerFourth.TextAlign = HorizontalAlignment.Left;
+            headerFourth.Text = "Comment";
+            headerFourth.Width = 100;
 
             // adding colums to the list
             itemsListView.Columns.Add(headerFirst);
-            //itemsListView.Columns.Add(headerSecond);
+            itemsListView.Columns.Add(headerSecond);
             itemsListView.Columns.Add(headerThird);
-            //itemsListView.Columns.Add(headerFourth);
-            itemsListView.Columns.Add(headerFifth);
+            itemsListView.Columns.Add(headerFourth);
+           
 
             // storing data into the list
             foreach (OrderItems item in items)
             {
                 ListViewItem entryListItem = new ListViewItem();
-                entryListItem.Tag = item;
-                entryListItem = itemsListView.Items.Add(item.itemName);
+                entryListItem = itemsListView.Items.Add(item.menuItemID.ToString());
+                entryListItem.SubItems.Add(item.itemName);
                 entryListItem.SubItems.Add(item.amount.ToString());
                 entryListItem.SubItems.Add(item.comment);
  
@@ -164,10 +159,7 @@ namespace ChapeauLogic
         
         public void AddNewOrderItemsToDB(List<OrderItems> orderItemsList, Order order)
         {
-            orderItem.UpdateOrderItems(orderItemsList, order);
-
-
-
+            orderItem.InsertOrderItems(orderItemsList, order);
 
         }
 

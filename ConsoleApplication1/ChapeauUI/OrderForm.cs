@@ -35,7 +35,7 @@ namespace ChapeauUI
             //save the employee ID on the form
             employeeID.Text = ID.ToString();
         }
-        
+
         private void orderForm_Load(object sender, EventArgs e)
         {
             orderViewPanel.Controls.Clear();
@@ -66,6 +66,25 @@ namespace ChapeauUI
             find_order_by_table.Location = new Point(550, 75);
             orderViewPanel.Controls.Add(find_order_by_table);
 
+            find_order_by_table.Click += (s, ee) =>
+            {
+
+                if (table_choice.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select a table");
+                    return;
+                }
+
+                OrderItems existedOrder = new OrderItems();
+                existedOrder.tableID = int.Parse(table_choice.SelectedItem.ToString());
+ 
+                ShowExistedOrder(existedOrder);
+
+
+            };
+
+
+
             Button served = new Button();
             served.Text = "Served";
             served.Width = 166;
@@ -79,14 +98,20 @@ namespace ChapeauUI
         {
             throw new NotImplementedException();
         }
-        
+
+        //Show an existed order
+        private void ShowExistedOrder(Order existedOrder)
+        {
+
+        }
+
 
         //new order button click
         private void createNew_Click(object sender, EventArgs e)
         {
             //clear List for new order after confirmation button click
             orderItemsList.Clear();
-            
+
             //creating of a new order in DB
             string table_text = ShowChooseTable();
             int tableID;
@@ -96,9 +121,9 @@ namespace ChapeauUI
 
             ShowMenuItemInterface(order);
             //clear space for new data
-            }
+        }
 
-        public void ShowMenuItemInterface (Order order)
+        public void ShowMenuItemInterface(Order order)
         {
             orderViewPanel.Controls.Clear();
 
@@ -106,25 +131,25 @@ namespace ChapeauUI
             Label table = new Label();
             table.Text = "Table: ";
             table.AutoSize = true;
-            table.Location = new Point(450, 240);
+            table.Location = new Point(560, 240);
             orderViewPanel.Controls.Add(table);
 
             Label chosen_table = new Label();
             chosen_table.Text = order.tableID.ToString();
             chosen_table.AutoSize = true;
-            chosen_table.Location = new Point(500, 240);
+            chosen_table.Location = new Point(620, 240);
             orderViewPanel.Controls.Add(chosen_table);
 
             Label order_text = new Label();
             order_text.Text = "Order: ";
             order_text.AutoSize = true;
-            order_text.Location = new Point(540, 240);
+            order_text.Location = new Point(660, 240);
             orderViewPanel.Controls.Add(order_text);
 
             Label orderid = new Label();
             orderid.Text = order.orderID.ToString();
             orderid.AutoSize = true;
-            orderid.Location = new Point(600, 240);
+            orderid.Location = new Point(720, 240);
             orderViewPanel.Controls.Add(orderid);
 
             Label amountTextlbl = new Label();
@@ -133,7 +158,7 @@ namespace ChapeauUI
             amountTextlbl.Location = new Point(05, 240);
             orderViewPanel.Controls.Add(amountTextlbl);
 
-           ComboBox amount_choice_box = new ComboBox() { Left = 50, Top = 50, Width = 400 };
+            ComboBox amount_choice_box = new ComboBox() { Left = 50, Top = 50, Width = 400 };
             amount_choice_box.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
             //amount_choice_box.AutoSize = true;
             amount_choice_box.Height = 5;
@@ -157,44 +182,92 @@ namespace ChapeauUI
             menu = menuItemService.ShowMenuItems();
             orderViewPanel.Controls.Add(menu);
 
-            ListView uncomplitedOrder = new ListView();
-            uncomplitedOrder = orderItemService.ShowUncompleteOrder(orderItemsList);
-            orderViewPanel.Controls.Add(uncomplitedOrder);
+            ListView incomplitedOrder = new ListView();
+            incomplitedOrder = orderItemService.ShowIncompleteOrder(orderItemsList);
+            orderViewPanel.Controls.Add(incomplitedOrder);
 
             Button add_btn = new Button();
             add_btn.Text = "ADD TO ORDER";
             add_btn.Width = 166;
             add_btn.Height = 47;
-            add_btn.Location = new Point(250, 280);
+            add_btn.Location = new Point(205, 280);
+            add_btn.BackColor = Color.LightGreen;
             orderViewPanel.Controls.Add(add_btn);
+
+            Button remove_btn = new Button();
+            remove_btn.Text = "REMOVE ITEM";
+            remove_btn.Width = 130;
+            remove_btn.Height = 40;
+            remove_btn.Location = new Point(400, 240);
+            remove_btn.BackColor = Color.LightCoral;
+            orderViewPanel.Controls.Add(remove_btn);
 
             Button confirm_btn = new Button();
             confirm_btn.Text = "CONFIRM";
             confirm_btn.Width = 166;
             confirm_btn.Height = 47;
-            confirm_btn.Location = new Point(550, 280);
+            confirm_btn.Location = new Point(570, 280);
+            confirm_btn.BackColor = Color.LightGreen;
             orderViewPanel.Controls.Add(confirm_btn);
 
+            //CONFIRM ORDER click
             confirm_btn.Click += (s, ee) =>
             {
+                //if the list of items is empty, show warning message
                 if (orderItemsList.Count == 0)
                 {
-                    MessageBox.Show("Please select items for a new order");
+                    MessageBox.Show("Please select an item for a new order");
                     return;
                 }
 
-
+                //send to DB new order items
                 orderItemService.AddNewOrderItemsToDB(orderItemsList, order);
+                //clear the list of items
+                orderItemsList.Clear();
+                //load the home page 
                 orderForm_Load(s, ee);
 
+
+            };
+
+            //REMOVE ITEM click
+            remove_btn.Click += (s, ee) =>
+            {
+                //if the list of items is empty, show warning message
+                if (incomplitedOrder.SelectedItems.Count == 0)
+                {
+                    MessageBox.Show("Please, select an item from the list to remove it!");
+                    return;
+                }
+
+                //saving the selected item
+                ListViewItem selected = incomplitedOrder.SelectedItems[0];
+
+                //creating an object for removing the same from the orderItemsList
+                OrderItems orderItemRemove = new OrderItems();
+                orderItemRemove.menuItemID = int.Parse(selected.SubItems[0].Text.ToString());
+                orderItemRemove.amount = int.Parse(selected.SubItems[2].Text.ToString());
+
+                //checking which item the same and removing it
+                for (int i = 0; i < orderItemsList.Count; i++)
+                {
+                    if ((orderItemsList[i].amount == orderItemRemove.amount) && (orderItemsList[i].menuItemID == orderItemRemove.menuItemID))
+                    {
+                        orderItemsList.RemoveAt(i);
+                        break;
+                    }
+                }
+
+                //show newOrder interface with menu and chosen items 
+                ShowMenuItemInterface(order);
 
             };
 
             //add a new item to the order list (but not sending it to DB yet)
             add_btn.Click += (s, ee) =>
             {
-               // if (amount_choice_box.SelectedIndex == -1)
-               if(menu.SelectedItems.Count == 0)
+
+                if (menu.SelectedItems.Count == 0)
                 {
                     MessageBox.Show("Please select an item");
                     return;
@@ -205,34 +278,14 @@ namespace ChapeauUI
                 orderItemNew.amount = int.Parse(amount_text);
 
                 ListViewItem selected = menu.SelectedItems[0];
-                string menuItemIdString = selected.SubItems[0].Text.ToString();
-                orderItemNew.menuItemID = int.Parse(menuItemIdString);
+                orderItemNew.menuItemID = int.Parse(selected.SubItems[0].Text.ToString());
                 orderItemNew.itemName = selected.SubItems[1].Text.ToString();
-
-                string something = menu.SelectedItems[0].Tag.ToString();
-                ChapeauModel.MenuItem menuItemSelected = new ChapeauModel.MenuItem();
-
-                menuItemSelected = (ChapeauModel.MenuItem)menu.SelectedItems[0].Tag;
-                //orderItemNew.menuItemID = menuItemSelected.menuItemID;
-                // var index = menu.CheckedIndices;
-                // int menuItemIndex = index[0];
-
-                orderItemNew.itemName = menuItemSelected.itemName;
-                // orderItemNew.menuItemID = menuItemIndex + 1;
                 orderItemNew.comment = comment_txt_box.Text;
-                //string itemName = menuItemService.FindItemNameByIndex(menuItemIndex);
-                //orderItemNew.itemName = itemName;
-
-
 
                 orderItemsList.Add(orderItemNew);
 
                 ShowMenuItemInterface(order);
-
-
             };
-           
-
         }
 
 
@@ -249,18 +302,20 @@ namespace ChapeauUI
             table_choice.AutoSize = true;
             Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 90 };
             string text = "";
-            confirmation.Click += (sender, e) => {
+            confirmation.Click += (sender, e) =>
+            {
                 if (table_choice.SelectedIndex == -1)
                 {
-                    MessageBox.Show("Please select a value");
+                    MessageBox.Show("Please select a table");
                     return;
                 }
-                text = table_choice.SelectedItem.ToString(); message.Close();};
+                text = table_choice.SelectedItem.ToString(); message.Close();
+            };
             message.Controls.Add(confirmation);
             message.Controls.Add(textLabel);
             message.Controls.Add(table_choice);
             message.ShowDialog();
-            
+
             return text;
 
         }
@@ -272,7 +327,7 @@ namespace ChapeauUI
 
         private void ordersView_Click(object sender, EventArgs e)
         {
-           orderForm_Load(sender, e);
+            orderForm_Load(sender, e);
 
         }
 
@@ -355,8 +410,8 @@ namespace ChapeauUI
 
         private void logoffLink_Click(object sender, EventArgs e)
         {
-           
-           
+
+
             LoginForm loginForm = new LoginForm();
             loginForm.Show();
             this.Close();

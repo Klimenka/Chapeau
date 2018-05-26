@@ -16,9 +16,9 @@ namespace ChapeauLogic
 
         public ListView ShowMenuItems()
         {
-            //List<ChapeauModel.MenuItem> menuItems = new List<ChapeauModel.MenuItem>();
+            //get all items from DB
             menuItems = menuItemDAO.GetAll();
-            
+
 
             // Making a list and editing its format 
             ListView MenuItemsListView = new ListView();
@@ -26,7 +26,6 @@ namespace ChapeauLogic
             MenuItemsListView.Width = 365;
             MenuItemsListView.View = View.Details;
             MenuItemsListView.FullRowSelect = true;
-            //MenuItemsListView.CheckBoxes = true;
             MenuItemsListView.HideSelection = false;
             MenuItemsListView.Select();
 
@@ -35,7 +34,6 @@ namespace ChapeauLogic
             ColumnHeader headerSecond = new ColumnHeader();
             ColumnHeader headerThird = new ColumnHeader();
             ColumnHeader headerFourth = new ColumnHeader();
-            //ColumnHeader headerFifth = new ColumnHeader();
 
             // Set the text, alignment and width for each column header.
             headerFirst.Text = "ID";
@@ -54,23 +52,17 @@ namespace ChapeauLogic
             headerFourth.Text = "Bar Or Kitchen";
             headerFourth.Width = 75;
 
-            //headerFifth.TextAlign = HorizontalAlignment.Left;
-            //headerFifth.Text = "Category";
-            //headerFifth.Width = 75;
-
             // adding colums to the list
             MenuItemsListView.Columns.Add(headerFirst);
             MenuItemsListView.Columns.Add(headerSecond);
             MenuItemsListView.Columns.Add(headerThird);
             MenuItemsListView.Columns.Add(headerFourth);
-            //MenuItemsListView.Columns.Add(headerFifth);
 
             // storing data into the list
             foreach (ChapeauModel.MenuItem item in menuItems)
             {
 
                 ListViewItem entryListItem = new ListViewItem();
-                entryListItem.Tag = item;
                 entryListItem = MenuItemsListView.Items.Add(item.menuItemID.ToString());
                 entryListItem.SubItems.Add(item.itemName);
                 entryListItem.SubItems.Add(item.amountOnStock.ToString());
@@ -82,25 +74,23 @@ namespace ChapeauLogic
                 {
                     entryListItem.SubItems.Add("Kitchen");
                 }
-               // entryListItem.SubItems.Add(item.category.ToString());
- 
             }
 
             // return a list view 
             return MenuItemsListView;
-            
+
 
         }
 
-        public string FindItemNameByIndex(int menuItemIndex)
-        {
-            string itemName = "";
-            List<ChapeauModel.MenuItem> menuItems = new List<ChapeauModel.MenuItem>();
-            menuItems = menuItemDAO.GetAll();
+        //public string FindItemNameByIndex(int menuItemIndex)
+        //{
+        //    string itemName = "";
+        //    List<ChapeauModel.MenuItem> menuItems = new List<ChapeauModel.MenuItem>();
+        //    menuItems = menuItemDAO.GetAll();
 
-            itemName = menuItems[menuItemIndex].itemName;
+        //    itemName = menuItems[menuItemIndex].itemName;
 
-            return itemName;
-        }
+        //    return itemName;
+        //}
     }
 }
