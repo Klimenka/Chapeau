@@ -8,8 +8,6 @@ namespace ChapeauModel
 {
     public enum PaymentMethod
     {
-        Pin,
-        CreditCard,
-        Cash
+        Pin = 1, CreditCard, Cash
     }
 }
