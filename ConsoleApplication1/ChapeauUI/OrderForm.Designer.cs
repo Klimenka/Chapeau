@@ -40,27 +40,32 @@
             // 
             // ordersView
             // 
-            this.ordersView.Location = new System.Drawing.Point(104, 69);
+            this.ordersView.Location = new System.Drawing.Point(92, 55);
+            this.ordersView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ordersView.Name = "ordersView";
-            this.ordersView.Size = new System.Drawing.Size(166, 47);
+            this.ordersView.Size = new System.Drawing.Size(148, 38);
             this.ordersView.TabIndex = 0;
             this.ordersView.Text = "Orders view";
             this.ordersView.UseVisualStyleBackColor = true;
+            this.ordersView.Click += new System.EventHandler(this.ordersView_Click);
             // 
             // createNew
             // 
-            this.createNew.Location = new System.Drawing.Point(519, 69);
+            this.createNew.Location = new System.Drawing.Point(461, 55);
+            this.createNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.createNew.Name = "createNew";
-            this.createNew.Size = new System.Drawing.Size(166, 47);
+            this.createNew.Size = new System.Drawing.Size(148, 38);
             this.createNew.TabIndex = 1;
             this.createNew.Text = "Create new";
             this.createNew.UseVisualStyleBackColor = true;
+            this.createNew.Click += new System.EventHandler(this.createNew_Click);
             // 
             // tablesViewBtn
             // 
-            this.tablesViewBtn.Location = new System.Drawing.Point(917, 69);
+            this.tablesViewBtn.Location = new System.Drawing.Point(815, 55);
+            this.tablesViewBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tablesViewBtn.Name = "tablesViewBtn";
-            this.tablesViewBtn.Size = new System.Drawing.Size(166, 47);
+            this.tablesViewBtn.Size = new System.Drawing.Size(148, 38);
             this.tablesViewBtn.TabIndex = 2;
             this.tablesViewBtn.Text = "Tables view";
             this.tablesViewBtn.UseVisualStyleBackColor = true;
@@ -68,9 +73,10 @@
             // 
             // orderViewPanel
             // 
-            this.orderViewPanel.Location = new System.Drawing.Point(49, 154);
+            this.orderViewPanel.Location = new System.Drawing.Point(44, 123);
+            this.orderViewPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.orderViewPanel.Name = "orderViewPanel";
-            this.orderViewPanel.Size = new System.Drawing.Size(1110, 546);
+            this.orderViewPanel.Size = new System.Drawing.Size(987, 437);
             this.orderViewPanel.TabIndex = 3;
             // 
             // statusStrip1
@@ -78,9 +84,10 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.logoffLink});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 682);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 545);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1218, 30);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1083, 25);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -93,22 +100,23 @@
             this.logoffLink.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.logoffLink.LinkColor = System.Drawing.Color.Maroon;
             this.logoffLink.Name = "logoffLink";
-            this.logoffLink.Size = new System.Drawing.Size(87, 25);
+            this.logoffLink.Size = new System.Drawing.Size(74, 20);
             this.logoffLink.Text = "Log off";
             this.logoffLink.VisitedLinkColor = System.Drawing.Color.Maroon;
             this.logoffLink.Click += new System.EventHandler(this.logoffLink_Click);
             // 
             // orderForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1218, 712);
+            this.ClientSize = new System.Drawing.Size(1083, 570);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.orderViewPanel);
             this.Controls.Add(this.tablesViewBtn);
             this.Controls.Add(this.createNew);
             this.Controls.Add(this.ordersView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "orderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Restaurant Chapeau-Ordering";

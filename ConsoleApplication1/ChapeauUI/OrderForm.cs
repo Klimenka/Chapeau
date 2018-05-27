@@ -106,5 +106,15 @@ namespace ChapeauUI
             loginForm.Show();
             this.Close();
         }
+
+        private void ordersView_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void createNew_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
