@@ -118,10 +118,10 @@ namespace ChapeauDAL
 
 
             // write a sql query 
-            string SQLquery = @"SELECT a.OrderId, a.TableId, b.ItemName, c.isReady, c.IsServed from Orders as a
+            string SQLquery = @"SELECT c.OrderItemId, a.TableId, b.ItemName, c.Amount, c.isReady, c.IsServed from Orders as a
                                 INNER JOIN OrderItems as c ON c.OrderId = a.OrderId
                                 INNER JOIN MenuItems as b ON c.MenuItemId = b.MenuItemId
-                                WHERE a.EmployeeId = @ID ";
+                                WHERE a.EmployeeId = @ID AND convert (date, DateTaken) = convert (date, GETDATE()) ";
 
             // execute the sql query
             SqlCommand command = new SqlCommand(SQLquery, connection);
@@ -135,9 +135,10 @@ namespace ChapeauDAL
             while (reader.Read())
             {
                 OrderItems order = new OrderItems();
-                order.orderID = (int)reader["OrderId"];
+                order.orderItemID = (int)reader["OrderItemId"];
                 order.tableID = (int)reader["TableId"];
                 order.itemName = Convert.ToString(reader["ItemName"]);
+                order.amount = (int)reader["Amount"];
                 order.isReady = (bool)reader["isReady"];
                 order.isServed = (bool)reader["IsServed"];
                 orders.Add(order);
@@ -158,14 +159,12 @@ namespace ChapeauDAL
 
 
             // write a sql query 
-            string SQLquery = @"SELECT a.OrderId, a.TableId, b.ItemName, c.isReady, c.IsServed from Orders as a
-                                INNER JOIN OrderItems as c ON c.OrderId = a.OrderId
-                                INNER JOIN MenuItems as b ON c.MenuItemId = b.MenuItemId
-                                WHERE a.EmployeeId = @ID ";
+            string SQLquery = @"SELECT OrderItemId, MenuItemId, Amount, Comments, IsServed  FROM OrderItems 
+                                WHERE OrderId = @OrderId";
 
             // execute the sql query
             SqlCommand command = new SqlCommand(SQLquery, connection);
-            command.Parameters.AddWithValue("@ID", ID);
+            command.Parameters.AddWithValue("@OrderId", existedOrder.orderID);
             command.ExecuteNonQuery();
 
             // read from db
@@ -174,13 +173,13 @@ namespace ChapeauDAL
 
             while (reader.Read())
             {
-                OrderItems order = new OrderItems();
-                order.orderID = (int)reader["OrderId"];
-                order.tableID = (int)reader["TableId"];
-                order.itemName = Convert.ToString(reader["ItemName"]);
-                order.isReady = (bool)reader["isReady"];
-                order.isServed = (bool)reader["IsServed"];
-                orders.Add(order);
+                OrderItems orderItem = new OrderItems();
+                orderItem.orderItemID = (int)reader["OrderItemId"];
+                orderItem.menuItemID = (int)reader["MenuItemId"];
+                orderItem.amount = (int)reader["Amount"];
+                orderItem.comment = Convert.ToString(reader["Comments"]);
+                orderItem.isServed = (bool)reader["IsServed"];
+                orderItems.Add(orderItem);
             }
 
             // close all connections
@@ -190,5 +189,27 @@ namespace ChapeauDAL
 
             return orderItems;
         }
+        public void CheckAsServedItems(int[] checkedItems)
+        {
+            SqlConnection connection = OpeConnection();
+
+            for (int i = 0; i < checkedItems.Length; i++)
+            {
+                // write a sql query 
+                string SQLquery = @"UPDATE OrderItems
+                                SET IsServed = 1
+                                WHERE OrderItemId = @OrderItemId";
+
+                // execute the sql query
+                SqlCommand command = new SqlCommand(SQLquery, connection);
+                command.Parameters.AddWithValue("@OrderItemId", checkedItems[i]);
+                command.ExecuteNonQuery();
+
+                // read from db
+
+            }
+            CloseConnection(connection);
+        }
+
     }
 }

@@ -9,8 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-
 
 
 namespace ChapeauUI
@@ -22,10 +20,8 @@ namespace ChapeauUI
         MenuItemService menuItemService = new MenuItemService();
         TableService tableService = new TableService();
         List<OrderItems> orderItemsList = new List<OrderItems>();
+        DateTime time = new DateTime();
 
-        //TextBox comment_txt_box = new TextBox();
-
-        //ComboBox amount_choice_box = new ComboBox() { Left = 50, Top = 50, Width = 400 };
 
         public orderForm(int ID)
         {
@@ -37,9 +33,16 @@ namespace ChapeauUI
         }
 
         private void orderForm_Load(object sender, EventArgs e)
+
         {
+
+            createNew.Enabled = true;
             orderViewPanel.Controls.Clear();
-            orderViewPanel.Controls.Add(orderItemService.ShowOrderItems(int.Parse(employeeID.Text)));
+
+            ListView showOrderItems = new ListView();
+            showOrderItems = orderItemService.ShowOrderItems(int.Parse(employeeID.Text));
+            orderViewPanel.Controls.Add(showOrderItems);
+            
 
             Label table = new Label();
             table.Text = "Table: ";
@@ -83,62 +86,99 @@ namespace ChapeauUI
 
             };
 
-
-
             Button served = new Button();
             served.Text = "Served";
             served.Width = 166;
             served.Height = 47;
             served.Location = new Point(285, 265);
             orderViewPanel.Controls.Add(served);
-            served.Click += new EventHandler(served_clicked);
+
+            served.Click += (s, ee) =>
+            {
+                //if the list of items is empty, show warning message
+                if (showOrderItems.CheckedItems.Count == 0)
+                {
+                    MessageBox.Show("Please select items to be served");
+                    return;
+                }
+
+                //save checked ItemsID
+                int[] checkedItems = new int[showOrderItems.CheckedItems.Count];
+                for (int i = 0; i < showOrderItems.CheckedItems.Count; i++)
+                {
+                    checkedItems[i] = int.Parse(showOrderItems.CheckedItems[i].SubItems[0].Text.ToString());
+                }
+
+                //send to DB items for the update
+                orderItemService.CheckAsServed(checkedItems);
+
+
+                orderForm_Load(s, ee);
+
+
+            };
+
+            
         }
 
-        private void served_clicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         //Show an existed order
         private void ShowExistedOrder(Order existedOrder)
         {
+            createNew.Enabled = false;
+            orderViewPanel.Controls.Clear();
+
             existedOrder.orderID = orderService.GetOrderID(existedOrder.tableID);
 
             ListView existedOrderListControl = new ListView();
             existedOrderListControl = orderItemService.ShowOrderItemsExisted(existedOrder);
             orderViewPanel.Controls.Add(existedOrderListControl);
 
+            Button add_btn = new Button();
+            add_btn.Text = "ADD TO ORDER";
+            add_btn.Width = 166;
+            add_btn.Height = 47;
+            add_btn.Location = new Point(00, 265);
+           // add_btn.BackColor = Color.LightGreen;
+            orderViewPanel.Controls.Add(add_btn);
+
+            Button payment_btn = new Button();
+            payment_btn.Text = "PAYMENT";
+            payment_btn.Width = 166;
+            payment_btn.Height = 47;
+            payment_btn.Location = new Point(550, 265);
+            payment_btn.BackColor = Color.LightGreen;
+            orderViewPanel.Controls.Add(payment_btn);
+
+            payment_btn.Click += (s, ee) =>
+            {
+                //don't know what check here
+                //if (orderItemsList.Count == 0)
+                //{
+                //    MessageBox.Show("Please select an item for a new order");
+                //    return;
+                //}
+
+                //show payment form
+                PaymentForm paymentForm = new PaymentForm(existedOrder);
+                paymentForm.Show();
+            };
+
+            add_btn.Click += (s, ee) =>
+            {
+                ShowMenuItemInterface(existedOrder);
+
+            };
 
 
-            Label table = new Label();
-            table.Text = "Table: ";
-            table.AutoSize = true;
-            table.Location = new Point(560, 240);
-            orderViewPanel.Controls.Add(table);
-
-            Label chosen_table = new Label();
-            chosen_table.Text = order.tableID.ToString();
-            chosen_table.AutoSize = true;
-            chosen_table.Location = new Point(620, 240);
-            orderViewPanel.Controls.Add(chosen_table);
-
-            Label order_text = new Label();
-            order_text.Text = "Order: ";
-            order_text.AutoSize = true;
-            order_text.Location = new Point(660, 240);
-            orderViewPanel.Controls.Add(order_text);
-
-            Label orderid = new Label();
-            orderid.Text = order.orderID.ToString();
-            orderid.AutoSize = true;
-            orderid.Location = new Point(720, 240);
-            orderViewPanel.Controls.Add(orderid);
         }
 
 
         //new order button click
         private void createNew_Click(object sender, EventArgs e)
         {
+            createNew.Enabled = false;
             //clear List for new order after confirmation button click
             orderItemsList.Clear();
 
@@ -155,6 +195,7 @@ namespace ChapeauUI
 
         public void ShowMenuItemInterface(Order order)
         {
+            createNew.Enabled = false;
             orderViewPanel.Controls.Clear();
 
             //saving data on the panel (creation of the buttons and labels)
@@ -230,7 +271,7 @@ namespace ChapeauUI
             remove_btn.Height = 40;
             remove_btn.Location = new Point(400, 240);
             remove_btn.BackColor = Color.LightCoral;
-            orderViewPanel.Controls.Add(remove_btn);
+           // orderViewPanel.Controls.Add(remove_btn);
 
             Button confirm_btn = new Button();
             confirm_btn.Text = "CONFIRM";
@@ -365,6 +406,7 @@ namespace ChapeauUI
 
         private void TablesViewBtn_Click(object sender, EventArgs e)
         {
+            createNew.Enabled = true;
             orderViewPanel.Controls.Clear();
             orderViewPanel.Controls.Add(CreateChnageTableStatusBtn());
             orderViewPanel.Controls.Add(ShowTables());
