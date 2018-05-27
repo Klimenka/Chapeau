@@ -16,9 +16,7 @@ namespace ChapeauUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            LoginForm form = new LoginForm();
-            form.Show();
-            Application.Run(); 
+            Application.Run(new LoginForm()); 
 
 
         }
