@@ -55,6 +55,39 @@ namespace ChapeauDAL
 
             return order;
         }
+
+        public int GetOrderIdDB(int tableIdExistedOrder)
+        {
+            int orderID = 0;
+            SqlConnection connection = OpeConnection();
+
+
+            // write a sql query 
+            string SQLquery = @"SELECT TOP 1 OrderId FROM Orders
+                                WHERE TableId = @TableId
+                                ORDER BY OrderId desc";
+
+            // execute the sql query
+            SqlCommand command = new SqlCommand(SQLquery, connection);
+            command.Parameters.AddWithValue("@tableID", tableIdExistedOrder);
+            command.ExecuteNonQuery();
+
+            // read from db
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                orderID = (int)reader["OrderId"];
+
+            }
+
+
+            // close all connections
+            reader.Close();
+            CloseConnection(connection);
+
+            return orderID;
+        }
     }
 
 

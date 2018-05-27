@@ -12,14 +12,14 @@ namespace ChapeauLogic
 {
     public class OrderItemsService 
     {
-        OrderItemsDAO orderItem = new OrderItemsDAO();
-
+        OrderItemsDAO orderItemDAO = new OrderItemsDAO();
+        MenuItemDAO menuItemDAO = new MenuItemDAO();
 
         public Control ShowOrderItems(int ID)
         {
             List<OrderItems> orders = new List<OrderItems>();
 
-            orders = orderItem.getOrders(ID);
+            orders = orderItemDAO.getOrders(ID);
 
             // Making a list and editing its format 
             ListView ordersListView = new ListView();
@@ -159,10 +159,18 @@ namespace ChapeauLogic
         
         public void AddNewOrderItemsToDB(List<OrderItems> orderItemsList, Order order)
         {
-            orderItem.InsertOrderItems(orderItemsList, order);
+            orderItemDAO.InsertOrderItems(orderItemsList, order);
 
         }
 
+        public ListView ShowOrderItemsExisted(Order existedOrder)
+        {
+            List<ChapeauModel.MenuItem> menuItems = new List<ChapeauModel.MenuItem>();
+            List<OrderItems> orderItems = new List<OrderItems>();
+            menuItems = menuItemDAO.GetAll();
+
+            orderItems = orderItemDAO.GetExistedOrderItems(existedOrder);
+        }
 
     }
 }

@@ -21,6 +21,12 @@ namespace ChapeauLogic
            
         }
 
-       
+        public int GetOrderID(int tableIdExistedOrder)
+        {
+            return order.GetOrderIdDB(tableIdExistedOrder);
+        }
+
+
+
     }
 }

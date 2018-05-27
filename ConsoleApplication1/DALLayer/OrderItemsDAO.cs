@@ -149,5 +149,46 @@ namespace ChapeauDAL
 
             return orders;
         }
+
+        public List<OrderItems> GetExistedOrderItems(Order existedOrder)
+        {
+            List<OrderItems> orderItems = new List<OrderItems>();
+
+            SqlConnection connection = OpeConnection();
+
+
+            // write a sql query 
+            string SQLquery = @"SELECT a.OrderId, a.TableId, b.ItemName, c.isReady, c.IsServed from Orders as a
+                                INNER JOIN OrderItems as c ON c.OrderId = a.OrderId
+                                INNER JOIN MenuItems as b ON c.MenuItemId = b.MenuItemId
+                                WHERE a.EmployeeId = @ID ";
+
+            // execute the sql query
+            SqlCommand command = new SqlCommand(SQLquery, connection);
+            command.Parameters.AddWithValue("@ID", ID);
+            command.ExecuteNonQuery();
+
+            // read from db
+            SqlDataReader reader = command.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                OrderItems order = new OrderItems();
+                order.orderID = (int)reader["OrderId"];
+                order.tableID = (int)reader["TableId"];
+                order.itemName = Convert.ToString(reader["ItemName"]);
+                order.isReady = (bool)reader["isReady"];
+                order.isServed = (bool)reader["IsServed"];
+                orders.Add(order);
+            }
+
+            // close all connections
+            reader.Close();
+            CloseConnection(connection);
+
+
+            return orderItems;
+        }
     }
 }

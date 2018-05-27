@@ -102,7 +102,37 @@ namespace ChapeauUI
         //Show an existed order
         private void ShowExistedOrder(Order existedOrder)
         {
+            existedOrder.orderID = orderService.GetOrderID(existedOrder.tableID);
 
+            ListView existedOrderListControl = new ListView();
+            existedOrderListControl = orderItemService.ShowOrderItemsExisted(existedOrder);
+            orderViewPanel.Controls.Add(existedOrderListControl);
+
+
+
+            Label table = new Label();
+            table.Text = "Table: ";
+            table.AutoSize = true;
+            table.Location = new Point(560, 240);
+            orderViewPanel.Controls.Add(table);
+
+            Label chosen_table = new Label();
+            chosen_table.Text = order.tableID.ToString();
+            chosen_table.AutoSize = true;
+            chosen_table.Location = new Point(620, 240);
+            orderViewPanel.Controls.Add(chosen_table);
+
+            Label order_text = new Label();
+            order_text.Text = "Order: ";
+            order_text.AutoSize = true;
+            order_text.Location = new Point(660, 240);
+            orderViewPanel.Controls.Add(order_text);
+
+            Label orderid = new Label();
+            orderid.Text = order.orderID.ToString();
+            orderid.AutoSize = true;
+            orderid.Location = new Point(720, 240);
+            orderViewPanel.Controls.Add(orderid);
         }
 
 
