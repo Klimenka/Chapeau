@@ -24,6 +24,7 @@ namespace ChapeauLogic
             ListView MenuItemsListView = new ListView();
             MenuItemsListView.Height = 230;
             MenuItemsListView.Width = 365;
+            MenuItemsListView.Left = 30;
             MenuItemsListView.View = View.Details;
             MenuItemsListView.FullRowSelect = true;
             MenuItemsListView.HideSelection = false;

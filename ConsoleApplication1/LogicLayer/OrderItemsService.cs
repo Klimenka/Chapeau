@@ -29,6 +29,7 @@ namespace ChapeauLogic
             ListView ordersListView = new ListView();
             ordersListView.Height = 250;
             ordersListView.Width = 500;
+            ordersListView.Left = 20;
             ordersListView.View = View.Details;
             ordersListView.FullRowSelect = true;
             ordersListView.CheckBoxes = true;
@@ -97,7 +98,7 @@ namespace ChapeauLogic
             itemsListView.Width = 350;
             itemsListView.View = View.Details;
             itemsListView.FullRowSelect = true;
-            itemsListView.Left = 400;
+            itemsListView.Left = 420;
 
 
 

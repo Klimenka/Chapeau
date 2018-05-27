@@ -42,7 +42,7 @@
             // 
             // ordersView
             // 
-            this.ordersView.Location = new System.Drawing.Point(104, 69);
+            this.ordersView.Location = new System.Drawing.Point(102, 50);
             this.ordersView.Name = "ordersView";
             this.ordersView.Size = new System.Drawing.Size(166, 47);
             this.ordersView.TabIndex = 0;
@@ -52,7 +52,7 @@
             // 
             // createNew
             // 
-            this.createNew.Location = new System.Drawing.Point(519, 69);
+            this.createNew.Location = new System.Drawing.Point(526, 50);
             this.createNew.Name = "createNew";
             this.createNew.Size = new System.Drawing.Size(166, 47);
             this.createNew.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             // tablesViewBtn
             // 
-            this.tablesViewBtn.Location = new System.Drawing.Point(917, 69);
+            this.tablesViewBtn.Location = new System.Drawing.Point(921, 50);
             this.tablesViewBtn.Name = "tablesViewBtn";
             this.tablesViewBtn.Size = new System.Drawing.Size(166, 47);
             this.tablesViewBtn.TabIndex = 2;

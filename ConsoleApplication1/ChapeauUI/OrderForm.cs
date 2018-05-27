@@ -10,9 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using ChapeauLogic;
-using ChapeauModel;
-using LogicLayer;
+
+
 
 
 namespace ChapeauUI
@@ -24,7 +23,7 @@ namespace ChapeauUI
         MenuItemService menuItemService = new MenuItemService();
         TableService tableService = new TableService();
         List<OrderItems> orderItemsList = new List<OrderItems>();
-        DateTime time = new DateTime();
+       // DateTime time = new DateTime();
 
 
         public orderForm(int ID)
@@ -91,10 +90,10 @@ namespace ChapeauUI
             };
 
             Button served = new Button();
-            served.Text = "Served";
+            served.Text = "SERVED";
             served.Width = 166;
             served.Height = 47;
-            served.Location = new Point(285, 265);
+            served.Location = new Point(345, 265);
             orderViewPanel.Controls.Add(served);
 
             served.Click += (s, ee) =>
@@ -230,7 +229,7 @@ namespace ChapeauUI
             Label amountTextlbl = new Label();
             amountTextlbl.Text = "Amount";
             amountTextlbl.AutoSize = true;
-            amountTextlbl.Location = new Point(05, 240);
+            amountTextlbl.Location = new Point(25, 240);
             orderViewPanel.Controls.Add(amountTextlbl);
 
             ComboBox amount_choice_box = new ComboBox() { Left = 50, Top = 50, Width = 400 };
@@ -238,19 +237,19 @@ namespace ChapeauUI
             //amount_choice_box.AutoSize = true;
             amount_choice_box.Height = 5;
             amount_choice_box.Width = 50;
-            amount_choice_box.Location = new Point(05, 270);
+            amount_choice_box.Location = new Point(25, 270);
             orderViewPanel.Controls.Add(amount_choice_box);
 
             Label leave_comment_lbl = new Label();
             leave_comment_lbl.Text = "Leave comment (optional):";
             leave_comment_lbl.AutoSize = true;
-            leave_comment_lbl.Location = new Point(100, 240);
+            leave_comment_lbl.Location = new Point(125, 240);
             orderViewPanel.Controls.Add(leave_comment_lbl);
 
             TextBox comment_txt_box = new TextBox();
             comment_txt_box.Height = 10;
             comment_txt_box.Width = 100;
-            comment_txt_box.Location = new Point(100, 270);
+            comment_txt_box.Location = new Point(125, 270);
             orderViewPanel.Controls.Add(comment_txt_box);
 
             ListView menu = new ListView();
@@ -265,7 +264,7 @@ namespace ChapeauUI
             add_btn.Text = "ADD TO ORDER";
             add_btn.Width = 166;
             add_btn.Height = 47;
-            add_btn.Location = new Point(205, 280);
+            add_btn.Location = new Point(235, 280);
             add_btn.BackColor = Color.LightGreen;
             orderViewPanel.Controls.Add(add_btn);
 
@@ -281,7 +280,7 @@ namespace ChapeauUI
             confirm_btn.Text = "CONFIRM";
             confirm_btn.Width = 166;
             confirm_btn.Height = 47;
-            confirm_btn.Location = new Point(570, 280);
+            confirm_btn.Location = new Point(595, 280);
             confirm_btn.BackColor = Color.LightGreen;
             orderViewPanel.Controls.Add(confirm_btn);
 
@@ -408,8 +407,6 @@ namespace ChapeauUI
 
         public ListView tablesListView;
 
-        private TableService tableService = new TableService();
-  
         // show tables
         private void TablesViewBtn_Click(object sender, EventArgs e)
         {
@@ -525,10 +522,7 @@ namespace ChapeauUI
             }
         }
 
-        private void orderForm_Load(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void orderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
