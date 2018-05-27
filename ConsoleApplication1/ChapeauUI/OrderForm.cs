@@ -9,6 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using ChapeauLogic;
+using ChapeauModel;
+using LogicLayer;
 
 
 namespace ChapeauUI
@@ -404,89 +408,131 @@ namespace ChapeauUI
 
         public ListView tablesListView;
 
+        private TableService tableService = new TableService();
+  
+        // show tables
         private void TablesViewBtn_Click(object sender, EventArgs e)
         {
             createNew.Enabled = true;
             orderViewPanel.Controls.Clear();
-            orderViewPanel.Controls.Add(CreateChnageTableStatusBtn());
-            orderViewPanel.Controls.Add(ShowTables());
+            ShowTables();
+            ShowRestaurantView();
         }
 
-        private Control ShowTables()
+        private void ShowRestaurantView()
         {
-            tablesListView = new ListView();
-            tablesListView.Width = orderViewPanel.Width;
-            tablesListView.Height = 220;
-            tablesListView.View = View.Details;
-            tablesListView.FullRowSelect = true;
-            //tablesListView.BackColor=Color.DarkCyan;
+            orderViewPanel.BackgroundImage =
+                new Bitmap(Application.StartupPath + "\\RV.png");
+            orderViewPanel.BackgroundImageLayout = ImageLayout.Stretch;
+        }
 
-            tablesListView.Columns.Add("Table Number", -2, HorizontalAlignment.Left);
-            tablesListView.Columns.Add("Table Status", -2, HorizontalAlignment.Left);
+        private void ShowTables()
+        {
             List<Table> tables = tableService.GetTables();
+            int lastX = 73;
+            int y = 50;
 
-            //for (int i = 0; i < tables.Count; i++)
-            //{
-            //    string[] items = { tables[i].tableID.ToString(), tables[i].occupied.ToString() };
-            //}
-            //tablesListView.Items.Clear();
-            foreach (Table table in tables)
+            // store even table numbers
+            for (int i = 0; i < tables.Count; i++)
             {
-                ListViewItem entryItem = tablesListView.Items.Add(table.tableID.ToString());
+                Button btn = new Button();
 
-                if (table.occupied == true)
+                if ((i + 1) % 2 == 0)
                 {
-                    entryItem.SubItems.Add("Reserved");
+                    btn.Size = new Size(100, 50);
+                    btn.Location = new Point(lastX, y);
+                    orderViewPanel.Controls.Add(btn);
+                    lastX += btn.Width + 36;
+                    btn.Text = (i + 1).ToString();
+                    btn.Click += new EventHandler(changeTableStatusBtn_Click);
+                    btn.Tag = tables[i];
+                }
+                if (tables[i].occupied == true)
+                {
+                    btn.BackColor = Color.Green;
+                    btn.ForeColor = Color.AliceBlue;
                 }
                 else
                 {
-                    entryItem.SubItems.Add("Un-Reserved");
+                    btn.BackColor = Color.Red;
                 }
             }
-            return tablesListView;
+
+            // store odd table numbers
+            lastX = 73;
+            y = 200;
+            for (int i = 0; i < tables.Count; i++)
+            {
+                Button btn = new Button();
+
+                if ((i + 1) % 2 != 0)
+                {
+                    btn.Size = new Size(100, 50);
+                    btn.Location = new Point(lastX, y);
+                    orderViewPanel.Controls.Add(btn);
+                    lastX += btn.Width + 36;
+                    btn.Text = (i + 1).ToString();
+                    btn.Click += new EventHandler(changeTableStatusBtn_Click);
+                    btn.Tag = tables[i];
+                }
+                if (tables[i].occupied == true)
+                {
+                    btn.BackColor = Color.Green;
+                    btn.ForeColor = Color.AliceBlue;
+                }
+                else
+                {
+                    btn.BackColor = Color.Red;
+                }
+            }
+
         }
 
-        private Control CreateChnageTableStatusBtn()
-        {
-            Button changeTableStatusBtn = new Button();
-            changeTableStatusBtn.Text = "Change Status";
-            changeTableStatusBtn.Width = tablesViewBtn.Width;
-            changeTableStatusBtn.Height = tablesViewBtn.Height;
-            changeTableStatusBtn.Top = orderViewPanel.Bottom - 200;
-            changeTableStatusBtn.Left = orderViewPanel.Right - 460;
-
-            changeTableStatusBtn.Click += new EventHandler(changeTableStatusBtn_Click);
-
-            return changeTableStatusBtn;
-        }
-
+        // change tables status
         private void changeTableStatusBtn_Click(object sender, EventArgs e)
         {
-            bool occuoied;
-            int tableID = Convert.ToInt32(tablesListView.SelectedItems[0].Text);
+            Button button = sender as Button;
+            Table table = (Table)button.Tag;
+            int tableID = table.tableID;
+            bool occupied;
 
-            if (tablesListView.SelectedItems[0].SubItems[1].Text == "Reserved")
+            if (MessageBox.Show("Would you like to change the status of table [" + table.tableID + "]?", "Change Table Status",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                occuoied = false;
+                if (table.occupied)
+                {
+                    occupied = false;
+                }
+                else
+                {
+                    occupied = true;
+                }
+                tableService.ChangeTableStatus(new Table(tableID, occupied));
             }
-            else
-            {
-                occuoied = true;
-            }
-
-            tableService.ChangeTableStatus(new Table(tableID, occuoied));
             orderViewPanel.Controls.Clear();
-            orderViewPanel.Controls.Add(ShowTables());
+            ShowTables();
+        }
+
+        // log off link
+        private void logoffLink_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to log off?", "Logging off",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
+                this.Hide();
+            }
+        }
+
+        private void orderForm_Load(object sender, EventArgs e)
+        {
 
         }
 
-        private void logoffLink_Click(object sender, EventArgs e)
+        private void orderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-
-            LoginForm loginForm = new LoginForm();
-            loginForm.Show();
-            this.Close();
+            Application.Exit();
         }
     }
 }

@@ -12,12 +12,15 @@ namespace ChapeauModel
         public string password { get; set; }
         public int employeeID { get; set; }
 
-        public Login(string loginName, string password, int employeeID)
+        public Login(string loginName, string password)
         {
             this.loginName = loginName;
             this.password = password;
-            this.employeeID = employeeID;
         }
 
+        public Login()
+        {
+          
+        }
     }
 }

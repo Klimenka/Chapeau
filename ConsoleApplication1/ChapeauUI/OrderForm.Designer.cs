@@ -72,9 +72,9 @@
             // 
             // orderViewPanel
             // 
-            this.orderViewPanel.Location = new System.Drawing.Point(49, 154);
+            this.orderViewPanel.Location = new System.Drawing.Point(0, 122);
             this.orderViewPanel.Name = "orderViewPanel";
-            this.orderViewPanel.Size = new System.Drawing.Size(1110, 546);
+            this.orderViewPanel.Size = new System.Drawing.Size(1218, 557);
             this.orderViewPanel.TabIndex = 3;
             // 
             // statusStrip1
@@ -136,6 +136,8 @@
             this.Name = "orderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Restaurant Chapeau-Ordering";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.orderForm_FormClosing);
+            this.Load += new System.EventHandler(this.orderForm_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);

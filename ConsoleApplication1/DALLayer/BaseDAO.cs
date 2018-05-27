@@ -8,7 +8,7 @@ using System.Configuration;
 
 namespace ChapeauDAL
 {
-    public class BaseDAO //public class BaseDAO and then I have to remove the static 
+    public class BaseDAO 
     {
 
         public SqlConnection OpeConnection()

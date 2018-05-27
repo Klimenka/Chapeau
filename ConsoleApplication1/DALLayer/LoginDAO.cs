@@ -42,7 +42,6 @@ namespace ChapeauDAL
                 employee.lastName = Convert.ToString(reader["LastName"]);
                 employee.positionID = (Position)reader["PositionId"];
             }
-
             // close all connections
             reader.Close();
             CloseConnection(connection);
@@ -81,66 +80,68 @@ namespace ChapeauDAL
 
 
 
-        //registraton
-        public void RegisterEmployee(Position position, string name, string lastName, Login loginInfo)
-        {
-            // add new user to the person table
-            int employeeID = GetEmployeeID(position, name, lastName);
 
-            // add new person to the login table
-            SetLoginInfo(loginInfo, employeeID);
-        }
+        /***registraton part- register new users***/
 
-        public int GetEmployeeID(Position position, string name, string lastName)
-        {
-            // create a sql connection
-            SqlConnection connection = OpeConnection();
+        //public void RegisterEmployee(Position position, string name, string lastName, Login loginInfo)
+        //{
+        //    // add new user to the person table
+        //    int employeeID = GetEmployeeID(position, name, lastName);
 
-            // write a sql query 
-            string sqlQuery = @"INSERT INTO Employees(Name, LastName, PositionId) 
-                                VALUES(@Name, @LastName, @PositionId)";
+        //    // add new person to the login table
+        //    SetLoginInfo(loginInfo, employeeID);
+        //}
 
-            string sqlQuery1 = @"SELECT EmployeeId FROM Employees 
-                                 where Name = @Name AND LastName = @LastName";
+        //public int GetEmployeeID(Position position, string name, string lastName)
+        //{
+        //    // create a sql connection
+        //    SqlConnection connection = OpeConnection();
 
-            // execute the sql query
-            SqlCommand command = new SqlCommand(sqlQuery, connection);
-            command.Parameters.AddWithValue("@Name", name);
-            command.Parameters.AddWithValue("@LastName", lastName);
-            command.Parameters.AddWithValue("@PositionId", position);
-            command.ExecuteNonQuery();
+        //    // write a sql query 
+        //    string sqlQuery = @"INSERT INTO Employees(Name, LastName, PositionId) 
+        //                        VALUES(@Name, @LastName, @PositionId)";
 
-            // execute the sql query
-            SqlCommand command1 = new SqlCommand(sqlQuery1, connection);
-            command1.Parameters.AddWithValue("@Name", name);
-            command1.Parameters.AddWithValue("@LastName", lastName);
-            int employeeID = (int)command1.ExecuteScalar();
+        //    string sqlQuery1 = @"SELECT EmployeeId FROM Employees 
+        //                         where Name = @Name AND LastName = @LastName";
 
-            // close the connection
-            CloseConnection(connection);
+        //    // execute the sql query
+        //    SqlCommand command = new SqlCommand(sqlQuery, connection);
+        //    command.Parameters.AddWithValue("@Name", name);
+        //    command.Parameters.AddWithValue("@LastName", lastName);
+        //    command.Parameters.AddWithValue("@PositionId", position);
+        //    command.ExecuteNonQuery();
 
-            return employeeID;
-        }
+        //    // execute the sql query
+        //    SqlCommand command1 = new SqlCommand(sqlQuery1, connection);
+        //    command1.Parameters.AddWithValue("@Name", name);
+        //    command1.Parameters.AddWithValue("@LastName", lastName);
+        //    int employeeID = (int)command1.ExecuteScalar();
 
-        public void SetLoginInfo(Login loginInfo, int employeeID)
-        {
-            // create a sql connection
-            SqlConnection connection = OpeConnection();
+        //    // close the connection
+        //    CloseConnection(connection);
 
-            // write a sql query 
-            string sqlQuery = @"INSERT INTO Logins(Login, Password, EmployeeId) 
-                                VALUES(@Login, @Password, @EmployeeId)";
+        //    return employeeID;
+        //}
 
-            // execute the sql query
-            SqlCommand command = new SqlCommand(sqlQuery, connection);
-            command.Parameters.AddWithValue("@Login", loginInfo.loginName);
-            command.Parameters.AddWithValue("@Password", loginInfo.password);
-            command.Parameters.AddWithValue("@EmployeeId", employeeID);
-            command.ExecuteNonQuery();
+        //public void SetLoginInfo(Login loginInfo, int employeeID)
+        //{
+        //    // create a sql connection
+        //    SqlConnection connection = OpeConnection();
 
-            // close the connection
-            CloseConnection(connection);
-        }
+        //    // write a sql query 
+        //    string sqlQuery = @"INSERT INTO Logins(Login, Password, EmployeeId) 
+        //                        VALUES(@Login, @Password, @EmployeeId)";
+
+        //    // execute the sql query
+        //    SqlCommand command = new SqlCommand(sqlQuery, connection);
+        //    command.Parameters.AddWithValue("@Login", loginInfo.loginName);
+        //    command.Parameters.AddWithValue("@Password", loginInfo.password);
+        //    command.Parameters.AddWithValue("@EmployeeId", employeeID);
+        //    command.ExecuteNonQuery();
+
+        //    // close the connection
+        //    CloseConnection(connection);
+        //}
 
 
     }
