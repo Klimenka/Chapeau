@@ -37,14 +37,16 @@
             this.logoffLink = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.employeeID = new System.Windows.Forms.Label();
+            this.empNameLbl = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ordersView
             // 
-            this.ordersView.Location = new System.Drawing.Point(102, 50);
+            this.ordersView.Location = new System.Drawing.Point(55, 62);
+            this.ordersView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ordersView.Name = "ordersView";
-            this.ordersView.Size = new System.Drawing.Size(148, 38);
+            this.ordersView.Size = new System.Drawing.Size(166, 48);
             this.ordersView.TabIndex = 0;
             this.ordersView.Text = "Orders view";
             this.ordersView.UseVisualStyleBackColor = true;
@@ -52,9 +54,10 @@
             // 
             // createNew
             // 
-            this.createNew.Location = new System.Drawing.Point(526, 50);
+            this.createNew.Location = new System.Drawing.Point(517, 62);
+            this.createNew.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.createNew.Name = "createNew";
-            this.createNew.Size = new System.Drawing.Size(148, 38);
+            this.createNew.Size = new System.Drawing.Size(166, 48);
             this.createNew.TabIndex = 1;
             this.createNew.Text = "Create new";
             this.createNew.UseVisualStyleBackColor = true;
@@ -62,9 +65,10 @@
             // 
             // tablesViewBtn
             // 
-            this.tablesViewBtn.Location = new System.Drawing.Point(921, 50);
+            this.tablesViewBtn.Location = new System.Drawing.Point(975, 62);
+            this.tablesViewBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tablesViewBtn.Name = "tablesViewBtn";
-            this.tablesViewBtn.Size = new System.Drawing.Size(148, 38);
+            this.tablesViewBtn.Size = new System.Drawing.Size(166, 48);
             this.tablesViewBtn.TabIndex = 2;
             this.tablesViewBtn.Text = "Tables view";
             this.tablesViewBtn.UseVisualStyleBackColor = true;
@@ -72,33 +76,33 @@
             // 
             // orderViewPanel
             // 
-            this.orderViewPanel.Location = new System.Drawing.Point(0, 122);
+            this.orderViewPanel.Location = new System.Drawing.Point(0, 118);
+            this.orderViewPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.orderViewPanel.Name = "orderViewPanel";
-            this.orderViewPanel.Size = new System.Drawing.Size(1218, 557);
+            this.orderViewPanel.Size = new System.Drawing.Size(1218, 560);
             this.orderViewPanel.TabIndex = 3;
             // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.empNameLbl,
             this.logoffLink});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 545);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 682);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1083, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1218, 30);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // logoffLink
             // 
-            this.logoffLink.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logoffLink.Image = ((System.Drawing.Image)(resources.GetObject("logoffLink.Image")));
+            this.logoffLink.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoffLink.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.logoffLink.IsLink = true;
             this.logoffLink.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.logoffLink.LinkColor = System.Drawing.Color.Maroon;
             this.logoffLink.Name = "logoffLink";
-            this.logoffLink.Size = new System.Drawing.Size(74, 20);
+            this.logoffLink.Size = new System.Drawing.Size(65, 25);
             this.logoffLink.Text = "Log off";
             this.logoffLink.VisitedLinkColor = System.Drawing.Color.Maroon;
             this.logoffLink.Click += new System.EventHandler(this.logoffLink_Click);
@@ -106,7 +110,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(955, 19);
+            this.label1.Location = new System.Drawing.Point(1045, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 20);
             this.label1.TabIndex = 4;
@@ -115,17 +119,26 @@
             // employeeID
             // 
             this.employeeID.AutoSize = true;
-            this.employeeID.Location = new System.Drawing.Point(1070, 19);
+            this.employeeID.Location = new System.Drawing.Point(1188, 24);
             this.employeeID.Name = "employeeID";
             this.employeeID.Size = new System.Drawing.Size(0, 20);
             this.employeeID.TabIndex = 5;
             this.employeeID.Click += new System.EventHandler(this.label2_Click);
             // 
+            // empNameLbl
+            // 
+            this.empNameLbl.Image = ((System.Drawing.Image)(resources.GetObject("empNameLbl.Image")));
+            this.empNameLbl.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.empNameLbl.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.empNameLbl.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.empNameLbl.Name = "empNameLbl";
+            this.empNameLbl.Size = new System.Drawing.Size(14, 25);
+            // 
             // orderForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1083, 570);
+            this.ClientSize = new System.Drawing.Size(1218, 712);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.orderViewPanel);
             this.Controls.Add(this.tablesViewBtn);
@@ -157,5 +170,6 @@
         private System.Windows.Forms.ToolStripStatusLabel logoffLink;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Label employeeID;
+        private System.Windows.Forms.ToolStripStatusLabel empNameLbl;
     }
 }

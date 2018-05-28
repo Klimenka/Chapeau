@@ -26,10 +26,13 @@ namespace ChapeauUI
        // DateTime time = new DateTime();
 
 
-        public orderForm(int ID)
+        public orderForm(int ID , string employeeName, Position employeePosition)
         {
             InitializeComponent();
             Shown += orderForm_Load;
+
+            // show the name of the user who logged in
+            empNameLbl.Text = "["+employeeName+ " <"+employeePosition+">" + "]";
 
             //save the employee ID on the form
             employeeID.Text = ID.ToString();
@@ -38,7 +41,6 @@ namespace ChapeauUI
         private void orderForm_Load(object sender, EventArgs e)
 
         {
-
             createNew.Enabled = true;
             orderViewPanel.Controls.Clear();
 
@@ -181,6 +183,7 @@ namespace ChapeauUI
         //new order button click
         private void createNew_Click(object sender, EventArgs e)
         {
+            orderViewPanel.BackgroundImage = null;
             createNew.Enabled = false;
             //clear List for new order after confirmation button click
             orderItemsList.Clear();
@@ -401,23 +404,29 @@ namespace ChapeauUI
 
         private void ordersView_Click(object sender, EventArgs e)
         {
+            orderViewPanel.BackgroundImage = null;
             orderForm_Load(sender, e);
-
         }
 
-        public ListView tablesListView;
 
-        // show tables
+
+
+
+        /*********************** Restaurant/table********************************/
+               /********************* view ***********************/
+  
+      
         private void TablesViewBtn_Click(object sender, EventArgs e)
         {
-            createNew.Enabled = true;
-            orderViewPanel.Controls.Clear();
-            ShowTables();
-            ShowRestaurantView();
+            createNew.Enabled = true; // enable Create New button
+            orderViewPanel.Controls.Clear(); // clear the panel
+            ShowTables();   // show tables
+            ShowRestaurantView(); // show Restaurant view
         }
 
         private void ShowRestaurantView()
         {
+            // add background image to the panel
             orderViewPanel.BackgroundImage =
                 new Bitmap(Application.StartupPath + "\\RV.png");
             orderViewPanel.BackgroundImageLayout = ImageLayout.Stretch;
@@ -425,9 +434,9 @@ namespace ChapeauUI
 
         private void ShowTables()
         {
-            List<Table> tables = tableService.GetTables();
-            int lastX = 73;
-            int y = 50;
+            List<Table> tables = tableService.GetTables(); // get the table list
+            int lastX = 73; // starting X position for creating the buttons
+            int y = 50; // starting Y position
 
             // store even table numbers
             for (int i = 0; i < tables.Count; i++)
@@ -441,8 +450,10 @@ namespace ChapeauUI
                     orderViewPanel.Controls.Add(btn);
                     lastX += btn.Width + 36;
                     btn.Text = (i + 1).ToString();
+
+                    // create event handler for the buttons
                     btn.Click += new EventHandler(changeTableStatusBtn_Click);
-                    btn.Tag = tables[i];
+                    btn.Tag = tables[i]; // link the table object to the button
                 }
                 if (tables[i].occupied == true)
                 {
@@ -469,8 +480,10 @@ namespace ChapeauUI
                     orderViewPanel.Controls.Add(btn);
                     lastX += btn.Width + 36;
                     btn.Text = (i + 1).ToString();
-                    btn.Click += new EventHandler(changeTableStatusBtn_Click);
-                    btn.Tag = tables[i];
+
+                    // create event handler for the buttons
+                    btn.Click += new EventHandler(changeTableStatusBtn_Click); 
+                    btn.Tag = tables[i]; // link the table object to the button
                 }
                 if (tables[i].occupied == true)
                 {
@@ -489,10 +502,11 @@ namespace ChapeauUI
         private void changeTableStatusBtn_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            Table table = (Table)button.Tag;
+            Table table = (Table)button.Tag; // store data in table from the button tag
             int tableID = table.tableID;
             bool occupied;
 
+            // show a message to know if the user want to change the table status or not
             if (MessageBox.Show("Would you like to change the status of table [" + table.tableID + "]?", "Change Table Status",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -504,15 +518,16 @@ namespace ChapeauUI
                 {
                     occupied = true;
                 }
-                tableService.ChangeTableStatus(new Table(tableID, occupied));
+                tableService.ChangeTableStatus(new Table(tableID, occupied)); // pass data to the logic layer
             }
-            orderViewPanel.Controls.Clear();
-            ShowTables();
+            orderViewPanel.Controls.Clear(); // clear the panel
+            ShowTables(); // show the updated tables again
         }
 
         // log off link
         private void logoffLink_Click(object sender, EventArgs e)
         {
+            // to show a confirmation message
             if (MessageBox.Show("Are you sure you want to log off?", "Logging off",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -522,11 +537,9 @@ namespace ChapeauUI
             }
         }
 
-       
-
         private void orderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            Application.Exit(); // exit the whole app
         }
 
         
