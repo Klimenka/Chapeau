@@ -16,9 +16,7 @@ namespace ChapeauUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            orderForm form = new orderForm();
-            form.Show();
-            Application.Run(); 
+            Application.Run(new LoginForm()); 
 
 
         }

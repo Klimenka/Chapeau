@@ -35,13 +35,14 @@
             this.orderViewPanel = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.logoffLink = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.employeeID = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ordersView
             // 
-            this.ordersView.Location = new System.Drawing.Point(92, 55);
-            this.ordersView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ordersView.Location = new System.Drawing.Point(102, 50);
             this.ordersView.Name = "ordersView";
             this.ordersView.Size = new System.Drawing.Size(148, 38);
             this.ordersView.TabIndex = 0;
@@ -51,8 +52,7 @@
             // 
             // createNew
             // 
-            this.createNew.Location = new System.Drawing.Point(461, 55);
-            this.createNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.createNew.Location = new System.Drawing.Point(526, 50);
             this.createNew.Name = "createNew";
             this.createNew.Size = new System.Drawing.Size(148, 38);
             this.createNew.TabIndex = 1;
@@ -62,8 +62,7 @@
             // 
             // tablesViewBtn
             // 
-            this.tablesViewBtn.Location = new System.Drawing.Point(815, 55);
-            this.tablesViewBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tablesViewBtn.Location = new System.Drawing.Point(921, 50);
             this.tablesViewBtn.Name = "tablesViewBtn";
             this.tablesViewBtn.Size = new System.Drawing.Size(148, 38);
             this.tablesViewBtn.TabIndex = 2;
@@ -73,10 +72,9 @@
             // 
             // orderViewPanel
             // 
-            this.orderViewPanel.Location = new System.Drawing.Point(44, 123);
-            this.orderViewPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.orderViewPanel.Location = new System.Drawing.Point(0, 122);
             this.orderViewPanel.Name = "orderViewPanel";
-            this.orderViewPanel.Size = new System.Drawing.Size(987, 437);
+            this.orderViewPanel.Size = new System.Drawing.Size(1218, 557);
             this.orderViewPanel.TabIndex = 3;
             // 
             // statusStrip1
@@ -105,6 +103,24 @@
             this.logoffLink.VisitedLinkColor = System.Drawing.Color.Maroon;
             this.logoffLink.Click += new System.EventHandler(this.logoffLink_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(955, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "EmployeeID";
+            // 
+            // employeeID
+            // 
+            this.employeeID.AutoSize = true;
+            this.employeeID.Location = new System.Drawing.Point(1070, 19);
+            this.employeeID.Name = "employeeID";
+            this.employeeID.Size = new System.Drawing.Size(0, 20);
+            this.employeeID.TabIndex = 5;
+            this.employeeID.Click += new System.EventHandler(this.label2_Click);
+            // 
             // orderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -113,6 +129,8 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.orderViewPanel);
             this.Controls.Add(this.tablesViewBtn);
+            this.Controls.Add(this.employeeID);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.createNew);
             this.Controls.Add(this.ordersView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -120,6 +138,8 @@
             this.Name = "orderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Restaurant Chapeau-Ordering";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.orderForm_FormClosing);
+            this.Load += new System.EventHandler(this.orderForm_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -135,5 +155,7 @@
         private System.Windows.Forms.Panel orderViewPanel;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel logoffLink;
+        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Label employeeID;
     }
 }
