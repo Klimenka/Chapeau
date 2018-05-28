@@ -5,37 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using ChapeauDAL;
 using ChapeauModel;
-namespace LogicLayer
+namespace ChapeauLogic
 {
     public class LoginService
     {
+        private LoginDAO login = new LoginDAO();
 
-        public static Employess CheckCredentials(Login user)
+        public Employess CheckCredentials(Login user)
         {
-            if (string.IsNullOrEmpty(user.loginName) || string.IsNullOrEmpty(user.password))
-            {
-                throw new Exception("Please enter your username/password");
-            }
-            {
-                
-            }
-            Employess employeee = null;
-            try
-            {
-                employeee = LoginDAO.CheckCredentials(user);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            Employess employeee = login.CheckCredentials(user);
 
             return employeee;
         }
 
-
-
-
-
-
     }
+
+
+
 }

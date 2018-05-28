@@ -19,6 +19,10 @@ namespace ChapeauModel
             this.employeeID = employeeID;
             this.tableID = tableID;
         }
+        public Order()
+        {
+
+        }
 
     }
 }

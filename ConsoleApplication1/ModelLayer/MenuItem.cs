@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,11 @@ namespace ChapeauModel
         public float vatPercentage { get; set; }
         public int amountOnStock { get; set; }
         public bool barOrKitchen { get; set; } // true is kitchen while false is bar
+        public Category category { get; set; }
+
 
         public MenuItem(int menuItemID, string itemName, float price, float vatPercentage,
-            int amountOnStock, bool barOrKitchen)
+            int amountOnStock, bool barOrKitchen, Category category)
         {
             this.menuItemID = menuItemID;
             this.itemName = itemName;
@@ -24,6 +27,12 @@ namespace ChapeauModel
             this.vatPercentage = vatPercentage;
             this.amountOnStock = amountOnStock;
             this.barOrKitchen = barOrKitchen;
+            this.category = category;
+        }
+
+        public MenuItem()
+        {
+            
         }
 
 

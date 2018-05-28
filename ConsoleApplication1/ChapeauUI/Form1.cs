@@ -9,16 +9,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ChapeauModel;
 using ChapeauLogic;
-using LogicLayer;
+using ChapeauLogic;
 
 namespace ChapeauUI
 {
+    
     public partial class LoginForm : Form
     {
+        LoginService loginService = new LoginService();
         public LoginForm()
         {
             InitializeComponent();
         }
+        private LoginService login = new LoginService();
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
@@ -27,38 +30,57 @@ namespace ChapeauUI
 
         private void LoginBtn_click(object sender, EventArgs e)
         {
+            Employess employee = null;
             string userName = nameTxtBox.Text;
             string password = passwordTxtBox.Text;
 
             try
             {
-                Employess employee = LoginService.CheckCredentials(new Login(userName, password, 1));
+                if (nameTxtBox.Text == "" || passwordTxtBox.Text == "")
+                {
+                    throw new Exception("Please enter your username/password");
+                }
+
+                employee = login.CheckCredentials(new Login(userName, password));
+
+                if (employee == null)
+                {
+                    throw new Exception("Please check your credentials");
+                }
 
                 if (employee.positionID == Position.Waiter)
                 {
-                    orderForm orderForm = new orderForm(); 
+                    //add EmployeeID for the OrderFrom
+                    orderForm orderForm = new orderForm(employee.employeeID);
                     orderForm.Show();
-                    this.Close();
-
+                    this.Hide();
                 }
                 else if (employee.positionID == Position.Chef)
                 {
                     KitchenBarForm kitchenForm = new KitchenBarForm();
                     kitchenForm.Show();
-                    this.Close();
+                    this.Hide();
                 }
-     
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Please check your credentials");
+                MessageBox.Show(exception.Message,"Warnning",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-   
+        }
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+           
+            //if (MessageBox.Show("Are you sure you want to close Chapeau Application?", "CLose Chapeau Application",
+            //    MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.No)
+            //{
+                
+            //    e.Cancel = true;
+            //}
+            Application.Exit();
+
         }
 
 
-
     }
-
-
 }
