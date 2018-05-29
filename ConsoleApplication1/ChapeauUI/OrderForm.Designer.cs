@@ -34,10 +34,10 @@
             this.tablesViewBtn = new System.Windows.Forms.Button();
             this.orderViewPanel = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.empNameLbl = new System.Windows.Forms.ToolStripStatusLabel();
             this.logoffLink = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.employeeID = new System.Windows.Forms.Label();
-            this.empNameLbl = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,6 +94,15 @@
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // empNameLbl
+            // 
+            this.empNameLbl.Image = ((System.Drawing.Image)(resources.GetObject("empNameLbl.Image")));
+            this.empNameLbl.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.empNameLbl.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.empNameLbl.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.empNameLbl.Name = "empNameLbl";
+            this.empNameLbl.Size = new System.Drawing.Size(14, 25);
+            // 
             // logoffLink
             // 
             this.logoffLink.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -124,15 +133,6 @@
             this.employeeID.Size = new System.Drawing.Size(0, 20);
             this.employeeID.TabIndex = 5;
             this.employeeID.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // empNameLbl
-            // 
-            this.empNameLbl.Image = ((System.Drawing.Image)(resources.GetObject("empNameLbl.Image")));
-            this.empNameLbl.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.empNameLbl.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.empNameLbl.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.empNameLbl.Name = "empNameLbl";
-            this.empNameLbl.Size = new System.Drawing.Size(14, 25);
             // 
             // orderForm
             // 
