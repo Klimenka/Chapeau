@@ -76,10 +76,10 @@
             // 
             // orderViewPanel
             // 
-            this.orderViewPanel.Location = new System.Drawing.Point(0, 118);
+            this.orderViewPanel.Location = new System.Drawing.Point(0, 131);
             this.orderViewPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.orderViewPanel.Name = "orderViewPanel";
-            this.orderViewPanel.Size = new System.Drawing.Size(1218, 560);
+            this.orderViewPanel.Size = new System.Drawing.Size(1218, 547);
             this.orderViewPanel.TabIndex = 3;
             // 
             // statusStrip1
@@ -128,7 +128,7 @@
             // employeeID
             // 
             this.employeeID.AutoSize = true;
-            this.employeeID.Location = new System.Drawing.Point(1188, 24);
+            this.employeeID.Location = new System.Drawing.Point(1147, 24);
             this.employeeID.Name = "employeeID";
             this.employeeID.Size = new System.Drawing.Size(0, 20);
             this.employeeID.TabIndex = 5;
