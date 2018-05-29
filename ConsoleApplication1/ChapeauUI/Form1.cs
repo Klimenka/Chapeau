@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ChapeauModel;
 using ChapeauLogic;
-using LogicLayer;
+
 
 namespace ChapeauUI
 {
+    
     public partial class LoginForm : Form
     {
         public LoginForm()
@@ -20,56 +21,59 @@ namespace ChapeauUI
             InitializeComponent();
         }
 
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
+        private LoginService login = new LoginService();
 
-        }
-
+        // login 
         private void LoginBtn_click(object sender, EventArgs e)
         {
+            Employess employee = null;
             string userName = nameTxtBox.Text;
             string password = passwordTxtBox.Text;
 
             try
             {
-                Employess employee = LoginService.CheckCredentials(new Login(userName, password, 1));
+                if (nameTxtBox.Text == "" || passwordTxtBox.Text == "")
+                {
+                    // throw an exception if one of the text boxes is empty
+                    throw new Exception("Please enter your username/password");
+                }
 
-                if (employee.positionID == Position.Waiter)
+                // pass the entered data to the logic/DB to check if it matches
+                employee = login.CheckCredentials(new Login(userName, password));
+
+                if (employee == null)
                 {
-                    orderForm orderForm = new orderForm();
+                    // throw an exception if there is no matching with the DB
+                    throw new Exception("Please check your credentials");
+                }
+
+                if (employee.positionID == Position.Waiter) // show the order form if the user is a Waiter
+                {
+                    //add Employee info to the OrderFrom in order to know who logged in
+                    orderForm orderForm = new orderForm(employee.employeeID,employee.EmployeeName, Position.Waiter);
                     orderForm.Show();
-                    this.Hide();
-                }
-                else if (employee.positionID == Position.Chef)
-                {
-                    KitchenForm kitchenForm = new KitchenForm();
-                    kitchenForm.Show();
-                    this.Hide();
-                }
-                else if (employee.positionID == Position.Barman)
-                {
-                    BarForm barForm = new BarForm();
-                    barForm.Show();
-                    this.Hide();
+                    this.Hide(); // hide the login from
                 }
                 else
                 {
-                    ManageForm manageForm = new ManageForm();
-                    manageForm.Show();
-                    this.Hide();
+                    // show the kitchen/bar form if the user is a Chef/Barman
+                    KitchenBarForm kitchenForm = new KitchenBarForm(employee.EmployeeName, employee.positionID);
+                    kitchenForm.Show();
+                    this.Hide(); // hide the login from
                 }
-
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Please check your credentials");
+                // show the message
+                MessageBox.Show(exception.Message,"Warnning",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-   
+        }
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit(); // exit the whole app
         }
 
 
-
     }
-
-
 }

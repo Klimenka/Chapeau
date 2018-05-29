@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs" />
     <Compile Include="Employess.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="MenuItem.cs" />

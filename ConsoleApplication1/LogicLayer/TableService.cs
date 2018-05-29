@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using ChapeauModel;
@@ -10,34 +11,22 @@ namespace ChapeauLogic
 {
     public class TableService
     {
-        public static List<Table> GetTables()
+        private TableDAO tableDao = new TableDAO();
+
+
+        public List<Table> GetTables()
         {
-            List<Table> tables = null;
-            try
-            {
-                tables = TableDAO.GetTables();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message); 
-            }
+            List<Table> tables = tableDao.GetTables();
 
             return tables;
         }
 
-        public static void ChangeTableStatus(Table table)
+        public void ChangeTableStatus(Table table)
         {
-            try
-            {
-                TableDAO.ChangeTableStatus(table);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
+            tableDao.ChangeTableStatus(table);
         }
-
-
     }
+
+
+
 }

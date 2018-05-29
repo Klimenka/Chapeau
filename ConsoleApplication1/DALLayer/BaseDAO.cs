@@ -8,10 +8,10 @@ using System.Configuration;
 
 namespace ChapeauDAL
 {
-    public static class SqlConn
+    public class BaseDAO 
     {
 
-        public static SqlConnection OpeConnection()
+        public SqlConnection OpeConnection()
         {
             try
             {
@@ -38,7 +38,7 @@ namespace ChapeauDAL
         }
 
         // a methos for closing the sql connection
-        public static void CloseConnection(SqlConnection connection)
+        public void CloseConnection(SqlConnection connection)
         {
             connection.Close();
         }

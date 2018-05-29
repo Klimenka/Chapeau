@@ -117,7 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="empNameLbl.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA4AAAARCAYAAADtyJ2fAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAADySURBVDhPldIha0JRGMbxg2uyICiIdUHBYDEYRItVm7Bk
+        csHodxgiqFFUBDGIIIhhH8E0mGBTmKAglqUlZWvu/8o9IHrO5e6BH1xe7sM9556jDImhjzWWeEUQrnnC
+        Hucbb/DDmhZuS1oB1rzDVBJ1WLOAqSSasGYMU0m8wJpnmEpHRGFNAKblduGDa9L4hS5tEYanrKCLPRm4
+        5QFlyHnF8YEJQqggh7tkMId8YYMkdpgiC5n/YAS5XZcUcYJempB96Ze/nGdNrmQC6uAM/kPOW31fDbya
+        QZXw6Qy8kHNO4ZII8qiigQ6GGKCNGvSffVRKqT/9Z3txHF6uYwAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAUAEBAAAAEAIABoBAAAVgAAABgYAAABACAAiAkAAL4EAAAgIAAAAQAgAKgQAABGDgAAMDAAAAEA
