@@ -211,5 +211,118 @@ namespace ChapeauDAL
             CloseConnection(connection);
         }
 
+        //Kitchen items
+        public List<OrderItems> getOrderItemsKitchen()
+        {
+            List<OrderItems> orderitems = new List<OrderItems>();
+
+
+            SqlConnection connection = OpeConnection();
+
+
+            // write a sql query 
+            string SQLquery = @"SELECT a.OrderId, a.OrderItemId, b.ItemName, a.Comments, a.Amount, b.CategoryId from OrderItems as a
+                                INNER JOIN MenuItems as b ON a.MenuItemId = b.MenuItemId
+                                WHERE IsReady = 0 AND convert (date, DateTaken) = convert (date, GETDATE()) AND b.BarOrKitchen = 1
+                                ORDER BY DateTaken";
+
+            // execute the sql query
+            SqlCommand command = new SqlCommand(SQLquery, connection);
+            
+            //command.ExecuteNonQuery();
+
+            // read from db
+            SqlDataReader reader = command.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                OrderItems order = new OrderItems();
+                order.orderID = (int)reader["OrderId"];
+                order.orderItemID = (int)reader["OrderItemId"];
+                order.itemName = Convert.ToString(reader["ItemName"]);
+                order.comment = Convert.ToString(reader["Comments"]);
+                order.amount = (int)reader["Amount"];
+                order.category = (ModelLayer.Category)reader["CategoryId"];
+                orderitems.Add(order);
+            }
+
+            
+            reader.Close();
+
+            // close all connections
+            CloseConnection(connection);
+
+            return orderitems;
+        }
+
+        //Bar Items
+        public List<OrderItems> getOrderItemsBar()
+        {
+            List<OrderItems> orderitems = new List<OrderItems>();
+
+
+            SqlConnection connection = OpeConnection();
+
+
+            // write a sql query 
+            string SQLquery = @"SELECT a.OrderId, a.OrderItemId, b.ItemName, a.Comments, a.Amount, b.CategoryId from OrderItems as a
+                                INNER JOIN MenuItems as b ON a.MenuItemId = b.MenuItemId
+                                WHERE IsReady = 0 AND convert (date, DateTaken) = convert (date, GETDATE()) AND b.BarOrKitchen = 0
+                                ORDER BY DateTaken";
+
+            // execute the sql query
+            SqlCommand command = new SqlCommand(SQLquery, connection);
+
+            //command.ExecuteNonQuery();
+
+            // read from db
+            SqlDataReader reader = command.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                OrderItems order = new OrderItems();
+                order.orderID = (int)reader["OrderId"];
+                order.orderItemID = (int)reader["OrderItemId"];
+                order.itemName = Convert.ToString(reader["ItemName"]);
+                order.comment = Convert.ToString(reader["Comments"]);
+                order.amount = (int)reader["Amount"];
+                order.category = (ModelLayer.Category)reader["CategoryId"];
+                orderitems.Add(order);
+            }
+
+
+            reader.Close();
+
+            // close all connections
+            CloseConnection(connection);
+
+            return orderitems;
+        }
+
+        //Kitchen
+        public void CheckAsReadyItems(int[] checkedItems)
+        {
+            SqlConnection connection = OpeConnection();
+
+            for (int i = 0; i < checkedItems.Length; i++)
+            {
+                // write a sql query 
+                string SQLquery = @"UPDATE OrderItems
+                                SET IsReady = 1, DateReady = GETDATE()
+                                WHERE OrderItemId = @OrderItemId";
+
+                // execute the sql query
+                SqlCommand command = new SqlCommand(SQLquery, connection);
+                command.Parameters.AddWithValue("@OrderItemId", checkedItems[i]);
+                command.ExecuteNonQuery();
+
+                // read from db
+
+            }
+            CloseConnection(connection);
+        }
+
     }
 }

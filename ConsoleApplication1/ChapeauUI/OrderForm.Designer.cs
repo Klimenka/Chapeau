@@ -121,7 +121,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(1045, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 20);
+            this.label1.Size = new System.Drawing.Size(83, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "EmployeeID";
             // 
@@ -130,7 +130,7 @@
             this.employeeID.AutoSize = true;
             this.employeeID.Location = new System.Drawing.Point(1147, 24);
             this.employeeID.Name = "employeeID";
-            this.employeeID.Size = new System.Drawing.Size(0, 20);
+            this.employeeID.Size = new System.Drawing.Size(0, 17);
             this.employeeID.TabIndex = 5;
             this.employeeID.Click += new System.EventHandler(this.label2_Click);
             // 

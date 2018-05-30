@@ -60,7 +60,16 @@ namespace ChapeauLogic
 
         }
 
-        
+        public List<OrderItems> GetKitchenItems()
+        {
+            return orderItemDAO.getOrderItemsKitchen();
+        }
+
+        public List<OrderItems> GetBarItems()
+        {
+            return orderItemDAO.getOrderItemsBar();
+
+        }
 
         public void AddNewOrderItemsToDB(List<OrderItems> orderItemsList, Order order)
         {
