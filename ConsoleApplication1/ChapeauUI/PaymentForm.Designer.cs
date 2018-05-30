@@ -43,18 +43,15 @@
             this.rb_cc = new System.Windows.Forms.RadioButton();
             this.visa = new System.Windows.Forms.PictureBox();
             this.amex = new System.Windows.Forms.PictureBox();
-            this.txtBox_name = new System.Windows.Forms.TextBox();
-            this.txtBox_number = new System.Windows.Forms.TextBox();
-            this.txtBox_cvv = new System.Windows.Forms.TextBox();
-            this.txtBox_yyyy = new System.Windows.Forms.TextBox();
-            this.txtBox_mm = new System.Windows.Forms.TextBox();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.btn_payNow = new System.Windows.Forms.Button();
             this.txtBox_tip = new System.Windows.Forms.TextBox();
             this.btn_add = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.visa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amex)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Order
@@ -88,7 +85,7 @@
             // totalWithTip
             // 
             this.totalWithTip.AutoSize = true;
-            this.totalWithTip.Location = new System.Drawing.Point(51, 116);
+            this.totalWithTip.Location = new System.Drawing.Point(51, 129);
             this.totalWithTip.Name = "totalWithTip";
             this.totalWithTip.Size = new System.Drawing.Size(87, 17);
             this.totalWithTip.TabIndex = 5;
@@ -98,7 +95,7 @@
             // 
             this.paymentMethod.AutoSize = true;
             this.paymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentMethod.Location = new System.Drawing.Point(51, 171);
+            this.paymentMethod.Location = new System.Drawing.Point(51, 190);
             this.paymentMethod.Name = "paymentMethod";
             this.paymentMethod.Size = new System.Drawing.Size(223, 17);
             this.paymentMethod.TabIndex = 6;
@@ -136,7 +133,7 @@
             // lbl_totalWithTip
             // 
             this.lbl_totalWithTip.AutoSize = true;
-            this.lbl_totalWithTip.Location = new System.Drawing.Point(254, 116);
+            this.lbl_totalWithTip.Location = new System.Drawing.Point(254, 129);
             this.lbl_totalWithTip.Name = "lbl_totalWithTip";
             this.lbl_totalWithTip.Size = new System.Drawing.Size(20, 17);
             this.lbl_totalWithTip.TabIndex = 13;
@@ -145,7 +142,7 @@
             // rb_cash
             // 
             this.rb_cash.AutoSize = true;
-            this.rb_cash.Location = new System.Drawing.Point(54, 208);
+            this.rb_cash.Location = new System.Drawing.Point(54, 239);
             this.rb_cash.Name = "rb_cash";
             this.rb_cash.Size = new System.Drawing.Size(61, 21);
             this.rb_cash.TabIndex = 14;
@@ -156,7 +153,7 @@
             // rb_pin
             // 
             this.rb_pin.AutoSize = true;
-            this.rb_pin.Location = new System.Drawing.Point(54, 235);
+            this.rb_pin.Location = new System.Drawing.Point(54, 281);
             this.rb_pin.Name = "rb_pin";
             this.rb_pin.Size = new System.Drawing.Size(49, 21);
             this.rb_pin.TabIndex = 15;
@@ -167,7 +164,7 @@
             // rb_cc
             // 
             this.rb_cc.AutoSize = true;
-            this.rb_cc.Location = new System.Drawing.Point(54, 262);
+            this.rb_cc.Location = new System.Drawing.Point(54, 371);
             this.rb_cc.Name = "rb_cc";
             this.rb_cc.Size = new System.Drawing.Size(100, 21);
             this.rb_cc.TabIndex = 16;
@@ -180,7 +177,7 @@
             this.visa.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.visa.Image = ((System.Drawing.Image)(resources.GetObject("visa.Image")));
             this.visa.InitialImage = ((System.Drawing.Image)(resources.GetObject("visa.InitialImage")));
-            this.visa.Location = new System.Drawing.Point(77, 289);
+            this.visa.Location = new System.Drawing.Point(77, 407);
             this.visa.Name = "visa";
             this.visa.Size = new System.Drawing.Size(61, 41);
             this.visa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -192,57 +189,12 @@
             this.amex.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.amex.Image = ((System.Drawing.Image)(resources.GetObject("amex.Image")));
             this.amex.InitialImage = ((System.Drawing.Image)(resources.GetObject("amex.InitialImage")));
-            this.amex.Location = new System.Drawing.Point(144, 289);
+            this.amex.Location = new System.Drawing.Point(144, 407);
             this.amex.Name = "amex";
             this.amex.Size = new System.Drawing.Size(61, 41);
             this.amex.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.amex.TabIndex = 18;
             this.amex.TabStop = false;
-            // 
-            // txtBox_name
-            // 
-            this.txtBox_name.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtBox_name.Location = new System.Drawing.Point(54, 342);
-            this.txtBox_name.Name = "txtBox_name";
-            this.txtBox_name.Size = new System.Drawing.Size(220, 22);
-            this.txtBox_name.TabIndex = 19;
-            this.txtBox_name.Text = "Name on Credit Card";
-            // 
-            // txtBox_number
-            // 
-            this.txtBox_number.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtBox_number.Location = new System.Drawing.Point(54, 370);
-            this.txtBox_number.Name = "txtBox_number";
-            this.txtBox_number.Size = new System.Drawing.Size(220, 22);
-            this.txtBox_number.TabIndex = 20;
-            this.txtBox_number.Text = "Card Number";
-            // 
-            // txtBox_cvv
-            // 
-            this.txtBox_cvv.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtBox_cvv.Location = new System.Drawing.Point(54, 426);
-            this.txtBox_cvv.Name = "txtBox_cvv";
-            this.txtBox_cvv.Size = new System.Drawing.Size(220, 22);
-            this.txtBox_cvv.TabIndex = 21;
-            this.txtBox_cvv.Text = "CVV";
-            // 
-            // txtBox_yyyy
-            // 
-            this.txtBox_yyyy.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtBox_yyyy.Location = new System.Drawing.Point(169, 398);
-            this.txtBox_yyyy.Name = "txtBox_yyyy";
-            this.txtBox_yyyy.Size = new System.Drawing.Size(105, 22);
-            this.txtBox_yyyy.TabIndex = 22;
-            this.txtBox_yyyy.Text = "YYYY";
-            // 
-            // txtBox_mm
-            // 
-            this.txtBox_mm.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtBox_mm.Location = new System.Drawing.Point(54, 398);
-            this.txtBox_mm.Name = "txtBox_mm";
-            this.txtBox_mm.Size = new System.Drawing.Size(100, 22);
-            this.txtBox_mm.TabIndex = 23;
-            this.txtBox_mm.Text = "MM";
             // 
             // btn_cancel
             // 
@@ -268,12 +220,11 @@
             // 
             // txtBox_tip
             // 
-            this.txtBox_tip.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtBox_tip.ForeColor = System.Drawing.Color.Black;
             this.txtBox_tip.Location = new System.Drawing.Point(857, 40);
             this.txtBox_tip.Name = "txtBox_tip";
             this.txtBox_tip.Size = new System.Drawing.Size(151, 22);
             this.txtBox_tip.TabIndex = 26;
-            this.txtBox_tip.Text = "Thank you";
             // 
             // btn_add
             // 
@@ -286,29 +237,36 @@
             // 
             // textBox1
             // 
-            this.textBox1.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.textBox1.ForeColor = System.Drawing.Color.Black;
             this.textBox1.Location = new System.Drawing.Point(805, 308);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(203, 140);
             this.textBox1.TabIndex = 28;
-            this.textBox1.Text = "Comments, complaints or recommendations ";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(77, 308);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(61, 41);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 29;
+            this.pictureBox1.TabStop = false;
             // 
             // PaymentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1083, 570);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btn_add);
             this.Controls.Add(this.txtBox_tip);
             this.Controls.Add(this.btn_payNow);
             this.Controls.Add(this.btn_cancel);
-            this.Controls.Add(this.txtBox_mm);
-            this.Controls.Add(this.txtBox_yyyy);
-            this.Controls.Add(this.txtBox_cvv);
-            this.Controls.Add(this.txtBox_number);
-            this.Controls.Add(this.txtBox_name);
             this.Controls.Add(this.amex);
             this.Controls.Add(this.visa);
             this.Controls.Add(this.rb_cc);
@@ -330,6 +288,7 @@
             this.Text = "Restaurant Chapeau-Payment";
             ((System.ComponentModel.ISupportInitialize)(this.visa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.amex)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,15 +310,11 @@
         private System.Windows.Forms.RadioButton rb_cc;
         private System.Windows.Forms.PictureBox visa;
         private System.Windows.Forms.PictureBox amex;
-        private System.Windows.Forms.TextBox txtBox_name;
-        private System.Windows.Forms.TextBox txtBox_number;
-        private System.Windows.Forms.TextBox txtBox_cvv;
-        private System.Windows.Forms.TextBox txtBox_yyyy;
-        private System.Windows.Forms.TextBox txtBox_mm;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Button btn_payNow;
         private System.Windows.Forms.TextBox txtBox_tip;
         private System.Windows.Forms.Button btn_add;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

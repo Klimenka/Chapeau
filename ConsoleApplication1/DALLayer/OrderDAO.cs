@@ -35,6 +35,8 @@ namespace ChapeauDAL
             command2.Parameters.AddWithValue("@tableID", tableID);
             command2.ExecuteNonQuery();
 
+            
+
             // read from db
             SqlDataReader reader = command2.ExecuteReader();
 
@@ -48,11 +50,21 @@ namespace ChapeauDAL
 
             // close all connections
             reader.Close();
+
+            string SQLquery3 = @"UPDATE Tables SET Occupied = 1
+                                WHERE tableId = @tableId";
+
+            // execute the sql query
+            SqlCommand command3 = new SqlCommand(SQLquery3, connection);
+            command3.Parameters.AddWithValue("@tableId", tableID);
+            command3.ExecuteNonQuery();
+
+
             CloseConnection(connection);
 
             order.tableID = tableID;
             order.employeeID = empId;
-
+            
             return order;
         }
 
