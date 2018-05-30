@@ -12,15 +12,15 @@ namespace ChapeauUI
 {
     public partial class KitchenBarForm : Form
     {
-        //public KitchenBarForm()
-        //{
-        //    InitializeComponent();
-        //    listBox1.Items.Add("Order 1");
-        //    listBox1.Items.Add("Order 2");
-        //    listBox1.Items.Add("Order 3");
-        //    listBox1.Items.Add("Order 4");
-        //    listBox1.Items.Add("Order 5");
-        //}
+        public KitchenBarForm()
+        {
+            InitializeComponent();
+            //listBox1.Items.Add("Order 1");
+            //listBox1.Items.Add("Order 2");
+            //listBox1.Items.Add("Order 3");
+           // listBox1.Items.Add("Order 4");
+          //  listBox1.Items.Add("Order 5");
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -39,15 +39,28 @@ namespace ChapeauUI
             //    LoadListBox();
             //}
         }
-        //private void LoadListBox()
-        //{
-        //    listBox2.Items.Clear();
-        //    listBox2.Items.Add("DOubke Burger");
-        //    listBox2.Items.Add("Pizza");
-        //    listBox2.Items.Add("Burger");
-        //    listBox2.Items.Add("Coak");
-        //    listBox2.Items.Add("Pepsi");
-        //    listBox2.Items.Add("Wine");
-        //}
+        private void KitchenBarForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+      
+        private void logoffLink_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to log off?", "Logging off",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
+                this.Hide();
+            }
+        }
+
+
+
+        private void orderForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace ChapeauUI
             Label table = new Label();
             table.Text = "Table: ";
             table.AutoSize = true;
-            table.Location = new Point(550, 45);
+            table.Location = new Point(550, 45); 
             orderViewPanel.Controls.Add(table);
 
             ComboBox table_choice = new ComboBox();
@@ -529,7 +529,9 @@ namespace ChapeauUI
             Application.Exit();
         }
 
-        
-        
+        private void orderViewPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

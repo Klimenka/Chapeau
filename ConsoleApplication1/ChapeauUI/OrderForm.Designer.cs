@@ -76,6 +76,7 @@
             this.orderViewPanel.Name = "orderViewPanel";
             this.orderViewPanel.Size = new System.Drawing.Size(1218, 557);
             this.orderViewPanel.TabIndex = 3;
+            this.orderViewPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.orderViewPanel_Paint);
             // 
             // statusStrip1
             // 
@@ -108,7 +109,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(955, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 20);
+            this.label1.Size = new System.Drawing.Size(83, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "EmployeeID";
             // 
@@ -117,7 +118,7 @@
             this.employeeID.AutoSize = true;
             this.employeeID.Location = new System.Drawing.Point(1070, 19);
             this.employeeID.Name = "employeeID";
-            this.employeeID.Size = new System.Drawing.Size(0, 20);
+            this.employeeID.Size = new System.Drawing.Size(0, 17);
             this.employeeID.TabIndex = 5;
             this.employeeID.Click += new System.EventHandler(this.label2_Click);
             // 
