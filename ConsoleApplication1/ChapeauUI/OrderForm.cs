@@ -749,7 +749,7 @@ namespace ChapeauUI
 
 
         /*********************** Restaurant/table********************************/
-        /********************* view ***********************/
+               /********************* view ***********************/
 
 
         private void TablesViewBtn_Click(object sender, EventArgs e)
