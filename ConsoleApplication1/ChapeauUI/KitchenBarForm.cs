@@ -13,15 +13,7 @@ namespace ChapeauUI
 {
     public partial class KitchenBarForm : Form
     {
-        //public KitchenBarForm()
-        //{
-        //    InitializeComponent();
-        //    listBox1.Items.Add("Order 1");
-        //    listBox1.Items.Add("Order 2");
-        //    listBox1.Items.Add("Order 3");
-        //    listBox1.Items.Add("Order 4");
-        //    listBox1.Items.Add("Order 5");
-        //}
+       
 
         public KitchenBarForm(string employeeName, Position employeePosition)
         {
@@ -30,11 +22,11 @@ namespace ChapeauUI
             // show the name of the user who logged in
             empNameLbl.Text = "[" + employeeName + " <" + employeePosition + ">" + "]";
 
-            listBox1.Items.Add("Order 1");
-            listBox1.Items.Add("Order 2");
-            listBox1.Items.Add("Order 3");
-            listBox1.Items.Add("Order 4");
-            listBox1.Items.Add("Order 5");
+            //listBox1.Items.Add("Order 1");
+            //listBox1.Items.Add("Order 2");
+            //listBox1.Items.Add("Order 3");
+            //listBox1.Items.Add("Order 4");
+            //listBox1.Items.Add("Order 5");
         }
 
         private void button1_Click(object sender, EventArgs e)

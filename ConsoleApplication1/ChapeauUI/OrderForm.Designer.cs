@@ -81,7 +81,6 @@
             this.orderViewPanel.Name = "orderViewPanel";
             this.orderViewPanel.Size = new System.Drawing.Size(1218, 547);
             this.orderViewPanel.TabIndex = 3;
-            this.orderViewPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.orderViewPanel_Paint);
             // 
             // statusStrip1
             // 
