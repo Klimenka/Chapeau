@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,7 +16,8 @@ namespace ChapeauModel
         public int amount { get; set; }
         public bool isReady { get; set; }
         public bool isServed { get; set; }
-        
+        public Category category { get; set; }
+
 
         private DateTime dateTaken { get; set; }
         private DateTime dateReady { get; set; }
