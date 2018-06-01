@@ -37,7 +37,7 @@
             this.lbl_tip = new System.Windows.Forms.Label();
             this.lbl_comments = new System.Windows.Forms.Label();
             this.lbl_total = new System.Windows.Forms.Label();
-            this.lbl_totalWithTip = new System.Windows.Forms.Label();
+            this.lblTip = new System.Windows.Forms.Label();
             this.rb_cash = new System.Windows.Forms.RadioButton();
             this.rb_pin = new System.Windows.Forms.RadioButton();
             this.rb_cc = new System.Windows.Forms.RadioButton();
@@ -69,9 +69,8 @@
             this.lbl_orderNr.AutoSize = true;
             this.lbl_orderNr.Location = new System.Drawing.Point(254, 40);
             this.lbl_orderNr.Name = "lbl_orderNr";
-            this.lbl_orderNr.Size = new System.Drawing.Size(20, 17);
+            this.lbl_orderNr.Size = new System.Drawing.Size(0, 17);
             this.lbl_orderNr.TabIndex = 1;
-            this.lbl_orderNr.Text = "...";
             // 
             // total
             // 
@@ -87,9 +86,9 @@
             this.totalWithTip.AutoSize = true;
             this.totalWithTip.Location = new System.Drawing.Point(51, 129);
             this.totalWithTip.Name = "totalWithTip";
-            this.totalWithTip.Size = new System.Drawing.Size(87, 17);
+            this.totalWithTip.Size = new System.Drawing.Size(28, 17);
             this.totalWithTip.TabIndex = 5;
-            this.totalWithTip.Text = "Total with tip";
+            this.totalWithTip.Text = "Tip";
             // 
             // paymentMethod
             // 
@@ -126,18 +125,18 @@
             this.lbl_total.AutoSize = true;
             this.lbl_total.Location = new System.Drawing.Point(254, 84);
             this.lbl_total.Name = "lbl_total";
-            this.lbl_total.Size = new System.Drawing.Size(20, 17);
+            this.lbl_total.Size = new System.Drawing.Size(16, 17);
             this.lbl_total.TabIndex = 12;
-            this.lbl_total.Text = "...";
+            this.lbl_total.Text = "0";
             // 
-            // lbl_totalWithTip
+            // lblTip
             // 
-            this.lbl_totalWithTip.AutoSize = true;
-            this.lbl_totalWithTip.Location = new System.Drawing.Point(254, 129);
-            this.lbl_totalWithTip.Name = "lbl_totalWithTip";
-            this.lbl_totalWithTip.Size = new System.Drawing.Size(20, 17);
-            this.lbl_totalWithTip.TabIndex = 13;
-            this.lbl_totalWithTip.Text = "...";
+            this.lblTip.AutoSize = true;
+            this.lblTip.Location = new System.Drawing.Point(254, 129);
+            this.lblTip.Name = "lblTip";
+            this.lblTip.Size = new System.Drawing.Size(16, 17);
+            this.lblTip.TabIndex = 13;
+            this.lblTip.Text = "0";
             // 
             // rb_cash
             // 
@@ -206,6 +205,7 @@
             this.btn_cancel.TabIndex = 24;
             this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = false;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // btn_payNow
             // 
@@ -217,6 +217,7 @@
             this.btn_payNow.TabIndex = 25;
             this.btn_payNow.Text = "Pay Now";
             this.btn_payNow.UseVisualStyleBackColor = false;
+            this.btn_payNow.Click += new System.EventHandler(this.btn_payNow_Click);
             // 
             // txtBox_tip
             // 
@@ -234,6 +235,7 @@
             this.btn_add.TabIndex = 27;
             this.btn_add.Text = "Add";
             this.btn_add.UseVisualStyleBackColor = true;
+            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
             // textBox1
             // 
@@ -272,7 +274,7 @@
             this.Controls.Add(this.rb_cc);
             this.Controls.Add(this.rb_pin);
             this.Controls.Add(this.rb_cash);
-            this.Controls.Add(this.lbl_totalWithTip);
+            this.Controls.Add(this.lblTip);
             this.Controls.Add(this.lbl_total);
             this.Controls.Add(this.lbl_comments);
             this.Controls.Add(this.lbl_tip);
@@ -304,7 +306,7 @@
         private System.Windows.Forms.Label lbl_tip;
         private System.Windows.Forms.Label lbl_comments;
         private System.Windows.Forms.Label lbl_total;
-        private System.Windows.Forms.Label lbl_totalWithTip;
+        private System.Windows.Forms.Label lblTip;
         private System.Windows.Forms.RadioButton rb_cash;
         private System.Windows.Forms.RadioButton rb_pin;
         private System.Windows.Forms.RadioButton rb_cc;

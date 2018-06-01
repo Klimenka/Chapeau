@@ -14,6 +14,7 @@ namespace ChapeauModel
         public float tip { get; set; }
         public int employeeID { get; set; }
         public PaymentMethod paymentMethod { get; set; }
+        public string feedback { get; set; }
 
         public Payment(int paymentID, int orderID, DateTime date, float tip, int employeeID,
             PaymentMethod paymentMethod)
@@ -26,5 +27,8 @@ namespace ChapeauModel
             this.paymentMethod = paymentMethod;
         }
 
+        public Payment()
+
+        { }
     }
 }

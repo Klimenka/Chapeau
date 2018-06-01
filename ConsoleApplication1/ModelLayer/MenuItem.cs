@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChapeauModel
 {
-    public class MenuItem
+    public class MenuItem: OrderItems
     {
         public int menuItemID { get; set; }
         public string itemName { get; set; }
@@ -16,7 +16,7 @@ namespace ChapeauModel
         public int amountOnStock { get; set; }
         public bool barOrKitchen { get; set; } // true is kitchen while false is bar
         public Category category { get; set; }
-
+        public float totalPrice { get; set; }
 
         public MenuItem(int menuItemID, string itemName, float price, float vatPercentage,
             int amountOnStock, bool barOrKitchen, Category category)
