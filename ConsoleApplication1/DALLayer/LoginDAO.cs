@@ -10,7 +10,6 @@ using ChapeauModel;
 namespace ChapeauDAL
 {
     public class LoginDAO : BaseDAO
-
     {
 
         public Employess CheckCredentials(Login user)

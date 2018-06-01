@@ -11,9 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-
-
-
 namespace ChapeauUI
 {
     public partial class orderForm : Form
@@ -224,7 +221,7 @@ namespace ChapeauUI
                 //}
 
                 //show payment form
-                PaymentForm paymentForm = new PaymentForm(existedOrder);
+                PaymentForm paymentForm = new PaymentForm(/*existedOrder*/);
                 paymentForm.Show();
             };
 

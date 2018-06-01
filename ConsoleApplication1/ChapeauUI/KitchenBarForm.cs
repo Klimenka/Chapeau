@@ -109,14 +109,6 @@ namespace ChapeauUI
 
         }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-
-        }
-        
-        
-      
-
         // log off link
         private void logoffLink_Click(object sender, EventArgs e)
         {

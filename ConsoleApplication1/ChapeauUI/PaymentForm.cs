@@ -13,7 +13,7 @@ namespace ChapeauUI
 {
     public partial class PaymentForm : Form
     {
-        public PaymentForm(Order order)
+        public PaymentForm(/*Order order*/)
         {
             InitializeComponent();
         }
