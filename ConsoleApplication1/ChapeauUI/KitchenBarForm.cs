@@ -20,11 +20,13 @@ namespace ChapeauUI
         {
             InitializeComponent();
 
-            // show the name of the user who logged in
+            // show the name of the employee who logged in
             empNameLbl.Text = "[" + employeeName + " <" + employeePosition + ">" + "]";
+
+
             List<OrderItems> items = new List<OrderItems>();
 
-
+            // BarMan will see Bar form & Chef will see Kitchen form
             if (employeePosition == Position.Barman)
             {
                 items = orderItemService.GetBarItems();
@@ -35,87 +37,148 @@ namespace ChapeauUI
                 items = orderItemService.GetKitchenItems();
             }
 
-
-        
-
-            // a list and editing its format 
-            
-            listView1.Height = 250;
-            listView1.Width = 500;
+               
+            // listview and editing its format 
+            listView1.Height = 400;
+            listView1.Width = 950;
             listView1.Left = 30;
             listView1.View = View.Details;
             listView1.FullRowSelect = true;
             listView1.CheckBoxes = true;
             listView1.MultiSelect = true;
 
-            ColumnHeader headerFirst = new ColumnHeader();
-            ColumnHeader headerSecond = new ColumnHeader();
-            ColumnHeader headerThird = new ColumnHeader();
-            ColumnHeader headerFourth = new ColumnHeader();
-            ColumnHeader headerFifth = new ColumnHeader();
-            ColumnHeader headerSixth = new ColumnHeader();
+            ColumnHeader headerOne = new ColumnHeader();
+            ColumnHeader headerTwo = new ColumnHeader();
+            ColumnHeader headerThree = new ColumnHeader();
+            ColumnHeader headerFour = new ColumnHeader();
+            ColumnHeader headerFive = new ColumnHeader();
+            ColumnHeader headerSix = new ColumnHeader();
 
             // Set the text, alignment and width for each column header.
-            headerFirst.Text = "OrderID";
-            headerFirst.TextAlign = HorizontalAlignment.Left;
-            headerFirst.Width = 75;
+            headerOne.Text = "OrderID";
+            headerOne.TextAlign = HorizontalAlignment.Left;
+            headerOne.Width = 150;
 
-            headerSecond.TextAlign = HorizontalAlignment.Left;
-            headerSecond.Text = "ItemID";
-            headerSecond.Width = 45;
+            headerTwo.TextAlign = HorizontalAlignment.Left;
+            headerTwo.Text = "ItemID";
+            headerTwo.Width = 145;
 
-            headerThird.TextAlign = HorizontalAlignment.Left;
-            headerThird.Text = "Name";
-            headerThird.Width = 150;
+            headerThree.TextAlign = HorizontalAlignment.Left;
+            headerThree.Text = "Name";
+            headerThree.Width = 200;
 
-            headerFourth.TextAlign = HorizontalAlignment.Left;
-            headerFourth.Text = "Comment";
-            headerFourth.Width = 70;
+            headerFour.TextAlign = HorizontalAlignment.Left;
+            headerFour.Text = "Comment";
+            headerFour.Width = 200;
 
-            headerFifth.TextAlign = HorizontalAlignment.Left;
-            headerFifth.Text = "Amount";
-            headerFifth.Width = 150;
+            headerFive.TextAlign = HorizontalAlignment.Left;
+            headerFive.Text = "Amount";
+            headerFive.Width = 100;
 
-            headerSixth.TextAlign = HorizontalAlignment.Left;
-            headerSixth.Text = "Category";
-            headerSixth.Width = 150;
+            headerSix.TextAlign = HorizontalAlignment.Left;
+            headerSix.Text = "Category";
+            headerSix.Width = 150;
 
-            // adding colums to the list
-            listView1.Columns.Add(headerFirst);
-            listView1.Columns.Add(headerSecond);
-            listView1.Columns.Add(headerThird);
-            listView1.Columns.Add(headerFourth);
-            listView1.Columns.Add(headerFifth);
+            // adding colums to the items list
+            listView1.Columns.Add(headerOne);
+            listView1.Columns.Add(headerTwo);
+            listView1.Columns.Add(headerThree);
+            listView1.Columns.Add(headerFour);
+            listView1.Columns.Add(headerFive);
+            listView1.Columns.Add(headerSix);
 
-            // store data to the list view
+
+
+            int order_id_counter = items[0].orderID;
+
+          // store data to the list view
             foreach (OrderItems item in items)
             {
-                ListViewItem entryListItem = listView1.Items.Add(item.orderID.ToString());
-                entryListItem.SubItems.Add(item.orderItemID.ToString());
-                entryListItem.SubItems.Add(item.itemName);
-                entryListItem.SubItems.Add(item.comment);
-                entryListItem.SubItems.Add(item.amount.ToString());
-                entryListItem.SubItems.Add(item.category.ToString());
+                if (order_id_counter == item.orderID)
+                {
+                    ListViewItem entryListItem = listView1.Items.Add(item.orderID.ToString());
+                    entryListItem.SubItems.Add(item.orderItemID.ToString());
+                    entryListItem.SubItems.Add(item.itemName);
+                    entryListItem.SubItems.Add(item.comment);
+                    entryListItem.SubItems.Add(item.amount.ToString());
+                    entryListItem.SubItems.Add(item.category.ToString());
+
+                   
+                }
+
+                else
+                {
+                   
+                    //listView1.check = false;
+
+                    //Empty line(Space) between orders
+                    ListViewItem entryListItem = listView1.Items.Add("");
+                    //listView1.CheckBoxes = true;
+                    entryListItem = listView1.Items.Add(item.orderID.ToString());
+                    entryListItem.SubItems.Add(item.orderItemID.ToString());
+                    entryListItem.SubItems.Add(item.itemName);
+                    entryListItem.SubItems.Add(item.comment);
+                    entryListItem.SubItems.Add(item.amount.ToString());
+                    entryListItem.SubItems.Add(item.category.ToString());
+
+                    order_id_counter = item.orderID;
+                }
+            
 
             }
 
-
-
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-
         }
         
-        
-      
+        // to add the line between the orders
+        //private void listView1_DrawItem(object sender, DrawListViewItemEventArgs e)
+        //{
+        //    e.DrawDefault = true;
+
+        //    if (e.Item.Text == "2")
+        //    {
+        //        e.Graphics.DrawLine(Pens.Black, e.Bounds.Left, e.Bounds.Bottom, e.Bounds.Right, e.Bounds.Bottom);
+        //    }
+        //}
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    ListView showOrderItems = new ListView();
+        //    showOrderItems = ShowOrderItems(int.Parse(employeeID.Text));
+        //    listView1.Controls.Add(showOrderItems);
+
+        //    Button ready = new Button();
+        //    ready.Text = "SERVED";
+        //    //ready.Width = 166;
+        //    //ready.Height = 50;
+            
+        //    listView1.Controls.Add(ready);
+
+        //    ready.Click += (s, ee) =>
+        //    {
+        //        //if the list of items is empty, show warning message
+        //        if (showOrderItems.CheckedItems.Count == 0)
+        //        {
+        //            MessageBox.Show("Please select items to be served");
+        //            return;
+        //        }
+
+        //        //save checked ItemsID
+        //        int[] checkedItems = new int[showOrderItems.CheckedItems.Count];
+        //        for (int i = 0; i < showOrderItems.CheckedItems.Count; i++)
+        //        {
+        //            checkedItems[i] = int.Parse(showOrderItems.CheckedItems[i].SubItems[0].Text.ToString());
+        //        }
+
+        //        //send to DB items for the update
+        //        orderItemService.CheckAsServed(checkedItems);
+
+
+        //        button1_Click(s, ee);
+
+
+        //    };
+
+        //}
 
         // log off link
         private void logoffLink_Click(object sender, EventArgs e)
@@ -135,5 +198,48 @@ namespace ChapeauUI
             Application.Exit();
         }
 
+     
+
+        private void KitchenBarForm_Load(object sender, EventArgs e)
+        {
+           
+
+            //    ListView showOrderItems = new ListView();
+            //showOrderItems = ShowOrderItems(int.Parse(ID.Text));
+            //    listView1.Controls.Add(showOrderItems);
+
+            //    Button ready = new Button();
+            //    ready.Text = "SERVED";
+            //    ready.Width = 166;
+            //    ready.Height = 50;
+
+            //    listView1.Controls.Add(ready);
+
+            //    ready.Click += (s, ee) =>
+            //    {
+            //    //if the list of items is empty, show warning message
+            //    if (showOrderItems.CheckedItems.Count == 0)
+            //        {
+            //            MessageBox.Show("Please select items to be served");
+            //            return;
+            //        }
+
+            //    //save checked ItemsID
+            //    int[] checkedItems = new int[showOrderItems.CheckedItems.Count];
+            //        for (int i = 0; i < showOrderItems.CheckedItems.Count; i++)
+            //        {
+            //            checkedItems[i] = int.Parse(showOrderItems.CheckedItems[i].SubItems[0].Text.ToString());
+            //        }
+
+            //    //send to DB items for the update
+            //    orderItemService.CheckAsServed(checkedItems);
+
+
+            //        KitchenBarForm_Load(s, ee);
+
+
+               // };
+
+        }
     }
 }

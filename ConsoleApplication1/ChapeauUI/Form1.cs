@@ -54,7 +54,7 @@ namespace ChapeauUI
                     orderForm.Show();
                     this.Hide(); // hide the login from
                 }
-                else
+                else                
                 {
                     // show the kitchen/bar form if the user is a Chef/Barman
                     KitchenBarForm kitchenForm = new KitchenBarForm(employee.EmployeeName, employee.positionID);
