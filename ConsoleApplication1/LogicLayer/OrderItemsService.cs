@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace ChapeauLogic
 {
@@ -27,7 +27,7 @@ namespace ChapeauLogic
             VAT_06 = (float)0.00;
             VAT_21 = (float)0.00;
 
-            List<ChapeauModel.MenuItem> menuItems = new List<ChapeauModel.MenuItem>();
+            List<MenuItem> menuItems = new List<MenuItem>();
             List<OrderItems> orderItems = new List<OrderItems>();
             menuItems = menuItemDAO.GetAll();
 
@@ -46,7 +46,7 @@ namespace ChapeauLogic
                 {
                     VAT_21 = (float)(VAT_21 + (menuItems.First(menuItem => menuItem.menuItemID == item.menuItemID).price * 0.21 * item.amount));
                 }
-
+                
             }
 
             totalPrice = subtotalPrice + VAT_06 + VAT_21;

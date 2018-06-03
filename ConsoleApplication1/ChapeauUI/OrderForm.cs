@@ -11,9 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-
-
-
 namespace ChapeauUI
 {
     public partial class orderForm : Form
@@ -69,7 +66,7 @@ namespace ChapeauUI
             orderViewPanel.Controls.Add(find_order);
 
             Button find_order_by_table = new Button();
-            find_order_by_table.Text = "Open the order";
+            find_order_by_table.Text = "OPEN THE ORDER";
             find_order_by_table.Width = 166;
             find_order_by_table.Height = 50;
             find_order_by_table.Location = new Point(560, 75);
@@ -224,7 +221,7 @@ namespace ChapeauUI
                 //}
 
                 //show payment form
-                PaymentForm paymentForm = new PaymentForm(existedOrder);
+                PaymentForm paymentForm = new PaymentForm(/*existedOrder*/);
                 paymentForm.Show();
             };
 
@@ -401,10 +398,10 @@ namespace ChapeauUI
             Button remove_btn = new Button();
             remove_btn.Text = "REMOVE ITEM";
             remove_btn.Width = 130;
-            remove_btn.Height = 50;
-            remove_btn.Location = new Point(400, 240);
-            remove_btn.BackColor = Color.LightCoral;
-            // orderViewPanel.Controls.Add(remove_btn);
+            remove_btn.Height = 47;
+            remove_btn.Location = new Point(430, 240);
+            //remove_btn.BackColor = Color.LightCoral;
+            orderViewPanel.Controls.Add(remove_btn);
 
             Button confirm_btn = new Button();
             confirm_btn.Text = "CONFIRM";
@@ -749,7 +746,7 @@ namespace ChapeauUI
 
 
         /*********************** Restaurant/table********************************/
-        /********************* view ***********************/
+               /********************* view ***********************/
 
 
         private void TablesViewBtn_Click(object sender, EventArgs e)
