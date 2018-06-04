@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KitchenBarForm));
-            this.button1 = new System.Windows.Forms.Button();
+            this.ready_btn = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.empNameLbl = new System.Windows.Forms.ToolStripStatusLabel();
             this.logoffLink = new System.Windows.Forms.ToolStripStatusLabel();
@@ -37,15 +37,15 @@
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // ready_btn
             // 
-            this.button1.Location = new System.Drawing.Point(820, 910);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(223, 69);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "READY";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ready_btn.Location = new System.Drawing.Point(898, 849);
+            this.ready_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ready_btn.Name = "ready_btn";
+            this.ready_btn.Size = new System.Drawing.Size(223, 69);
+            this.ready_btn.TabIndex = 7;
+            this.ready_btn.Text = "READY";
+            this.ready_btn.UseVisualStyleBackColor = true;
             // 
             // statusStrip1
             // 
@@ -84,10 +84,10 @@
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(56, 45);
+            this.listView1.Location = new System.Drawing.Point(184, 45);
             this.listView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1773, 836);
+            this.listView1.Size = new System.Drawing.Size(1672, 726);
             this.listView1.TabIndex = 12;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -98,7 +98,7 @@
             this.ClientSize = new System.Drawing.Size(1902, 1033);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.listView1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ready_btn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "KitchenBarForm";
@@ -114,7 +114,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ready_btn;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel empNameLbl;
         private System.Windows.Forms.ToolStripStatusLabel logoffLink;

@@ -39,9 +39,7 @@ namespace ChapeauUI
 
                
             // listview and editing its format 
-            listView1.Height = 400;
-            listView1.Width = 950;
-            listView1.Left = 30;
+
             listView1.View = View.Details;
             listView1.FullRowSelect = true;
             listView1.CheckBoxes = true;
@@ -126,6 +124,33 @@ namespace ChapeauUI
             
 
             }
+
+            ready_btn.Click += (s, ee) =>
+            {
+                //if the list of items is empty, show warning message
+                if (listView1.CheckedItems.Count == 0)
+                {
+                    MessageBox.Show("Please select something");
+                    return;
+                }
+
+                //save checked ItemsID
+                int[] checkedItems = new int[listView1.CheckedItems.Count];
+                for (int i = 0; i < listView1.CheckedItems.Count; i++)
+                {
+                    checkedItems[i] = int.Parse(listView1.CheckedItems[i].SubItems[0].Text.ToString());
+                }
+
+                //send to DB items for the update
+                orderItemService.CheckAsServed(checkedItems);
+
+
+                kitchenForm.Show();
+
+
+            };
+
+.
 
         }
         

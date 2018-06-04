@@ -246,7 +246,7 @@ namespace ChapeauDAL
                 order.itemName = Convert.ToString(reader["ItemName"]);
                 order.comment = Convert.ToString(reader["Comments"]);
                 order.amount = (int)reader["Amount"];
-                order.category = (ModelLayer.Category)reader["CategoryId"];
+                order.category = (Category)reader["CategoryId"];
 
                 //add to orderitems list
                 orderitems.Add(order);
@@ -290,7 +290,7 @@ namespace ChapeauDAL
                 order.itemName = Convert.ToString(reader["ItemName"]);
                 order.comment = Convert.ToString(reader["Comments"]);
                 order.amount = (int)reader["Amount"];
-                order.category = (ModelLayer.Category)reader["CategoryId"];
+                order.category = (Category)reader["CategoryId"];
 
                 //add to orderitems list
                 orderitems.Add(order);
