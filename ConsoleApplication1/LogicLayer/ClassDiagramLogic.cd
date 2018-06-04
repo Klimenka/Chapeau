@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ChapeauLogic.LoginService">
+    <Position X="3.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBA=</HashCode>
+      <FileName>LoginService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="login" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChapeauLogic.MenuItemService">
+    <Position X="5.5" Y="6" Width="1.5" />
+    <AssociationLine Name="menuItemDAO" Type="ChapeauDAL.MenuItemDAO">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.397" Y="0.373" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MenuItemService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="menuItemDAO" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChapeauLogic.OrderItemsService">
+    <Position X="9.25" Y="6" Width="1.5" />
+    <AssociationLine Name="menuItemDAO" Type="ChapeauDAL.MenuItemDAO">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.619" Y="1.22" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAQQAAAAIAAAAAEABEAAAAAAABAAABQAAAAAQ=</HashCode>
+      <FileName>OrderItemsService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="menuItemDAO" />
+      <Field Name="orderItemDAO" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChapeauLogic.OrderService">
+    <Position X="1.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OrderService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="order" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChapeauLogic.PaymentService">
+    <Position X="11.5" Y="6" Width="1.5" />
+    <AssociationLine Name="paymentDAO" Type="ChapeauDAL.PaymentDAO" ManuallyRouted="true">
+      <Path>
+        <Point X="11.719" Y="6" />
+        <Point X="11.719" Y="4.691" />
+        <Point X="12.526" Y="4.691" Type="JumpStart" />
+        <Point X="12.693" Y="4.691" Type="JumpEnd" />
+        <Point X="13.198" Y="4.691" Type="JumpStart" />
+        <Point X="13.365" Y="4.691" Type="JumpEnd" />
+        <Point X="13.752" Y="4.691" />
+        <Point X="13.752" Y="4.053" />
+        <Point X="14" Y="4.053" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.223" Y="-0.509" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAIAAAAQAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PaymentService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="paymentDAO" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChapeauLogic.TableService">
+    <Position X="7.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAQAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>TableService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="tableDao" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChapeauDAL.PaymentDAO">
+    <Position X="14" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ChapeauDAL.MenuItemDAO">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ChapeauDAL.OrderItemsDAO">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ChapeauDAL.TableDAO">
+    <Position X="7.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ChapeauDAL.LoginDAO">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ChapeauDAL.OrderDAO">
+    <Position X="2.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ChapeauDAL.BaseDAO">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

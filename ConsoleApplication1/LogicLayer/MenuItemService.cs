@@ -14,7 +14,7 @@ namespace ChapeauLogic
         public MenuItemDAO menuItemDAO = new MenuItemDAO();
        
 
-        public List<ChapeauModel.MenuItem> GetMenuItems()
+        public List<MenuItem> GetMenuItems()
         {
             //get all items from DB
             return menuItemDAO.GetAll();

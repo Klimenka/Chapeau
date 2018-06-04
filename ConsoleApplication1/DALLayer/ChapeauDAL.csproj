@@ -58,8 +58,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1DAL_group6.cd" />
-    <None Include="ClassDiagram2.cd" />
+    <None Include="ClassDiagramDAO.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

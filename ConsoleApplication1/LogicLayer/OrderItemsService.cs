@@ -27,7 +27,7 @@ namespace ChapeauLogic
             VAT_06 = (float)0.00;
             VAT_21 = (float)0.00;
 
-            List<ChapeauModel.MenuItem> menuItems = new List<ChapeauModel.MenuItem>();
+            List<MenuItem> menuItems = new List<MenuItem>();
             List<OrderItems> orderItems = new List<OrderItems>();
             menuItems = menuItemDAO.GetAll();
 

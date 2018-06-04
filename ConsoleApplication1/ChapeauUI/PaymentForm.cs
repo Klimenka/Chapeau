@@ -14,25 +14,27 @@ namespace ChapeauUI
 {
     public partial class PaymentForm : Form
     {
+        private int employeeID;
+
         public PaymentForm(Order order)
         {
             InitializeComponent();
 
             lbl_orderNr.Text = order.orderID.ToString();
-
+            employeeID = order.employeeID;
         }
 
         private PaymentService paymentService = new PaymentService();
-
         private Payment payment = new Payment();
+        private float tip;
 
-        
+
 
         private void btn_add_Click(object sender, EventArgs e)
         {
             if (txtBox_tip.Text != "")
             {
-                float tip = float.Parse(txtBox_tip.Text);
+                tip = float.Parse(txtBox_tip.Text);
                 lblTip.Text = tip.ToString();
             }
             else
@@ -57,17 +59,31 @@ namespace ChapeauUI
                 payment.paymentMethod = PaymentMethod.Pin;
             }
 
+            payment.orderID = Convert.ToInt32(lbl_orderNr.Text);
+            payment.employeeID = employeeID;
+            payment.tip = tip;
+            payment.feedback = txtBoxFeedback.Text;
+            paymentService.StorePayment(payment);
+
+            ShowBill();
+
+        }
+
+        private void ShowBill()
+        {
             Form bill = new Form();
-            bill.Width = 300;
-            bill.Height = 300;
+            bill.Width = 350;
+            bill.Height = 350;
             bill.Text = "Receipt";
             bill.ShowIcon = false;
+            bill.AutoSize = true;
             bill.StartPosition = FormStartPosition.CenterParent;
 
             ListView billListView = new ListView();
 
-            billListView.Height = bill.Height;
+            billListView.Height = bill.Height - 50;
             billListView.Width = bill.Width;
+            billListView.AutoSize = true;
             billListView.View = View.Details;
             billListView.FullRowSelect = true;
 
@@ -76,25 +92,67 @@ namespace ChapeauUI
             billListView.Columns.Add("Price (inc.VAT)", -2, HorizontalAlignment.Left);
             billListView.Columns.Add("VAT", -2, HorizontalAlignment.Left);
 
-             List<ChapeauModel.MenuItem> items = paymentService.menuItems(Convert.ToInt32(lbl_orderNr.Text));
+            List<ChapeauModel.MenuItem> items = paymentService.menuItems(Convert.ToInt32(lbl_orderNr.Text));
             ListViewItem entryListItem = new ListViewItem();
+            float totalPrice=0;
 
             foreach (ChapeauModel.MenuItem item in items)
             {
-                
-                entryListItem = billListView.Items.Add(item.itemName.ToString());
+
+                entryListItem = billListView.Items.Add(item.itemName);
                 entryListItem.SubItems.Add(item.amount.ToString());
-                entryListItem.SubItems.Add(item.price.ToString());
-                entryListItem.SubItems.Add(item.vatPercentage.ToString());
+                entryListItem.SubItems.Add(item.price.ToString("0.00"));
+                entryListItem.SubItems.Add(item.vatPercentage.ToString("0.00"));
+
+                totalPrice += item.totalPrice;
 
             }
-
             
+            Label lblTotalPrice = new Label();
+            lblTotalPrice.Text = "Total price:";
+            lblTotalPrice.Location = new Point(0, billListView.Bottom + 10);
+
+            Label lblTotalPriceShow = new Label();
+            lblTotalPriceShow.Text = totalPrice.ToString("0.00");
+            lblTotalPriceShow.Location = new Point(250, billListView.Bottom + 10);
+
+            Label lblPayMethod = new Label();
+            lblPayMethod.Text = "Payment Method:";
+            lblPayMethod.Location = new Point(0, billListView.Bottom + 40);
+
+
+            Label lblPayMethodShow = new Label();
+            lblPayMethodShow.Text = payment.paymentMethod.ToString();
+            lblPayMethodShow.Location = new Point(250, billListView.Bottom + 40);
+
+            Label lblTip = new Label();
+            lblTip.Text = "Tip:";
+            lblTip.Location = new Point(0, billListView.Bottom + 70);
+
+            Label lblTipShow = new Label();
+            lblTipShow.Text = tip.ToString("0.00");
+            lblTipShow.Location = new Point(250, billListView.Bottom + 70);
+
+            Label lblFeedback = new Label();
+            lblFeedback.Text = "Comment:";
+            lblFeedback.Location = new Point(0, billListView.Bottom + 100);
+
+            Label lblFeedbackShow = new Label();
+            lblFeedbackShow.Text = payment.feedback;
+            lblFeedbackShow.Location = new Point(250, billListView.Bottom + 100);
+
 
             bill.Controls.Add(billListView);
+            bill.Controls.Add(lblTotalPriceShow);
+            bill.Controls.Add(lblTotalPrice);
+            bill.Controls.Add(lblPayMethod);
+            bill.Controls.Add(lblPayMethodShow);
+            bill.Controls.Add(lblTip);
+            bill.Controls.Add(lblTipShow);
+            bill.Controls.Add(lblFeedback);
+            bill.Controls.Add(lblFeedbackShow);
+
             bill.ShowDialog();
-
-
 
         }
 

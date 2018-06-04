@@ -11,9 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-
-
-
 namespace ChapeauUI
 {
     public partial class orderForm : Form
@@ -224,6 +221,7 @@ namespace ChapeauUI
                 //}
 
                 //show payment form
+                existedOrder.employeeID = Convert.ToInt32(employeeID.Text);
                 PaymentForm paymentForm = new PaymentForm(existedOrder);
                 paymentForm.Show();
             };
@@ -785,19 +783,25 @@ namespace ChapeauUI
                     btn.Location = new Point(lastX, y);
                     orderViewPanel.Controls.Add(btn);
                     lastX += btn.Width + 36;
-                    btn.Text = (i + 1).ToString();
-
+                    
                     // create event handler for the buttons
                     btn.Click += new EventHandler(changeTableStatusBtn_Click);
                     btn.Tag = tables[i]; // link the table object to the button
                 }
+                else
+                {
+                    continue;
+                }
+
                 if (tables[i].occupied == true)
                 {
                     btn.BackColor = Color.Green;
                     btn.ForeColor = Color.AliceBlue;
+                    btn.Text = (i+1)+"\nReserved";
                 }
                 else
                 {
+                    btn.Text = (i + 1) + "\nUn-Reserved";
                     btn.BackColor = Color.Red;
                 }
             }
@@ -815,20 +819,27 @@ namespace ChapeauUI
                     btn.Location = new Point(lastX, y);
                     orderViewPanel.Controls.Add(btn);
                     lastX += btn.Width + 36;
-                    btn.Text = (i + 1).ToString();
+                    
 
                     // create event handler for the buttons
                     btn.Click += new EventHandler(changeTableStatusBtn_Click);
                     btn.Tag = tables[i]; // link the table object to the button
                 }
+                else
+                {
+                    continue;
+                }
+
                 if (tables[i].occupied == true)
                 {
                     btn.BackColor = Color.Green;
                     btn.ForeColor = Color.AliceBlue;
+                    btn.Text = (i + 1) + "\nReserved";
                 }
                 else
                 {
                     btn.BackColor = Color.Red;
+                    btn.Text = (i + 1) + "\nUn-Reserved";
                 }
             }
 
