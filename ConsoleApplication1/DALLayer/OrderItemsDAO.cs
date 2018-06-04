@@ -111,6 +111,8 @@ namespace ChapeauDAL
             CloseConnection(connection);
 
         }
+
+        //get orders from DB for kitchen/bar form
         public List<OrderItems> getOrders(int ID)
         {
             List<OrderItems> orders = new List<OrderItems>();
@@ -141,6 +143,8 @@ namespace ChapeauDAL
                 order.amount = (int)reader["Amount"];
                 order.isReady = (bool)reader["isReady"];
                 order.isServed = (bool)reader["IsServed"];
+               
+                //add order to then list
                 orders.Add(order);
             }
 
@@ -148,13 +152,13 @@ namespace ChapeauDAL
             reader.Close();
             CloseConnection(connection);
 
+            //return orders list
             return orders;
         }
 
         public List<OrderItems> GetExistedOrderItems(Order existedOrder)
         {
             List<OrderItems> orderItems = new List<OrderItems>();
-
             SqlConnection connection = OpeConnection();
 
 
@@ -179,6 +183,8 @@ namespace ChapeauDAL
                 orderItem.amount = (int)reader["Amount"];
                 orderItem.comment = Convert.ToString(reader["Comments"]);
                 orderItem.isServed = (bool)reader["IsServed"];
+
+                //add to orderitems list
                 orderItems.Add(orderItem);
             }
 
@@ -204,23 +210,20 @@ namespace ChapeauDAL
                 SqlCommand command = new SqlCommand(SQLquery, connection);
                 command.Parameters.AddWithValue("@OrderItemId", checkedItems[i]);
                 command.ExecuteNonQuery();
-
-                // read from db
-
             }
             CloseConnection(connection);
         }
+
+
 
         //Kitchen items
         public List<OrderItems> getOrderItemsKitchen()
         {
             List<OrderItems> orderitems = new List<OrderItems>();
-
-
             SqlConnection connection = OpeConnection();
 
 
-            // write a sql query 
+            // write a sql query for Kitchen output
             string SQLquery = @"SELECT a.OrderId, a.OrderItemId, b.ItemName, a.Comments, a.Amount, b.CategoryId from OrderItems as a
                                 INNER JOIN MenuItems as b ON a.MenuItemId = b.MenuItemId
                                 WHERE IsReady = 0 AND convert (date, DateTaken) = convert (date, GETDATE()) AND b.BarOrKitchen = 1
@@ -231,7 +234,7 @@ namespace ChapeauDAL
             
             //command.ExecuteNonQuery();
 
-            // read from db
+            // read from DB
             SqlDataReader reader = command.ExecuteReader();
 
 
@@ -244,11 +247,13 @@ namespace ChapeauDAL
                 order.comment = Convert.ToString(reader["Comments"]);
                 order.amount = (int)reader["Amount"];
                 order.category = (Category)reader["CategoryId"];
-                orderitems.Add(order);
-            }
 
+                //add to orderitems list
+                orderitems.Add(order);
+            }    
             
             reader.Close();
+
 
             // close all connections
             CloseConnection(connection);
@@ -260,8 +265,6 @@ namespace ChapeauDAL
         public List<OrderItems> getOrderItemsBar()
         {
             List<OrderItems> orderitems = new List<OrderItems>();
-
-
             SqlConnection connection = OpeConnection();
 
 
@@ -274,9 +277,8 @@ namespace ChapeauDAL
             // execute the sql query
             SqlCommand command = new SqlCommand(SQLquery, connection);
 
-            //command.ExecuteNonQuery();
-
-            // read from db
+            
+            // read from DB
             SqlDataReader reader = command.ExecuteReader();
 
 
@@ -289,6 +291,8 @@ namespace ChapeauDAL
                 order.comment = Convert.ToString(reader["Comments"]);
                 order.amount = (int)reader["Amount"];
                 order.category = (Category)reader["CategoryId"];
+
+                //add to orderitems list
                 orderitems.Add(order);
             }
 
@@ -301,7 +305,7 @@ namespace ChapeauDAL
             return orderitems;
         }
 
-        //Kitchen
+        //change items state to READY (1)
         public void CheckAsReadyItems(int[] checkedItems)
         {
             SqlConnection connection = OpeConnection();
@@ -317,8 +321,6 @@ namespace ChapeauDAL
                 SqlCommand command = new SqlCommand(SQLquery, connection);
                 command.Parameters.AddWithValue("@OrderItemId", checkedItems[i]);
                 command.ExecuteNonQuery();
-
-                // read from db
 
             }
             CloseConnection(connection);

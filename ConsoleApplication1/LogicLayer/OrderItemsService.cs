@@ -59,12 +59,12 @@ namespace ChapeauLogic
             return orderItemDAO.getOrders(ID);
 
         }
-
+        //get kitchne order from DB
         public List<OrderItems> GetKitchenItems()
         {
             return orderItemDAO.getOrderItemsKitchen();
         }
-
+        //get bar order from DB
         public List<OrderItems> GetBarItems()
         {
             return orderItemDAO.getOrderItemsBar();
