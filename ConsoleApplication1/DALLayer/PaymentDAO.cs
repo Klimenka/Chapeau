@@ -52,15 +52,15 @@ namespace ChapeauDAL
             //open connection
             SqlConnection connection = OpeConnection();
 
-            string sqlQuery = @"insert into Payments(OrderId, DateTime, PaymentMethodId, Tips, EmployeeId, feedback)
-                                values (@OrderId, GETDATE(), @PaymentMethodId, @Tips, @EmployeeId, @feedback; )";
+            string sqlQuery = @"Insert into Payments(OrderId, DateTime, PaymentMethodId, Tips, EmployeeId, feedback)
+                                values (@OrderId, GETDATE(), @PaymentMethodId, @Tips, @EmployeeId, @feedback)";
 
             SqlCommand command = new SqlCommand(sqlQuery, connection);
-            command.Parameters.AddWithValue("OrderId",payment.orderID);
-            command.Parameters.AddWithValue("PaymentMethodId", payment.paymentMethod);
-            command.Parameters.AddWithValue("Tips", payment.tip);
-            command.Parameters.AddWithValue("EmployeeId", payment.employeeID);
-            command.Parameters.AddWithValue("feedback", payment.feedback);
+            command.Parameters.AddWithValue("@OrderId",payment.orderID);
+            command.Parameters.AddWithValue("@PaymentMethodId", (int)payment.paymentMethod);
+            command.Parameters.AddWithValue("@Tips", payment.tip);
+            command.Parameters.AddWithValue("@EmployeeId", payment.employeeID);
+            command.Parameters.AddWithValue("@feedback", payment.feedback);
 
             command.ExecuteNonQuery();
 
