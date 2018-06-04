@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ChapeauUI.KitchenBarForm" Collapsed="true">
+    <Position X="3.5" Y="11.75" Width="1.5" />
+    <AssociationLine Name="orderItemService" Type="ChapeauLogic.OrderItemsService" ManuallyRouted="true">
+      <Path>
+        <Point X="4.375" Y="11.75" />
+        <Point X="4.375" Y="10.536" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAgAAQQCEAAACAEA4AAAAAEAAAKAAAAE=</HashCode>
+      <FileName>KitchenBarForm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="orderItemService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChapeauUI.LoginForm" Collapsed="true">
+    <Position X="5.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAACAAAACAAQAAAAAAABgABBgEAA=</HashCode>
+      <FileName>LoginForm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="login" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChapeauUI.orderForm" Collapsed="true">
+    <Position X="7.75" Y="11.75" Width="1.5" />
+    <AssociationLine Name="menuItemService" Type="ChapeauLogic.MenuItemService" ManuallyRouted="true">
+      <Path>
+        <Point X="8.109" Y="11.75" />
+        <Point X="8.109" Y="9.882" />
+        <Point X="8.747" Y="9.882" Type="JumpStart" />
+        <Point X="8.914" Y="9.882" Type="JumpEnd" />
+        <Point X="10.917" Y="9.882" Type="JumpStart" />
+        <Point X="11.083" Y="9.882" Type="JumpEnd" />
+        <Point X="11.799" Y="9.882" />
+        <Point X="11.799" Y="8.899" />
+        <Point X="12.25" Y="8.899" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.244" Y="-0.614" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="orderItemService" Type="ChapeauLogic.OrderItemsService">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.65" Y="-1.029" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAgJYBACAAAhACQQCAEgACEAIIQiAgACCAhyAQAIE=</HashCode>
+      <FileName>OrderForm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="menuItemService" />
+      <Field Name="orderItemService" />
+      <Field Name="orderService" />
+      <Field Name="tableService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChapeauUI.PaymentForm" Collapsed="true">
+    <Position X="1.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIEAAAMAACIgIAAQABCEAACDAFBAEgAEAEAAFQBAiSA=</HashCode>
+      <FileName>PaymentForm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="paymentService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="System.Windows.Forms.Form" Collapsed="true">
+    <Position X="4.5" Y="14" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ChapeauLogic.PaymentService">
+    <Position X="1.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ChapeauLogic.OrderItemsService">
+    <Position X="3.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ChapeauLogic.LoginService">
+    <Position X="6" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ChapeauLogic.MenuItemService">
+    <Position X="12.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ChapeauLogic.OrderService">
+    <Position X="8.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ChapeauLogic.TableService">
+    <Position X="10.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
