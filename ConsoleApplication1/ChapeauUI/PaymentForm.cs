@@ -15,13 +15,15 @@ namespace ChapeauUI
     public partial class PaymentForm : Form
     {
         private int employeeID;
-
-        public PaymentForm(Order order)
+        private int tableID;
+        public PaymentForm(Order order, float total)
         {
             InitializeComponent();
 
+            lbl_total.Text = total.ToString("0.00") + " euro";
             lbl_orderNr.Text = order.orderID.ToString();
             employeeID = order.employeeID;
+            tableID = order.tableID;
         }
 
         private PaymentService paymentService = new PaymentService();
@@ -63,7 +65,7 @@ namespace ChapeauUI
             payment.employeeID = employeeID;
             payment.tip = tip;
             payment.feedback = txtBoxFeedback.Text;
-            paymentService.StorePayment(payment);
+            paymentService.StorePayment(payment, tableID);
 
             ShowBill();
 
@@ -159,6 +161,7 @@ namespace ChapeauUI
         private void btn_cancel_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Payment canceled!");
+            this.Close();
         }
     }
 }

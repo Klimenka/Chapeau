@@ -120,7 +120,7 @@
             this.employeeID.Name = "employeeID";
             this.employeeID.Size = new System.Drawing.Size(0, 20);
             this.employeeID.TabIndex = 5;
-            this.employeeID.Click += new System.EventHandler(this.label2_Click);
+           
             // 
             // orderForm
             // 
@@ -139,7 +139,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Restaurant Chapeau-Ordering";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.orderForm_FormClosing);
-            this.Load += new System.EventHandler(this.orderForm_Load);
+            this.Load += new System.EventHandler(this.TablesViewBtn_Click);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);

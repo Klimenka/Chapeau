@@ -37,7 +37,7 @@ namespace ChapeauUI
                 items = orderItemService.GetKitchenItems();
             }
 
-               
+
             // listview and editing its format 
 
             listView1.View = View.Details;
@@ -89,7 +89,7 @@ namespace ChapeauUI
 
             int order_id_counter = items[0].orderID;
 
-          // store data to the list view
+            // store data to the list view
             foreach (OrderItems item in items)
             {
                 if (order_id_counter == item.orderID)
@@ -101,12 +101,12 @@ namespace ChapeauUI
                     entryListItem.SubItems.Add(item.amount.ToString());
                     entryListItem.SubItems.Add(item.category.ToString());
 
-                   
+
                 }
 
                 else
                 {
-                   
+
                     //listView1.check = false;
 
                     //Empty line(Space) between orders
@@ -121,7 +121,7 @@ namespace ChapeauUI
 
                     order_id_counter = item.orderID;
                 }
-            
+
 
             }
 
@@ -145,12 +145,12 @@ namespace ChapeauUI
                 orderItemService.CheckAsServed(checkedItems);
 
 
-                kitchenForm.Show();
+               // kitchenForm.Show();
 
 
             };
 
-.
+        
 
         }
         

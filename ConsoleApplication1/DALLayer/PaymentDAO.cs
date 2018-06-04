@@ -47,7 +47,7 @@ namespace ChapeauDAL
         }
 
 
-        public void StorePayment(Payment payment)
+        public void StorePayment(Payment payment, int tableID)
         {
             //open connection
             SqlConnection connection = OpeConnection();
@@ -63,6 +63,15 @@ namespace ChapeauDAL
             command.Parameters.AddWithValue("@feedback", payment.feedback);
 
             command.ExecuteNonQuery();
+
+            //Occupied ----> set as 0
+            string SQLquery2 = @"UPDATE Tables SET Occupied = 0
+                                WHERE tableId = @tableId";
+
+            // execute the sql query
+            SqlCommand command2 = new SqlCommand(SQLquery2, connection);
+            command2.Parameters.AddWithValue("@tableId", tableID);
+            command2.ExecuteNonQuery();
 
             CloseConnection(connection);
 
