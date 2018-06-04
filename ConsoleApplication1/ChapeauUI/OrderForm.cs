@@ -39,7 +39,7 @@ namespace ChapeauUI
         //show home page for a waiter
         private void orderForm_Load(object sender, EventArgs e)
         {
-            createNew.Enabled = true;
+            
             orderViewPanel.Controls.Clear();
 
             ListView showOrderItems = new ListView();
@@ -47,47 +47,47 @@ namespace ChapeauUI
             orderViewPanel.Controls.Add(showOrderItems);
 
 
-            Label table = new Label();
-            table.Text = "Table: ";
-            table.AutoSize = true;
-            table.Location = new Point(550, 45); 
-            orderViewPanel.Controls.Add(table);
+            //Label table = new Label();
+            //table.Text = "Table: ";
+            //table.AutoSize = true;
+            //table.Location = new Point(550, 45); 
+            //orderViewPanel.Controls.Add(table);
 
-            ComboBox table_choice = new ComboBox();
-            table_choice.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
-            table.AutoSize = true;
-            table_choice.Location = new Point(600, 45);
-            orderViewPanel.Controls.Add(table_choice);
+            //ComboBox table_choice = new ComboBox();
+            //table_choice.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
+            //table.AutoSize = true;
+            //table_choice.Location = new Point(600, 45);
+            //orderViewPanel.Controls.Add(table_choice);
 
-            Label find_order = new Label();
-            find_order.Text = "Find the order by table number: ";
-            find_order.AutoSize = true;
-            find_order.Location = new Point(550, 20);
-            orderViewPanel.Controls.Add(find_order);
+            //Label find_order = new Label();
+            //find_order.Text = "Find the order by table number: ";
+            //find_order.AutoSize = true;
+            //find_order.Location = new Point(550, 20);
+            //orderViewPanel.Controls.Add(find_order);
 
-            Button find_order_by_table = new Button();
-            find_order_by_table.Text = "OPEN THE ORDER";
-            find_order_by_table.Width = 166;
-            find_order_by_table.Height = 50;
-            find_order_by_table.Location = new Point(560, 75);
-            orderViewPanel.Controls.Add(find_order_by_table);
+            //Button find_order_by_table = new Button();
+            //find_order_by_table.Text = "OPEN THE ORDER";
+            //find_order_by_table.Width = 166;
+            //find_order_by_table.Height = 50;
+            //find_order_by_table.Location = new Point(560, 75);
+            //orderViewPanel.Controls.Add(find_order_by_table);
 
-            find_order_by_table.Click += (s, ee) =>
-            {
+            //find_order_by_table.Click += (s, ee) =>
+            //{
 
-                if (table_choice.SelectedIndex == -1)
-                {
-                    MessageBox.Show("Please select a table");
-                    return;
-                }
+            //    if (table_choice.SelectedIndex == -1)
+            //    {
+            //        MessageBox.Show("Please select a table");
+            //        return;
+            //    }
 
-                OrderItems existedOrder = new OrderItems();
-                existedOrder.tableID = int.Parse(table_choice.SelectedItem.ToString());
+            //    OrderItems existedOrder = new OrderItems();
+            //    existedOrder.tableID = int.Parse(table_choice.SelectedItem.ToString());
 
-                ShowExistedOrder(existedOrder);
+            //    ShowExistedOrder(existedOrder);
 
 
-            };
+            //};
 
             Button served = new Button();
             served.Text = "SERVED";
@@ -129,7 +129,7 @@ namespace ChapeauUI
         //Show an existed order
         private void ShowExistedOrder(Order existedOrder)
         {
-            createNew.Enabled = false;
+            
             orderViewPanel.Controls.Clear();
 
             existedOrder.orderID = orderService.GetOrderID(existedOrder.tableID);
@@ -213,14 +213,7 @@ namespace ChapeauUI
 
             payment_btn.Click += (s, ee) =>
             {
-                //don't know what check here
-                //if (orderItemsList.Count == 0)
-                //{
-                //    MessageBox.Show("Please select an item for a new order");
-                //    return;
-                //}
-
-                //show payment form
+                
                 existedOrder.employeeID = Convert.ToInt32(employeeID.Text);
                 PaymentForm paymentForm = new PaymentForm(existedOrder);
                 paymentForm.Show();
@@ -236,24 +229,24 @@ namespace ChapeauUI
         }
 
 
-        //new order button click
-        private void createNew_Click(object sender, EventArgs e)
-        {
-            orderViewPanel.BackgroundImage = null;
-            createNew.Enabled = false;
-            //clear List for new order after confirmation button click
-            orderItemsList.Clear();
+        ////new order button click
+        //private void createNew_Click(object sender, EventArgs e)
+        //{
+        //    orderViewPanel.BackgroundImage = null;
+            
+        //    //clear List for new order after confirmation button click
+        //    orderItemsList.Clear();
 
-            //creating of a new order in DB
-            string table_text = ShowChooseTable();
-            int tableID;
-            tableID = int.Parse(table_text);
-            Order order = new Order();
-            order = orderService.NewOrder(int.Parse(employeeID.Text), tableID);
+        //    //creating of a new order in DB
+        //    string table_text = ShowChooseTable();
+        //    int tableID;
+        //    tableID = int.Parse(table_text);
+        //    Order order = new Order();
+        //    order = orderService.NewOrder(int.Parse(employeeID.Text), tableID);
 
-            ShowMenuItemInterface(order);
-            //clear space for new data
-        }
+        //    ShowMenuItemInterface(order);
+        //    //clear space for new data
+        //}
 
         public ListView ShowOrderItems(int ID)
         {
@@ -326,7 +319,7 @@ namespace ChapeauUI
         }
         public void ShowMenuItemInterface(Order order)
         {
-            createNew.Enabled = false;
+            
             orderViewPanel.Controls.Clear();
 
             //saving data on the panel (creation of the buttons and labels)
@@ -752,7 +745,7 @@ namespace ChapeauUI
 
         private void TablesViewBtn_Click(object sender, EventArgs e)
         {
-            createNew.Enabled = true; // enable Create New button
+            
             orderViewPanel.Controls.Clear(); // clear the panel
             ShowTables();   // show tables
             ShowRestaurantView(); // show Restaurant view
@@ -851,24 +844,24 @@ namespace ChapeauUI
             Button button = sender as Button;
             Table table = (Table)button.Tag; // store data in table from the button tag
             int tableID = table.tableID;
-            bool occupied;
-
-            // show a message to know if the user want to change the table status or not
-            if (MessageBox.Show("Would you like to change the status of table [" + table.tableID + "]?", "Change Table Status",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
+            
+            Order order = new Order();
+           
                 if (table.occupied)
                 {
-                    occupied = false;
+               //show an existed order
+                order.tableID = table.tableID;
+                    ShowExistedOrder(order);
                 }
                 else
                 {
-                    occupied = true;
+                //create a new order
+                order = orderService.NewOrder(int.Parse(employeeID.Text), table.tableID);
+
+                ShowMenuItemInterface(order);
+
                 }
-                tableService.ChangeTableStatus(new Table(tableID, occupied)); // pass data to the logic layer
-            }
-            orderViewPanel.Controls.Clear(); // clear the panel
-            ShowTables(); // show the updated tables again
+             
         }
 
         // log off link
