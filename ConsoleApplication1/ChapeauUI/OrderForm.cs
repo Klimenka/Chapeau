@@ -72,6 +72,7 @@ namespace ChapeauUI
             served.Text = "SERVED";
             served.Width = 166;
             served.Height = 50;
+            served.ForeColor = Color.White;
             served.BackColor = Color.Green;
             served.Location = new Point(550, 245);
             orderViewPanel.Controls.Add(served);
@@ -123,6 +124,7 @@ namespace ChapeauUI
             add_btn.Width = 166;
             add_btn.Height = 50;
             add_btn.Location = new Point(30, 220);
+            add_btn.ForeColor = Color.White;
             add_btn.BackColor = Color.Green;
             orderViewPanel.Controls.Add(add_btn);
 
@@ -139,6 +141,7 @@ namespace ChapeauUI
             payment_btn.Width = 166;
             payment_btn.Height = 50;
             payment_btn.Location = new Point(594, 220);
+            payment_btn.ForeColor = Color.White;
             payment_btn.BackColor = Color.Green;
             orderViewPanel.Controls.Add(payment_btn);
 
@@ -312,6 +315,7 @@ namespace ChapeauUI
             add_btn.Width = 150;
             add_btn.Height = 50;
             add_btn.Location = new Point(310, 180);
+            add_btn.ForeColor = Color.White;
             add_btn.BackColor = Color.Green;
             orderViewPanel.Controls.Add(add_btn);
 
@@ -327,6 +331,7 @@ namespace ChapeauUI
             confirm_btn.Width = 166;
             confirm_btn.Height = 50;
             confirm_btn.Location = new Point(605, 280);
+            confirm_btn.ForeColor = Color.White;
             confirm_btn.BackColor = Color.Green;
             orderViewPanel.Controls.Add(confirm_btn);
 
