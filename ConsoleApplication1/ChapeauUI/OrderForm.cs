@@ -22,8 +22,7 @@ namespace ChapeauUI
         TableService tableService = new TableService();
         List<OrderItems> orderItemsList = new List<OrderItems>();
 
-
-
+        
         public orderForm(int ID, string employeeName, Position employeePosition)
         {
             InitializeComponent();
@@ -221,6 +220,7 @@ namespace ChapeauUI
                 existedOrder.employeeID = Convert.ToInt32(employeeID.Text);
                 PaymentForm paymentForm = new PaymentForm(existedOrder, orderItemService.totalPrice);
                 paymentForm.Show();
+               
             };
 
             add_btn.Click += (s, ee) =>
@@ -239,7 +239,7 @@ namespace ChapeauUI
 
 
         //create a new order
-        public void ShowMenuItemInterface(Order order)
+        private void ShowMenuItemInterface(Order order)
         {
             flag_timer = 2;
             ordersView.Enabled = false;
@@ -424,7 +424,7 @@ namespace ChapeauUI
         }
 
         //ListView for items what need to be served
-        public ListView ShowOrderItems(int ID)
+        private ListView ShowOrderItems(int ID)
         {
             List<OrderItems> orders = orderItemService.GetOrderItems(ID);
 
@@ -524,7 +524,7 @@ namespace ChapeauUI
         }
 
         //listView for incomplete order 
-        public ListView ShowIncompleteOrder(List<OrderItems> items)
+        private ListView ShowIncompleteOrder(List<OrderItems> items)
         {
             ListView itemsListView = new ListView();
             itemsListView.Height = 165;
@@ -588,7 +588,7 @@ namespace ChapeauUI
         }
 
         //listView for the menu
-        public ListView ShowMenuItems()
+        private ListView ShowMenuItems()
         {
             // Making a list and editing its format 
             ListView MenuItemsListView = new ListView();
@@ -645,7 +645,7 @@ namespace ChapeauUI
         }
 
         //listview for an existed order
-        public ListView ShowOrderItemsExisted(Order existedOrder)
+        private ListView ShowOrderItemsExisted(Order existedOrder)
         {
             List<OrderItems> orderItems = orderItemService.OrderItemsExistedLogic(existedOrder);
             List<ChapeauModel.MenuItem> menuItems = menuItemService.GetMenuItems();
@@ -742,7 +742,7 @@ namespace ChapeauUI
         /********************* view ***********************/
 
 
-        private void TablesViewBtn_Click(object sender, EventArgs e)
+        public void TablesViewBtn_Click(object sender, EventArgs e)
         {
             flag_timer = 0;
             orderViewPanel.Controls.Clear(); // clear the panel

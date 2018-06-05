@@ -14,6 +14,7 @@ namespace ChapeauUI
 {
     public partial class PaymentForm : Form
     {
+        
         private int employeeID;
         private int tableID;
         public PaymentForm(Order order, float total)
@@ -26,6 +27,7 @@ namespace ChapeauUI
             tableID = order.tableID;
         }
 
+       
         private PaymentService paymentService = new PaymentService();
         private Payment payment = new Payment();
         private float tip;
@@ -145,9 +147,11 @@ namespace ChapeauUI
 
             Button buttoclose_btn = new Button();
             buttoclose_btn.Text = "Close";
-            buttoclose_btn.ForeColor = Color.Red;
+            buttoclose_btn.BackColor = Color.Red;
             buttoclose_btn.Location = new Point(250, billListView.Bottom + 130);
-          
+            buttoclose_btn.Width = 100;
+            buttoclose_btn.Height = 50;
+            buttoclose_btn.Click += new EventHandler(this.buttoclose_btn_Click);
 
 
             bill.Controls.Add(billListView);
@@ -162,8 +166,12 @@ namespace ChapeauUI
             bill.Controls.Add(buttoclose_btn);
 
             bill.ShowDialog();
-           
 
+            
+        }
+        private void buttoclose_btn_Click(object sender, EventArgs e)
+        {
+           this.Close();
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
