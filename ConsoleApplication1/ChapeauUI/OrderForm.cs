@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using ContentAlignment = System.Drawing.ContentAlignment;
 
 namespace ChapeauUI
 {
@@ -762,7 +763,7 @@ namespace ChapeauUI
         private void ShowRestaurantView()
         {
             // add background image to the panel
-            orderViewPanel.BackgroundImage =
+            orderViewPanel.BackgroundImage=
                 new Bitmap(Application.StartupPath + "\\RV.png");
             orderViewPanel.BackgroundImageLayout = ImageLayout.Stretch;
         }
@@ -770,24 +771,32 @@ namespace ChapeauUI
         private void ShowTables()
         {
             List<Table> tables = tableService.GetTables(); // get the table list
-            int lastX = 73; // starting X position for creating the buttons
-            int y = 50; // starting Y position
+
+            int lastX = 100; // starting X position for creating the buttons
+            int y = 40; // starting Y position
 
             // store even table numbers
             for (int i = 0; i < tables.Count; i++)
             {
-                Button btn = new Button();
+                PictureBox pbtnBox = new PictureBox();
+                pbtnBox.Size = new Size(70, 50);
+                pbtnBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                pbtnBox.Cursor = Cursors.Hand;
+
+                Label lbl = new Label();
+                lbl.Size = new Size(70, 30);
+                lbl.TextAlign = ContentAlignment.MiddleCenter;
 
                 if ((i + 1) % 2 == 0)
                 {
-                    btn.Size = new Size(100, 50);
-                    btn.Location = new Point(lastX, y);
-                    orderViewPanel.Controls.Add(btn);
-                    lastX += btn.Width + 36;
+
+                    pbtnBox.Location = new Point(lastX, y);
+                    lbl.Location = new Point(lastX, 95);
+                    lastX += pbtnBox.Width + 70;
 
                     // create event handler for the buttons
-                    btn.Click += new EventHandler(changeTableStatusBtn_Click);
-                    btn.Tag = tables[i]; // link the table object to the button
+                    pbtnBox.Click += new EventHandler(changeTableStatusPBtnBox_Click);
+                    pbtnBox.Tag = tables[i]; // link the table object to the button
                 }
                 else
                 {
@@ -796,35 +805,40 @@ namespace ChapeauUI
 
                 if (tables[i].occupied == true)
                 {
-                    btn.BackColor = Color.Green;
-                    btn.ForeColor = Color.AliceBlue;
-                    btn.Text = (i + 1) + "\nReserved";
+                    lbl.Text = (i + 1) + "\nReserved";
+                    pbtnBox.ImageLocation = @"c:tableRed.png";
                 }
                 else
                 {
-                    btn.Text = (i + 1) + "\nUn-Reserved";
-                    btn.BackColor = Color.Red;
+                    lbl.Text = (i + 1) + "\nUn-Reserved";
+                    pbtnBox.ImageLocation = @"c:tableGreen.png";
                 }
+                orderViewPanel.Controls.Add(pbtnBox);
+                orderViewPanel.Controls.Add(lbl);
             }
 
             // store odd table numbers
-            lastX = 73;
-            y = 200;
+            lastX = 100;
+            y = 170;
             for (int i = 0; i < tables.Count; i++)
             {
-                Button btn = new Button();
+                PictureBox pbtnBox = new PictureBox();
+                pbtnBox.Size = new Size(70, 50);
+                pbtnBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                pbtnBox.Cursor = Cursors.Hand;
+
+                Label lbl = new Label();
+                lbl.Size = new Size(70, 30);
+                lbl.TextAlign = ContentAlignment.MiddleCenter;
 
                 if ((i + 1) % 2 != 0)
                 {
-                    btn.Size = new Size(100, 50);
-                    btn.Location = new Point(lastX, y);
-                    orderViewPanel.Controls.Add(btn);
-                    lastX += btn.Width + 36;
-
-
+                    pbtnBox.Location = new Point(lastX, y);
+                    lbl.Location = new Point(lastX, 225);
+                    lastX += pbtnBox.Width + 70;
                     // create event handler for the buttons
-                    btn.Click += new EventHandler(changeTableStatusBtn_Click);
-                    btn.Tag = tables[i]; // link the table object to the button
+                    pbtnBox.Click += new EventHandler(changeTableStatusPBtnBox_Click);
+                    pbtnBox.Tag = tables[i]; // link the table object to the button
                 }
                 else
                 {
@@ -833,25 +847,26 @@ namespace ChapeauUI
 
                 if (tables[i].occupied == true)
                 {
-                    btn.BackColor = Color.Green;
-                    btn.ForeColor = Color.AliceBlue;
-                    btn.Text = (i + 1) + "\nReserved";
+                    lbl.Text = (i + 1) + "\nReserved";
+                    pbtnBox.ImageLocation = @"c:tableRed.png";
                 }
                 else
                 {
-                    btn.BackColor = Color.Red;
-                    btn.Text = (i + 1) + "\nUn-Reserved";
+                    pbtnBox.ImageLocation = @"c:tableGreen.png";
+                    lbl.Text = (i + 1) + "\nUn-Reserved"; 
                 }
+                orderViewPanel.Controls.Add(pbtnBox);
+                orderViewPanel.Controls.Add(lbl);
             }
-
+           
         }
 
         // change tables status
-        private void changeTableStatusBtn_Click(object sender, EventArgs e)
+        private void changeTableStatusPBtnBox_Click(object sender, EventArgs e)
         {
-            Button button = sender as Button;
+            PictureBox button = sender as PictureBox;
             Table table = (Table)button.Tag; // store data in table from the button tag
-            int tableID = table.tableID;
+          
 
             Order order = new Order();
 
