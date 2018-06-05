@@ -99,6 +99,7 @@
             // 
             this.isReady_btn.BackColor = System.Drawing.Color.Green;
             this.isReady_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.isReady_btn.ForeColor = System.Drawing.Color.White;
             this.isReady_btn.Location = new System.Drawing.Point(778, 838);
             this.isReady_btn.Name = "isReady_btn";
             this.isReady_btn.Size = new System.Drawing.Size(363, 104);
