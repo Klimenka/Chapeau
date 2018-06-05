@@ -8,13 +8,13 @@ namespace ChapeauModel
 {
     public class MenuItem: OrderItems
     {
-        public int menuItemID { get; set; }
-        public string itemName { get; set; }
+       // public int menuItemID { get; set; }
+       // public string itemName { get; set; }
         public float price { get; set; }
         public float vatPercentage { get; set; }
         public int amountOnStock { get; set; }
         public bool barOrKitchen { get; set; } // true is kitchen while false is bar
-        public Category category { get; set; }
+      //  public Category category { get; set; }
         public float totalPrice { get; set; }
 
         public MenuItem(int menuItemID, string itemName, float price, float vatPercentage,

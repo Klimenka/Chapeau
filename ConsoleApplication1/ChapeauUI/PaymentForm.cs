@@ -143,6 +143,12 @@ namespace ChapeauUI
             lblFeedbackShow.Text = payment.feedback;
             lblFeedbackShow.Location = new Point(250, billListView.Bottom + 100);
 
+            Button buttoclose_btn = new Button();
+            buttoclose_btn.Text = "Close";
+            buttoclose_btn.ForeColor = Color.Red;
+            buttoclose_btn.Location = new Point(250, billListView.Bottom + 130);
+          
+
 
             bill.Controls.Add(billListView);
             bill.Controls.Add(lblTotalPriceShow);
@@ -153,8 +159,10 @@ namespace ChapeauUI
             bill.Controls.Add(lblTipShow);
             bill.Controls.Add(lblFeedback);
             bill.Controls.Add(lblFeedbackShow);
+            bill.Controls.Add(buttoclose_btn);
 
             bill.ShowDialog();
+           
 
         }
 

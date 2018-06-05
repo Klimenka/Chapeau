@@ -54,6 +54,11 @@ namespace ChapeauLogic
             return orderItems;
         }
 
+        public bool CheckIfExistedOrder(int orderID)
+        {
+           return orderItemDAO.CheckIfExistedOrderDB(orderID);
+        }
+
         public List<OrderItems> GetOrderItems(int ID)
         {
             return orderItemDAO.getOrders(ID);
@@ -77,10 +82,15 @@ namespace ChapeauLogic
 
         }
 
-        
+
         public void CheckAsServed(int[] checkedItems)
         {
             orderItemDAO.CheckAsServedItems(checkedItems);
+        }
+
+        public void CheckAsReady(int[] checkedItems)
+        {
+            orderItemDAO.CheckAsReadyItems(checkedItems);
         }
     }
 }

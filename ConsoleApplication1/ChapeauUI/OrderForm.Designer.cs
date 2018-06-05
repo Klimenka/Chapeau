@@ -46,8 +46,8 @@
             this.ordersView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ordersView.Name = "ordersView";
             this.ordersView.Size = new System.Drawing.Size(166, 48);
-            this.ordersView.TabIndex = 0;
-            this.ordersView.Text = "Orders view";
+            this.ordersView.TabIndex = 2;
+            this.ordersView.Text = "Need to be served";
             this.ordersView.UseVisualStyleBackColor = true;
             this.ordersView.Click += new System.EventHandler(this.ordersView_Click);
             // 
@@ -57,7 +57,7 @@
             this.tablesViewBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tablesViewBtn.Name = "tablesViewBtn";
             this.tablesViewBtn.Size = new System.Drawing.Size(166, 48);
-            this.tablesViewBtn.TabIndex = 2;
+            this.tablesViewBtn.TabIndex = 0;
             this.tablesViewBtn.Text = "Tables view";
             this.tablesViewBtn.UseVisualStyleBackColor = true;
             this.tablesViewBtn.Click += new System.EventHandler(this.TablesViewBtn_Click);
@@ -120,7 +120,6 @@
             this.employeeID.Name = "employeeID";
             this.employeeID.Size = new System.Drawing.Size(0, 20);
             this.employeeID.TabIndex = 5;
-           
             // 
             // orderForm
             // 

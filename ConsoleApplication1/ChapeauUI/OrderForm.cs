@@ -15,7 +15,7 @@ namespace ChapeauUI
 {
     public partial class orderForm : Form
     {
-
+        int flag_timer = 0; // 0 - initial form (tables view), 1 - orders_view
         OrderItemsService orderItemService = new OrderItemsService();
         OrderService orderService = new OrderService();
         MenuItemService menuItemService = new MenuItemService();
@@ -32,16 +32,39 @@ namespace ChapeauUI
 
             //save the employee ID on the form
             employeeID.Text = ID.ToString();
+
+            // Instantiate the timer
+           
+            Timer t = new Timer();
+
+            t.Interval = 10000;
+
+            t.Enabled = true;
+
+            t.Tick += new System.EventHandler(OnTimerEvent);
         }
 
+        private void OnTimerEvent(object sender, EventArgs e)
+
+        {
+            if (flag_timer == 1)
+            {
+                orderForm_Load(sender, e);
+            }
+            else if (flag_timer == 0)
+            {
+                TablesViewBtn_Click(sender, e);
+            }
+
+        }
 
         //show home page for a waiter(for serving purpose)
         private void orderForm_Load(object sender, EventArgs e)
         {
-
+            flag_timer = 1;
             orderViewPanel.Controls.Clear();
 
-            //items that needs to be served
+            //items that need to be served
             ListView showOrderItems = new ListView();
             showOrderItems = ShowOrderItems(int.Parse(employeeID.Text));
             orderViewPanel.Controls.Add(showOrderItems);
@@ -50,7 +73,8 @@ namespace ChapeauUI
             served.Text = "SERVED";
             served.Width = 166;
             served.Height = 50;
-            served.Location = new Point(350, 265);
+            served.BackColor = Color.Green;
+            served.Location = new Point(550, 245);
             orderViewPanel.Controls.Add(served);
 
             served.Click += (s, ee) =>
@@ -62,7 +86,7 @@ namespace ChapeauUI
                     return;
                 }
 
-                //save checked ItemsID
+                //save checked ItemsIDs
                 int[] checkedItems = new int[showOrderItems.CheckedItems.Count];
                 for (int i = 0; i < showOrderItems.CheckedItems.Count; i++)
                 {
@@ -81,16 +105,20 @@ namespace ChapeauUI
         //Show an existed order (a table number is required)
         private void ShowExistedOrder(Order existedOrder)
         {
+            flag_timer = 2;
             orderViewPanel.BackgroundImage = null;
 
             orderViewPanel.Controls.Clear();
 
+            //getting orderID by tableID (from DB)
             existedOrder.orderID = orderService.GetOrderID(existedOrder.tableID);
 
+            //show items from an existed order
             ListView existedOrderListControl = new ListView();
             existedOrderListControl = ShowOrderItemsExisted(existedOrder);
             orderViewPanel.Controls.Add(existedOrderListControl);
 
+            //creating the buttons and labels
             Button add_btn = new Button();
             add_btn.Text = "ADD TO ORDER";
             add_btn.Width = 166;
@@ -139,6 +167,7 @@ namespace ChapeauUI
             subtotal_value_lbl.Location = new Point(460, 230);
             orderViewPanel.Controls.Add(subtotal_value_lbl);
 
+            //if items with 0.06% VAT exists ----> add to the label
             if (orderItemService.VAT_06 != 0)
             {
                 Label VAT_06_lbl = new Label();
@@ -154,6 +183,7 @@ namespace ChapeauUI
                 orderViewPanel.Controls.Add(VAT_06_value_lbl);
             }
 
+            //if items with 0.21% VAT exists ----> add to the label
             if (orderItemService.VAT_21 != 0)
             {
                 Label VAT_21_lbl = new Label();
@@ -170,7 +200,7 @@ namespace ChapeauUI
             }
 
 
-
+            //Total price
             Label totalPrice_lbl = new Label();
             totalPrice_lbl.Text = "Total price: ";
             totalPrice_lbl.AutoSize = true;
@@ -183,6 +213,7 @@ namespace ChapeauUI
             totalPrice_value_lbl.Location = new Point(460, 300);
             orderViewPanel.Controls.Add(totalPrice_value_lbl);
 
+            //*****Button clicks*****
 
             payment_btn.Click += (s, ee) =>
             {
@@ -205,87 +236,20 @@ namespace ChapeauUI
 
         }
 
-        //ListView for items what need to be served
-        public ListView ShowOrderItems(int ID)
-        {
-            List<OrderItems> orders = orderItemService.GetOrderItems(ID);
-
-            // Making a list and editing its format 
-            ListView ordersListView = new ListView();
-            ordersListView.Height = 250;
-            ordersListView.Width = 500;
-            ordersListView.Left = 30;
-            ordersListView.View = View.Details;
-            ordersListView.FullRowSelect = true;
-            ordersListView.CheckBoxes = true;
-            ordersListView.MultiSelect = true;
-
-            ColumnHeader headerFirst = new ColumnHeader();
-            ColumnHeader headerSecond = new ColumnHeader();
-            ColumnHeader headerThird = new ColumnHeader();
-            ColumnHeader headerFourth = new ColumnHeader();
-            ColumnHeader headerFifth = new ColumnHeader();
-
-            // Set the text, alignment and width for each column header.
-            headerFirst.Text = "OrderID";
-            headerFirst.TextAlign = HorizontalAlignment.Left;
-            headerFirst.Width = 75;
-
-            headerSecond.TextAlign = HorizontalAlignment.Left;
-            headerSecond.Text = "Table";
-            headerSecond.Width = 45;
-
-            headerThird.TextAlign = HorizontalAlignment.Left;
-            headerThird.Text = "Name";
-            headerThird.Width = 150;
-
-            headerFourth.TextAlign = HorizontalAlignment.Left;
-            headerFourth.Text = "Amount";
-            headerFourth.Width = 70;
-
-            headerFifth.TextAlign = HorizontalAlignment.Left;
-            headerFifth.Text = "Task";
-            headerFifth.Width = 150;
 
 
-            // adding colums to the list
-            ordersListView.Columns.Add(headerFirst);
-            ordersListView.Columns.Add(headerSecond);
-            ordersListView.Columns.Add(headerThird);
-            ordersListView.Columns.Add(headerFourth);
-            ordersListView.Columns.Add(headerFifth);
-
-            // storing data into the list
-            foreach (OrderItems item in orders)
-            {
-                if (item.isServed == false && item.isReady == true)
-                {
-                    ListViewItem entryListItem = ordersListView.Items.Add(item.orderItemID.ToString());
-                    entryListItem.SubItems.Add(item.tableID.ToString());
-                    entryListItem.SubItems.Add(item.itemName);
-                    entryListItem.SubItems.Add(item.amount.ToString());
-                    entryListItem.SubItems.Add("Needs to be served");
-
-                }
-                else
-                    continue;
-
-            }
-
-            // return a list view 
-            return ordersListView;
-        }
-
-        //create new order
+        //create a new order
         public void ShowMenuItemInterface(Order order)
         {
+            flag_timer = 2;
             ordersView.Enabled = false;
             tablesViewBtn.Enabled = false;
+
             orderViewPanel.BackgroundImage = null;
 
             orderViewPanel.Controls.Clear();
 
-            //saving data on the panel (creation of the buttons and labels)
+            //creating the buttons and labels
             Label table = new Label();
             table.Text = "Table: ";
             table.AutoSize = true;
@@ -312,7 +276,7 @@ namespace ChapeauUI
             amountTextlbl.Location = new Point(320, 00);
             orderViewPanel.Controls.Add(amountTextlbl);
 
-            ComboBox amount_choice_box = new ComboBox() { Left = 50, Top = 50, Width = 400 };
+            ComboBox amount_choice_box = new ComboBox();
             amount_choice_box.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
             amount_choice_box.AutoSize = true;
             amount_choice_box.SelectedIndex = 0;
@@ -333,10 +297,12 @@ namespace ChapeauUI
             comment_txt_box.Location = new Point(320, 140);
             orderViewPanel.Controls.Add(comment_txt_box);
 
+            //menu from DB
             ListView menu = new ListView();
             menu = ShowMenuItems();
             orderViewPanel.Controls.Add(menu);
 
+            //selected items (for a new order (not in DB yet))
             ListView incomplitedOrder = new ListView();
             incomplitedOrder = ShowIncompleteOrder(orderItemsList);
             orderViewPanel.Controls.Add(incomplitedOrder);
@@ -354,7 +320,6 @@ namespace ChapeauUI
             remove_btn.Width = 130;
             remove_btn.Height = 47;
             remove_btn.Location = new Point(650, 180);
-            //remove_btn.BackColor = Color.Green;
             orderViewPanel.Controls.Add(remove_btn);
 
             Button confirm_btn = new Button();
@@ -443,16 +408,122 @@ namespace ChapeauUI
                 ShowMenuItemInterface(order);
             };
 
-            
-           cancel_btn.Click += (s, ee) =>
-           {
-               orderService.DeleteOrder(order);
-               ordersView.Enabled = true;
-               tablesViewBtn.Enabled = true;
-               TablesViewBtn_Click(s, ee);
-           };
+
+            cancel_btn.Click += (s, ee) =>
+            {
+                //if we are trying to add items in an existed order, we cannot delete the order, so we need to check it
+                if (!orderItemService.CheckIfExistedOrder(order.orderID))
+                {
+                    orderService.DeleteOrder(order);
+                }
+
+                ordersView.Enabled = true;
+                tablesViewBtn.Enabled = true;
+                TablesViewBtn_Click(s, ee);
+            };
         }
 
+        //ListView for items what need to be served
+        public ListView ShowOrderItems(int ID)
+        {
+            List<OrderItems> orders = orderItemService.GetOrderItems(ID);
+
+            //for separate colors
+            int counter1 = 0;
+            int counter2 = 0;
+            bool flag = false;
+
+            // Making a list and editing its format 
+            ListView ordersListView = new ListView();
+            ordersListView.Height = 250;
+            ordersListView.Width = 500;
+            ordersListView.Left = 30;
+            ordersListView.View = View.Details;
+            ordersListView.FullRowSelect = true;
+            ordersListView.CheckBoxes = true;
+            ordersListView.MultiSelect = true;
+
+            ColumnHeader headerFirst = new ColumnHeader();
+            ColumnHeader headerSecond = new ColumnHeader();
+            ColumnHeader headerThird = new ColumnHeader();
+            ColumnHeader headerFourth = new ColumnHeader();
+            ColumnHeader headerFifth = new ColumnHeader();
+
+            // Set the text, alignment and width for each column header.
+            headerFirst.Text = "ID";
+            headerFirst.TextAlign = HorizontalAlignment.Left;
+            headerFirst.Width = 75;
+
+            headerSecond.TextAlign = HorizontalAlignment.Left;
+            headerSecond.Text = "Table";
+            headerSecond.Width = 45;
+
+            headerThird.TextAlign = HorizontalAlignment.Left;
+            headerThird.Text = "Name";
+            headerThird.Width = 150;
+
+            headerFourth.TextAlign = HorizontalAlignment.Left;
+            headerFourth.Text = "Amount";
+            headerFourth.Width = 70;
+
+            headerFifth.TextAlign = HorizontalAlignment.Left;
+            headerFifth.Text = "Task";
+            headerFifth.Width = 150;
+
+
+            // adding colums to the list
+            ordersListView.Columns.Add(headerFirst);
+            ordersListView.Columns.Add(headerSecond);
+            ordersListView.Columns.Add(headerThird);
+            ordersListView.Columns.Add(headerFourth);
+            ordersListView.Columns.Add(headerFifth);
+
+
+            // storing data into the list
+            foreach (OrderItems item in orders)
+            {
+                //if items are needed to be served
+                if (item.isServed == false && item.isReady == true)
+                {
+                    //if it's the first unserved order OR we need to reset counters
+                    if (counter1 == 0 || (counter1 != item.orderID && counter2 != item.orderID && flag == true))
+                    {
+                        counter1 = item.orderID;
+                        flag = false;
+                    }
+
+
+                    if (counter1 == item.orderID)
+                    {
+                        ListViewItem entryListItem = ordersListView.Items.Add(item.orderItemID.ToString());
+                        entryListItem.BackColor = Color.LightBlue;
+                        entryListItem.SubItems.Add(item.tableID.ToString());
+                        entryListItem.SubItems.Add(item.itemName);
+                        entryListItem.SubItems.Add(item.amount.ToString());
+                        entryListItem.SubItems.Add("Needs to be served");
+
+                    }
+                    else
+                    {
+                        counter2 = item.orderID;
+                        flag = true;
+                        ListViewItem entryListItem = ordersListView.Items.Add(item.orderItemID.ToString());
+                        entryListItem.BackColor = Color.LightYellow;
+                        entryListItem.SubItems.Add(item.tableID.ToString());
+                        entryListItem.SubItems.Add(item.itemName);
+                        entryListItem.SubItems.Add(item.amount.ToString());
+                        entryListItem.SubItems.Add("Needs to be served");
+                    }
+                }
+                else
+                    continue;
+            }
+
+            // return a list view 
+            return ordersListView;
+        }
+
+        //listView for incomplete order 
         public ListView ShowIncompleteOrder(List<OrderItems> items)
         {
             ListView itemsListView = new ListView();
@@ -509,13 +580,14 @@ namespace ChapeauUI
 
         }
 
-        
+        //Button_click (Needs to be served)
         private void ordersView_Click(object sender, EventArgs e)
         {
             orderViewPanel.BackgroundImage = null;
-           // orderForm_Load(sender, e);
+            orderForm_Load(sender, e);
         }
 
+        //listView for the menu
         public ListView ShowMenuItems()
         {
             // Making a list and editing its format 
@@ -533,12 +605,12 @@ namespace ChapeauUI
             ColumnHeader headerFirst = new ColumnHeader();
             ColumnHeader headerSecond = new ColumnHeader();
             ColumnHeader headerThird = new ColumnHeader();
-            
+
 
             // Set the text, alignment and width for each column header.
             headerFirst.Text = "ID";
             headerFirst.TextAlign = HorizontalAlignment.Left;
-            headerFirst.Width = 45;
+            headerFirst.Width = 37;
 
             headerSecond.TextAlign = HorizontalAlignment.Left;
             headerSecond.Text = "Name";
@@ -548,13 +620,13 @@ namespace ChapeauUI
             headerThird.Text = "Stock";
             headerThird.Width = 50;
 
-           
+
 
             // adding colums to the list
             MenuItemsListView.Columns.Add(headerFirst);
             MenuItemsListView.Columns.Add(headerSecond);
             MenuItemsListView.Columns.Add(headerThird);
-        
+
 
             // storing data into the list
             foreach (ChapeauModel.MenuItem item in menuItems)
@@ -564,7 +636,7 @@ namespace ChapeauUI
                 entryListItem = MenuItemsListView.Items.Add(item.menuItemID.ToString());
                 entryListItem.SubItems.Add(item.itemName);
                 entryListItem.SubItems.Add(item.amountOnStock.ToString());
-              
+
             }
 
             // return a list view 
@@ -572,6 +644,7 @@ namespace ChapeauUI
 
         }
 
+        //listview for an existed order
         public ListView ShowOrderItemsExisted(Order existedOrder)
         {
             List<OrderItems> orderItems = orderItemService.OrderItemsExistedLogic(existedOrder);
@@ -601,7 +674,7 @@ namespace ChapeauUI
 
             headerSecond.TextAlign = HorizontalAlignment.Left;
             headerSecond.Text = "Name";
-            headerSecond.Width = 260;
+            headerSecond.Width = 250;
 
             headerThird.TextAlign = HorizontalAlignment.Left;
             headerThird.Text = "Price";
@@ -671,13 +744,14 @@ namespace ChapeauUI
 
         private void TablesViewBtn_Click(object sender, EventArgs e)
         {
+            flag_timer = 0;
             orderViewPanel.Controls.Clear(); // clear the panel
             ShowTables();   // show tables
             ShowRestaurantView(); // show Restaurant view
 
         }
 
-       
+
         private void ShowRestaurantView()
         {
             // add background image to the panel

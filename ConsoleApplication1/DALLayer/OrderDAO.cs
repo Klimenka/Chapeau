@@ -87,7 +87,7 @@ namespace ChapeauDAL
             // read from db
             SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
+            if (reader.Read())
             {
                 orderID = (int)reader["OrderId"];
 
