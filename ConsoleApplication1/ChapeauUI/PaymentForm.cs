@@ -14,16 +14,20 @@ namespace ChapeauUI
 {
     public partial class PaymentForm : Form
     {
+        
         private int employeeID;
-
-        public PaymentForm(Order order)
+        private int tableID;
+        public PaymentForm(Order order, float total)
         {
             InitializeComponent();
 
+            lbl_total.Text = total.ToString("0.00") + " euro";
             lbl_orderNr.Text = order.orderID.ToString();
             employeeID = order.employeeID;
+            tableID = order.tableID;
         }
 
+       
         private PaymentService paymentService = new PaymentService();
         private Payment payment = new Payment();
         private float tip;
@@ -63,7 +67,7 @@ namespace ChapeauUI
             payment.employeeID = employeeID;
             payment.tip = tip;
             payment.feedback = txtBoxFeedback.Text;
-            paymentService.StorePayment(payment);
+            paymentService.StorePayment(payment, tableID);
 
             ShowBill();
 
@@ -141,6 +145,14 @@ namespace ChapeauUI
             lblFeedbackShow.Text = payment.feedback;
             lblFeedbackShow.Location = new Point(250, billListView.Bottom + 100);
 
+            Button buttoclose_btn = new Button();
+            buttoclose_btn.Text = "Close";
+            buttoclose_btn.BackColor = Color.Red;
+            buttoclose_btn.Location = new Point(250, billListView.Bottom + 130);
+            buttoclose_btn.Width = 100;
+            buttoclose_btn.Height = 50;
+            buttoclose_btn.Click += new EventHandler(this.buttoclose_btn_Click);
+
 
             bill.Controls.Add(billListView);
             bill.Controls.Add(lblTotalPriceShow);
@@ -151,14 +163,21 @@ namespace ChapeauUI
             bill.Controls.Add(lblTipShow);
             bill.Controls.Add(lblFeedback);
             bill.Controls.Add(lblFeedbackShow);
+            bill.Controls.Add(buttoclose_btn);
 
             bill.ShowDialog();
 
+            
+        }
+        private void buttoclose_btn_Click(object sender, EventArgs e)
+        {
+           this.Close();
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Payment canceled!");
+            this.Close();
         }
     }
 }

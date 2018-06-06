@@ -31,9 +31,9 @@ namespace ChapeauLogic
         }
 
         //takes the information from the UI to the Database
-        public void StorePayment(Payment payment)
+        public void StorePayment(Payment payment, int tableID)
         {
-            paymentDAO.StorePayment(payment);
+            paymentDAO.StorePayment(payment, tableID);
         }
 
 

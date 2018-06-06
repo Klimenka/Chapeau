@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ChapeauUI.KitchenBarForm">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAgAAQQCEAAACAEA4AAAAAEAAAKAAQAE=</HashCode>
+      <FileName>KitchenBarForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChapeauUI.LoginForm">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAACAAAACAAQAAAAAAABgABBgEAA=</HashCode>
+      <FileName>LoginForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChapeauUI.orderForm">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgJYBACAAAhACQQCAEgACEAIIQiAgACCAhyAQAIE=</HashCode>
+      <FileName>OrderForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChapeauUI.PaymentForm">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIEAAAMAACIgAAAQABCEAACCAEBAEAAEEEAAFQBAiSA=</HashCode>
+      <FileName>PaymentForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChapeauUI.Program">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

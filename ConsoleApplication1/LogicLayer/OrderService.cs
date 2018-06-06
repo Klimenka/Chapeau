@@ -26,6 +26,11 @@ namespace ChapeauLogic
             return order.GetOrderIdDB(tableIdExistedOrder);
         }
 
+        public void DeleteOrder(Order delete_order)
+        {
+            order.DeleteOrderDB(delete_order);
+
+        }
 
 
     }

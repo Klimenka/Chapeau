@@ -42,7 +42,7 @@ namespace ChapeauDAL
 
                     SqlDataReader reader = command.ExecuteReader();
 
-                    while (reader.Read())
+                    if (reader.Read())
                     {
                         amountOnStock = int.Parse(reader["AmountOnStock"].ToString());
                     }
@@ -85,7 +85,7 @@ namespace ChapeauDAL
 
                     SqlDataReader reader = command.ExecuteReader();
 
-                    while (reader.Read())
+                    if (reader.Read())
                     {
                         amountOnStock = int.Parse(reader["AmountOnStock"].ToString());
                     }
@@ -112,7 +112,7 @@ namespace ChapeauDAL
 
         }
 
-        //get orders from DB for kitchen/bar form
+        //get orders from DB
         public List<OrderItems> getOrders(int ID)
         {
             List<OrderItems> orders = new List<OrderItems>();
@@ -120,7 +120,7 @@ namespace ChapeauDAL
 
 
             // write a sql query 
-            string SQLquery = @"SELECT c.OrderItemId, a.TableId, b.ItemName, c.Amount, c.isReady, c.IsServed from Orders as a
+            string SQLquery = @"SELECT c.OrderId, c.OrderItemId, a.TableId, b.ItemName, c.Amount, c.isReady, c.IsServed from Orders as a
                                 INNER JOIN OrderItems as c ON c.OrderId = a.OrderId
                                 INNER JOIN MenuItems as b ON c.MenuItemId = b.MenuItemId
                                 WHERE a.EmployeeId = @ID AND convert (date, DateTaken) = convert (date, GETDATE()) ";
@@ -137,6 +137,7 @@ namespace ChapeauDAL
             while (reader.Read())
             {
                 OrderItems order = new OrderItems();
+                order.orderID = (int)reader["OrderId"];
                 order.orderItemID = (int)reader["OrderItemId"];
                 order.tableID = (int)reader["TableId"];
                 order.itemName = Convert.ToString(reader["ItemName"]);
@@ -326,5 +327,30 @@ namespace ChapeauDAL
             CloseConnection(connection);
         }
 
+        public bool CheckIfExistedOrderDB(int orderID)
+        {
+            bool is_exist = false;
+
+            SqlConnection connection = OpeConnection();
+
+            string SQLquery = @"SELECT CAST(CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END AS BIT) as Name
+                                    FROM OrderItems WHERE OrderID = @OrderID";
+            SqlCommand command = new SqlCommand(SQLquery, connection);
+            command.Parameters.AddWithValue("@OrderID", orderID);
+            command.ExecuteNonQuery();
+
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                is_exist = (bool)reader["Name"];
+            }
+            reader.Close();
+
+
+            // close all connections
+            CloseConnection(connection);
+
+            return is_exist;
+        }
     }
 }

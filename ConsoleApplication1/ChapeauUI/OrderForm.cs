@@ -10,90 +10,72 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using ContentAlignment = System.Drawing.ContentAlignment;
 
 namespace ChapeauUI
 {
     public partial class orderForm : Form
     {
-
+        int flag_timer = 0; // 0 - initial form (tables view), 1 - orders_view
         OrderItemsService orderItemService = new OrderItemsService();
         OrderService orderService = new OrderService();
         MenuItemService menuItemService = new MenuItemService();
         TableService tableService = new TableService();
         List<OrderItems> orderItemsList = new List<OrderItems>();
+
         
-
-
         public orderForm(int ID, string employeeName, Position employeePosition)
         {
             InitializeComponent();
-            Shown += orderForm_Load;
-
             // show the name of the user who logged in
             empNameLbl.Text = "[" + employeeName + " <" + employeePosition + ">" + "]";
 
             //save the employee ID on the form
             employeeID.Text = ID.ToString();
+
+            // Instantiate the timer
+           
+            Timer t = new Timer();
+
+            t.Interval = 10000;
+
+            t.Enabled = true;
+
+            t.Tick += new System.EventHandler(OnTimerEvent);
         }
 
-        //show home page for a waiter
+        private void OnTimerEvent(object sender, EventArgs e)
+
+        {
+            if (flag_timer == 1)
+            {
+                orderForm_Load(sender, e);
+            }
+            else if (flag_timer == 0)
+            {
+                TablesViewBtn_Click(sender, e);
+            }
+
+        }
+
+        //show home page for a waiter(for serving purpose)
         private void orderForm_Load(object sender, EventArgs e)
         {
-            createNew.Enabled = true;
+            flag_timer = 1;
             orderViewPanel.Controls.Clear();
 
+            //items that need to be served
             ListView showOrderItems = new ListView();
             showOrderItems = ShowOrderItems(int.Parse(employeeID.Text));
             orderViewPanel.Controls.Add(showOrderItems);
-
-
-            Label table = new Label();
-            table.Text = "Table: ";
-            table.AutoSize = true;
-            table.Location = new Point(550, 45); 
-            orderViewPanel.Controls.Add(table);
-
-            ComboBox table_choice = new ComboBox();
-            table_choice.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
-            table.AutoSize = true;
-            table_choice.Location = new Point(600, 45);
-            orderViewPanel.Controls.Add(table_choice);
-
-            Label find_order = new Label();
-            find_order.Text = "Find the order by table number: ";
-            find_order.AutoSize = true;
-            find_order.Location = new Point(550, 20);
-            orderViewPanel.Controls.Add(find_order);
-
-            Button find_order_by_table = new Button();
-            find_order_by_table.Text = "OPEN THE ORDER";
-            find_order_by_table.Width = 166;
-            find_order_by_table.Height = 50;
-            find_order_by_table.Location = new Point(560, 75);
-            orderViewPanel.Controls.Add(find_order_by_table);
-
-            find_order_by_table.Click += (s, ee) =>
-            {
-
-                if (table_choice.SelectedIndex == -1)
-                {
-                    MessageBox.Show("Please select a table");
-                    return;
-                }
-
-                OrderItems existedOrder = new OrderItems();
-                existedOrder.tableID = int.Parse(table_choice.SelectedItem.ToString());
-
-                ShowExistedOrder(existedOrder);
-
-
-            };
 
             Button served = new Button();
             served.Text = "SERVED";
             served.Width = 166;
             served.Height = 50;
-            served.Location = new Point(350, 265);
+            served.ForeColor = Color.White;
+            served.BackColor = Color.Green;
+            served.Location = new Point(550, 245);
             orderViewPanel.Controls.Add(served);
 
             served.Click += (s, ee) =>
@@ -105,7 +87,7 @@ namespace ChapeauUI
                     return;
                 }
 
-                //save checked ItemsID
+                //save checked ItemsIDs
                 int[] checkedItems = new int[showOrderItems.CheckedItems.Count];
                 for (int i = 0; i < showOrderItems.CheckedItems.Count; i++)
                 {
@@ -117,113 +99,132 @@ namespace ChapeauUI
 
 
                 orderForm_Load(s, ee);
-
-
             };
-
-
         }
 
 
-
-        //Show an existed order
+        //Show an existed order (a table number is required)
         private void ShowExistedOrder(Order existedOrder)
         {
-            createNew.Enabled = false;
+            flag_timer = 2;
+            orderViewPanel.BackgroundImage = null;
+
             orderViewPanel.Controls.Clear();
 
+            //getting orderID by tableID (from DB)
             existedOrder.orderID = orderService.GetOrderID(existedOrder.tableID);
 
+            //show items from an existed order
             ListView existedOrderListControl = new ListView();
             existedOrderListControl = ShowOrderItemsExisted(existedOrder);
             orderViewPanel.Controls.Add(existedOrderListControl);
 
+            //creating the buttons and labels
             Button add_btn = new Button();
             add_btn.Text = "ADD TO ORDER";
             add_btn.Width = 166;
             add_btn.Height = 50;
-            add_btn.Location = new Point(30, 265);
-            // add_btn.BackColor = Color.LightGreen;
+            add_btn.Location = new Point(30, 220);
+            add_btn.ForeColor = Color.White;
+            add_btn.BackColor = Color.Green;
             orderViewPanel.Controls.Add(add_btn);
+
+            Button cancel_btn = new Button();
+            cancel_btn.Text = "CANCEL";
+            cancel_btn.Width = 120;
+            cancel_btn.Height = 45;
+            cancel_btn.Location = new Point(05, 290);
+            cancel_btn.BackColor = Color.Red;
+            orderViewPanel.Controls.Add(cancel_btn);
 
             Button payment_btn = new Button();
             payment_btn.Text = "PAYMENT";
             payment_btn.Width = 166;
             payment_btn.Height = 50;
-            payment_btn.Location = new Point(590, 265);
-            payment_btn.BackColor = Color.LightGreen;
+            payment_btn.Location = new Point(594, 220);
+            payment_btn.ForeColor = Color.White;
+            payment_btn.BackColor = Color.Green;
             orderViewPanel.Controls.Add(payment_btn);
+
+            Label table = new Label();
+            table.Text = "Table: ";
+            table.AutoSize = true;
+            table.Location = new Point(377, 210);
+            orderViewPanel.Controls.Add(table);
+
+            Label chosen_table = new Label();
+            chosen_table.Text = existedOrder.tableID.ToString();
+            chosen_table.AutoSize = true;
+            chosen_table.Location = new Point(460, 210);
+            orderViewPanel.Controls.Add(chosen_table);
 
             Label subtotal_lbl = new Label();
             subtotal_lbl.Text = "Subtotal: ";
             subtotal_lbl.AutoSize = true;
-            subtotal_lbl.Location = new Point(317, 230);
+            subtotal_lbl.Location = new Point(377, 230);
             orderViewPanel.Controls.Add(subtotal_lbl);
 
             Label subtotal_value_lbl = new Label();
             subtotal_value_lbl.Text = orderItemService.subtotalPrice.ToString("0.00") + " euro";
             subtotal_value_lbl.AutoSize = true;
-            subtotal_value_lbl.Location = new Point(400, 230);
+            subtotal_value_lbl.Location = new Point(460, 230);
             orderViewPanel.Controls.Add(subtotal_value_lbl);
 
+            //if items with 0.06% VAT exists ----> add to the label
             if (orderItemService.VAT_06 != 0)
             {
                 Label VAT_06_lbl = new Label();
                 VAT_06_lbl.Text = "VAT 0.06 %: ";
                 VAT_06_lbl.AutoSize = true;
-                VAT_06_lbl.Location = new Point(317, 250);
+                VAT_06_lbl.Location = new Point(377, 250);
                 orderViewPanel.Controls.Add(VAT_06_lbl);
 
                 Label VAT_06_value_lbl = new Label();
                 VAT_06_value_lbl.Text = orderItemService.VAT_06.ToString("0.00") + " euro";
                 VAT_06_value_lbl.AutoSize = true;
-                VAT_06_value_lbl.Location = new Point(400, 250);
+                VAT_06_value_lbl.Location = new Point(460, 250);
                 orderViewPanel.Controls.Add(VAT_06_value_lbl);
             }
 
+            //if items with 0.21% VAT exists ----> add to the label
             if (orderItemService.VAT_21 != 0)
             {
                 Label VAT_21_lbl = new Label();
                 VAT_21_lbl.Text = "VAT 0.21 %: ";
                 VAT_21_lbl.AutoSize = true;
-                VAT_21_lbl.Location = new Point(317, 270);
+                VAT_21_lbl.Location = new Point(377, 270);
                 orderViewPanel.Controls.Add(VAT_21_lbl);
 
                 Label VAT_21_value_lbl = new Label();
                 VAT_21_value_lbl.Text = orderItemService.VAT_21.ToString("0.00") + " euro";
                 VAT_21_value_lbl.AutoSize = true;
-                VAT_21_value_lbl.Location = new Point(400, 270);
+                VAT_21_value_lbl.Location = new Point(460, 270);
                 orderViewPanel.Controls.Add(VAT_21_value_lbl);
             }
 
-            
 
+            //Total price
             Label totalPrice_lbl = new Label();
             totalPrice_lbl.Text = "Total price: ";
             totalPrice_lbl.AutoSize = true;
-            totalPrice_lbl.Location = new Point(317, 300);
+            totalPrice_lbl.Location = new Point(377, 300);
             orderViewPanel.Controls.Add(totalPrice_lbl);
 
             Label totalPrice_value_lbl = new Label();
             totalPrice_value_lbl.Text = orderItemService.totalPrice.ToString("0.00") + " euro";
             totalPrice_value_lbl.AutoSize = true;
-            totalPrice_value_lbl.Location = new Point(400, 300);
+            totalPrice_value_lbl.Location = new Point(460, 300);
             orderViewPanel.Controls.Add(totalPrice_value_lbl);
 
+            //*****Button clicks*****
 
             payment_btn.Click += (s, ee) =>
             {
-                //don't know what check here
-                //if (orderItemsList.Count == 0)
-                //{
-                //    MessageBox.Show("Please select an item for a new order");
-                //    return;
-                //}
 
-                //show payment form
                 existedOrder.employeeID = Convert.ToInt32(employeeID.Text);
-                PaymentForm paymentForm = new PaymentForm(existedOrder);
+                PaymentForm paymentForm = new PaymentForm(existedOrder, orderItemService.totalPrice);
                 paymentForm.Show();
+               
             };
 
             add_btn.Click += (s, ee) =>
@@ -232,176 +233,98 @@ namespace ChapeauUI
 
             };
 
-
-        }
-
-
-        //new order button click
-        private void createNew_Click(object sender, EventArgs e)
-        {
-            orderViewPanel.BackgroundImage = null;
-            createNew.Enabled = false;
-            //clear List for new order after confirmation button click
-            orderItemsList.Clear();
-
-            //creating of a new order in DB
-            string table_text = ShowChooseTable();
-            int tableID;
-            tableID = int.Parse(table_text);
-            Order order = new Order();
-            order = orderService.NewOrder(int.Parse(employeeID.Text), tableID);
-
-            ShowMenuItemInterface(order);
-            //clear space for new data
-        }
-
-        public ListView ShowOrderItems(int ID)
-        {
-            List<OrderItems> orders = orderItemService.GetOrderItems(ID);
-
-            // Making a list and editing its format 
-            ListView ordersListView = new ListView();
-            ordersListView.Height = 250;
-            ordersListView.Width = 500;
-            ordersListView.Left = 30;
-            ordersListView.View = View.Details;
-            ordersListView.FullRowSelect = true;
-            ordersListView.CheckBoxes = true;
-            ordersListView.MultiSelect = true;
-
-            ColumnHeader headerFirst = new ColumnHeader();
-            ColumnHeader headerSecond = new ColumnHeader();
-            ColumnHeader headerThird = new ColumnHeader();
-            ColumnHeader headerFourth = new ColumnHeader();
-            ColumnHeader headerFifth = new ColumnHeader();
-
-            // Set the text, alignment and width for each column header.
-            headerFirst.Text = "OrderID";
-            headerFirst.TextAlign = HorizontalAlignment.Left;
-            headerFirst.Width = 75;
-
-            headerSecond.TextAlign = HorizontalAlignment.Left;
-            headerSecond.Text = "Table";
-            headerSecond.Width = 45;
-
-            headerThird.TextAlign = HorizontalAlignment.Left;
-            headerThird.Text = "Name";
-            headerThird.Width = 150;
-
-            headerFourth.TextAlign = HorizontalAlignment.Left;
-            headerFourth.Text = "Amount";
-            headerFourth.Width = 70;
-
-            headerFifth.TextAlign = HorizontalAlignment.Left;
-            headerFifth.Text = "Task";
-            headerFifth.Width = 150;
-
-
-            // adding colums to the list
-            ordersListView.Columns.Add(headerFirst);
-            ordersListView.Columns.Add(headerSecond);
-            ordersListView.Columns.Add(headerThird);
-            ordersListView.Columns.Add(headerFourth);
-            ordersListView.Columns.Add(headerFifth);
-
-            // storing data into the list
-            foreach (OrderItems item in orders)
+            cancel_btn.Click += (s, ee) =>
             {
-                if (item.isServed == false && item.isReady == true)
-                {
-                    ListViewItem entryListItem = ordersListView.Items.Add(item.orderItemID.ToString());
-                    entryListItem.SubItems.Add(item.tableID.ToString());
-                    entryListItem.SubItems.Add(item.itemName);
-                    entryListItem.SubItems.Add(item.amount.ToString());
-                    entryListItem.SubItems.Add("Needs to be served");
+                TablesViewBtn_Click(s, ee);
+            };
 
-                }
-                else
-                    continue;
-
-            }
-
-            // return a list view 
-            return ordersListView;
         }
-        public void ShowMenuItemInterface(Order order)
+
+
+
+        //create a new order
+        private void ShowMenuItemInterface(Order order)
         {
-            createNew.Enabled = false;
+            flag_timer = 2;
+            ordersView.Enabled = false;
+            tablesViewBtn.Enabled = false;
+
+            orderViewPanel.BackgroundImage = null;
+
             orderViewPanel.Controls.Clear();
 
-            //saving data on the panel (creation of the buttons and labels)
+            //creating the buttons and labels
             Label table = new Label();
             table.Text = "Table: ";
             table.AutoSize = true;
-            table.Location = new Point(560, 240);
+            table.Location = new Point(570, 180);
             orderViewPanel.Controls.Add(table);
 
             Label chosen_table = new Label();
             chosen_table.Text = order.tableID.ToString();
             chosen_table.AutoSize = true;
-            chosen_table.Location = new Point(620, 240);
+            chosen_table.Location = new Point(610, 180);
             orderViewPanel.Controls.Add(chosen_table);
 
-            Label order_text = new Label();
-            order_text.Text = "Order: ";
-            order_text.AutoSize = true;
-            order_text.Location = new Point(660, 240);
-            orderViewPanel.Controls.Add(order_text);
-
-            Label orderid = new Label();
-            orderid.Text = order.orderID.ToString();
-            orderid.AutoSize = true;
-            orderid.Location = new Point(720, 240);
-            orderViewPanel.Controls.Add(orderid);
+            Button cancel_btn = new Button();
+            cancel_btn.Text = "CANCEL";
+            cancel_btn.Width = 140;
+            cancel_btn.Height = 47;
+            cancel_btn.Location = new Point(05, 290);
+            cancel_btn.BackColor = Color.Red;
+            orderViewPanel.Controls.Add(cancel_btn);
 
             Label amountTextlbl = new Label();
             amountTextlbl.Text = "Amount";
             amountTextlbl.AutoSize = true;
-            amountTextlbl.Location = new Point(25, 240);
+            amountTextlbl.Location = new Point(320, 00);
             orderViewPanel.Controls.Add(amountTextlbl);
 
-            ComboBox amount_choice_box = new ComboBox() { Left = 50, Top = 50, Width = 400 };
+            ComboBox amount_choice_box = new ComboBox();
             amount_choice_box.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
-            //amount_choice_box.AutoSize = true;
-            amount_choice_box.Height = 5;
-            amount_choice_box.Width = 50;
-            amount_choice_box.Location = new Point(25, 270);
+            amount_choice_box.AutoSize = true;
+            amount_choice_box.SelectedIndex = 0;
+            amount_choice_box.Height = 10;
+            amount_choice_box.Width = 60;
+            amount_choice_box.Location = new Point(320, 40);
             orderViewPanel.Controls.Add(amount_choice_box);
 
             Label leave_comment_lbl = new Label();
-            leave_comment_lbl.Text = "Leave comment (optional):";
+            leave_comment_lbl.Text = "Comment (optional):";
             leave_comment_lbl.AutoSize = true;
-            leave_comment_lbl.Location = new Point(125, 240);
+            leave_comment_lbl.Location = new Point(320, 100);
             orderViewPanel.Controls.Add(leave_comment_lbl);
 
             TextBox comment_txt_box = new TextBox();
             comment_txt_box.Height = 10;
             comment_txt_box.Width = 100;
-            comment_txt_box.Location = new Point(125, 270);
+            comment_txt_box.Location = new Point(320, 140);
             orderViewPanel.Controls.Add(comment_txt_box);
 
+            //menu from DB
             ListView menu = new ListView();
             menu = ShowMenuItems();
             orderViewPanel.Controls.Add(menu);
 
+            //selected items (for a new order (not in DB yet))
             ListView incomplitedOrder = new ListView();
             incomplitedOrder = ShowIncompleteOrder(orderItemsList);
             orderViewPanel.Controls.Add(incomplitedOrder);
 
             Button add_btn = new Button();
             add_btn.Text = "ADD TO ORDER";
-            add_btn.Width = 166;
+            add_btn.Width = 150;
             add_btn.Height = 50;
-            add_btn.Location = new Point(235, 280);
-            add_btn.BackColor = Color.LightGreen;
+            add_btn.Location = new Point(310, 180);
+            add_btn.ForeColor = Color.White;
+            add_btn.BackColor = Color.Green;
             orderViewPanel.Controls.Add(add_btn);
 
             Button remove_btn = new Button();
             remove_btn.Text = "REMOVE ITEM";
             remove_btn.Width = 130;
             remove_btn.Height = 47;
-            remove_btn.Location = new Point(430, 240);
-            //remove_btn.BackColor = Color.LightCoral;
+            remove_btn.Location = new Point(650, 180);
             orderViewPanel.Controls.Add(remove_btn);
 
             Button confirm_btn = new Button();
@@ -409,7 +332,8 @@ namespace ChapeauUI
             confirm_btn.Width = 166;
             confirm_btn.Height = 50;
             confirm_btn.Location = new Point(605, 280);
-            confirm_btn.BackColor = Color.LightGreen;
+            confirm_btn.ForeColor = Color.White;
+            confirm_btn.BackColor = Color.Green;
             orderViewPanel.Controls.Add(confirm_btn);
 
             //CONFIRM ORDER click
@@ -424,12 +348,13 @@ namespace ChapeauUI
 
                 //send to DB new order items
                 orderItemService.AddNewOrderItemsToDB(orderItemsList, order);
+
                 //clear the list of items
                 orderItemsList.Clear();
-                //load the home page 
-                orderForm_Load(s, ee);
-
-
+                ordersView.Enabled = true;
+                tablesViewBtn.Enabled = true;
+                //load the tables_view page 
+                TablesViewBtn_Click(s, ee);
             };
 
             //REMOVE ITEM click
@@ -488,16 +413,131 @@ namespace ChapeauUI
 
                 ShowMenuItemInterface(order);
             };
+
+
+            cancel_btn.Click += (s, ee) =>
+            {
+                //if we are trying to add items in an existed order, we cannot delete the order, so we need to check it
+                if (!orderItemService.CheckIfExistedOrder(order.orderID))
+                {
+                    orderService.DeleteOrder(order);
+                }
+
+                ordersView.Enabled = true;
+                tablesViewBtn.Enabled = true;
+                TablesViewBtn_Click(s, ee);
+            };
         }
 
-        public ListView ShowIncompleteOrder(List<OrderItems> items)
+        //ListView for items what need to be served
+        private ListView ShowOrderItems(int ID)
+        {
+            List<OrderItems> orders = orderItemService.GetOrderItems(ID);
+
+            //for separate colors
+            int counter1 = 0;
+            int counter2 = 0;
+            bool flag = false;
+
+            // Making a list and editing its format 
+            ListView ordersListView = new ListView();
+            ordersListView.Height = 250;
+            ordersListView.Width = 500;
+            ordersListView.Left = 30;
+            ordersListView.View = View.Details;
+            ordersListView.FullRowSelect = true;
+            ordersListView.CheckBoxes = true;
+            ordersListView.MultiSelect = true;
+
+            ColumnHeader headerFirst = new ColumnHeader();
+            ColumnHeader headerSecond = new ColumnHeader();
+            ColumnHeader headerThird = new ColumnHeader();
+            ColumnHeader headerFourth = new ColumnHeader();
+            ColumnHeader headerFifth = new ColumnHeader();
+
+            // Set the text, alignment and width for each column header.
+            headerFirst.Text = "ID";
+            headerFirst.TextAlign = HorizontalAlignment.Left;
+            headerFirst.Width = 75;
+
+            headerSecond.TextAlign = HorizontalAlignment.Left;
+            headerSecond.Text = "Table";
+            headerSecond.Width = 45;
+
+            headerThird.TextAlign = HorizontalAlignment.Left;
+            headerThird.Text = "Name";
+            headerThird.Width = 150;
+
+            headerFourth.TextAlign = HorizontalAlignment.Left;
+            headerFourth.Text = "Amount";
+            headerFourth.Width = 70;
+
+            headerFifth.TextAlign = HorizontalAlignment.Left;
+            headerFifth.Text = "Task";
+            headerFifth.Width = 150;
+
+
+            // adding colums to the list
+            ordersListView.Columns.Add(headerFirst);
+            ordersListView.Columns.Add(headerSecond);
+            ordersListView.Columns.Add(headerThird);
+            ordersListView.Columns.Add(headerFourth);
+            ordersListView.Columns.Add(headerFifth);
+
+
+            // storing data into the list
+            foreach (OrderItems item in orders)
+            {
+                //if items are needed to be served
+                if (item.isServed == false && item.isReady == true)
+                {
+                    //if it's the first unserved order OR we need to reset counters
+                    if (counter1 == 0 || (counter1 != item.orderID && counter2 != item.orderID && flag == true))
+                    {
+                        counter1 = item.orderID;
+                        flag = false;
+                    }
+
+
+                    if (counter1 == item.orderID)
+                    {
+                        ListViewItem entryListItem = ordersListView.Items.Add(item.orderItemID.ToString());
+                        entryListItem.BackColor = Color.LightBlue;
+                        entryListItem.SubItems.Add(item.tableID.ToString());
+                        entryListItem.SubItems.Add(item.itemName);
+                        entryListItem.SubItems.Add(item.amount.ToString());
+                        entryListItem.SubItems.Add("Needs to be served");
+
+                    }
+                    else
+                    {
+                        counter2 = item.orderID;
+                        flag = true;
+                        ListViewItem entryListItem = ordersListView.Items.Add(item.orderItemID.ToString());
+                        entryListItem.BackColor = Color.LightYellow;
+                        entryListItem.SubItems.Add(item.tableID.ToString());
+                        entryListItem.SubItems.Add(item.itemName);
+                        entryListItem.SubItems.Add(item.amount.ToString());
+                        entryListItem.SubItems.Add("Needs to be served");
+                    }
+                }
+                else
+                    continue;
+            }
+
+            // return a list view 
+            return ordersListView;
+        }
+
+        //listView for incomplete order 
+        private ListView ShowIncompleteOrder(List<OrderItems> items)
         {
             ListView itemsListView = new ListView();
-            itemsListView.Height = 230;
-            itemsListView.Width = 350;
+            itemsListView.Height = 165;
+            itemsListView.Width = 330;
             itemsListView.View = View.Details;
             itemsListView.FullRowSelect = true;
-            itemsListView.Left = 420;
+            itemsListView.Left = 450;
 
 
 
@@ -513,15 +553,15 @@ namespace ChapeauUI
 
             headerSecond.TextAlign = HorizontalAlignment.Left;
             headerSecond.Text = "Name";
-            headerSecond.Width = 150;
+            headerSecond.Width = 160;
 
             headerThird.TextAlign = HorizontalAlignment.Left;
             headerThird.Text = "Amount";
-            headerThird.Width = 40;
+            headerThird.Width = 50;
 
             headerFourth.TextAlign = HorizontalAlignment.Left;
             headerFourth.Text = "Comment";
-            headerFourth.Width = 100;
+            headerFourth.Width = 80;
 
             // adding colums to the list
             itemsListView.Columns.Add(headerFirst);
@@ -546,55 +586,21 @@ namespace ChapeauUI
 
         }
 
-        //new window for a table choice before a creation of a new order
-        public static string ShowChooseTable()
-        {
-            Form message = new Form();
-            message.Width = 500;
-            message.Height = 300;
-            message.Text = "Choose the table for a new order";
-            Label textLabel = new Label() { Left = 50, Top = 20, Text = "Table" };
-            ComboBox table_choice = new ComboBox() { Left = 50, Top = 50, Width = 400 };
-            table_choice.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
-            table_choice.AutoSize = true;
-            Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 90 };
-            string text = "";
-            confirmation.Click += (sender, e) =>
-            {
-                if (table_choice.SelectedIndex == -1)
-                {
-                    MessageBox.Show("Please select a table");
-                    return;
-                }
-                text = table_choice.SelectedItem.ToString(); message.Close();
-            };
-            message.Controls.Add(confirmation);
-            message.Controls.Add(textLabel);
-            message.Controls.Add(table_choice);
-            message.ShowDialog();
-
-            return text;
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //Button_click (Needs to be served)
         private void ordersView_Click(object sender, EventArgs e)
         {
             orderViewPanel.BackgroundImage = null;
             orderForm_Load(sender, e);
         }
 
-        public ListView ShowMenuItems()
+        //listView for the menu
+        private ListView ShowMenuItems()
         {
             // Making a list and editing its format 
             ListView MenuItemsListView = new ListView();
             List<ChapeauModel.MenuItem> menuItems = menuItemService.GetMenuItems();
             MenuItemsListView.Height = 230;
-            MenuItemsListView.Width = 365;
+            MenuItemsListView.Width = 280;
             MenuItemsListView.Left = 30;
             MenuItemsListView.View = View.Details;
             MenuItemsListView.FullRowSelect = true;
@@ -605,12 +611,12 @@ namespace ChapeauUI
             ColumnHeader headerFirst = new ColumnHeader();
             ColumnHeader headerSecond = new ColumnHeader();
             ColumnHeader headerThird = new ColumnHeader();
-            ColumnHeader headerFourth = new ColumnHeader();
+
 
             // Set the text, alignment and width for each column header.
             headerFirst.Text = "ID";
             headerFirst.TextAlign = HorizontalAlignment.Left;
-            headerFirst.Width = 45;
+            headerFirst.Width = 37;
 
             headerSecond.TextAlign = HorizontalAlignment.Left;
             headerSecond.Text = "Name";
@@ -620,15 +626,13 @@ namespace ChapeauUI
             headerThird.Text = "Stock";
             headerThird.Width = 50;
 
-            headerFourth.TextAlign = HorizontalAlignment.Left;
-            headerFourth.Text = "Bar Or Kitchen";
-            headerFourth.Width = 75;
+
 
             // adding colums to the list
             MenuItemsListView.Columns.Add(headerFirst);
             MenuItemsListView.Columns.Add(headerSecond);
             MenuItemsListView.Columns.Add(headerThird);
-            MenuItemsListView.Columns.Add(headerFourth);
+
 
             // storing data into the list
             foreach (ChapeauModel.MenuItem item in menuItems)
@@ -638,14 +642,7 @@ namespace ChapeauUI
                 entryListItem = MenuItemsListView.Items.Add(item.menuItemID.ToString());
                 entryListItem.SubItems.Add(item.itemName);
                 entryListItem.SubItems.Add(item.amountOnStock.ToString());
-                if (item.barOrKitchen == false)
-                {
-                    entryListItem.SubItems.Add("Bar");
-                }
-                else
-                {
-                    entryListItem.SubItems.Add("Kitchen");
-                }
+
             }
 
             // return a list view 
@@ -653,7 +650,8 @@ namespace ChapeauUI
 
         }
 
-        public ListView ShowOrderItemsExisted(Order existedOrder)
+        //listview for an existed order
+        private ListView ShowOrderItemsExisted(Order existedOrder)
         {
             List<OrderItems> orderItems = orderItemService.OrderItemsExistedLogic(existedOrder);
             List<ChapeauModel.MenuItem> menuItems = menuItemService.GetMenuItems();
@@ -682,7 +680,7 @@ namespace ChapeauUI
 
             headerSecond.TextAlign = HorizontalAlignment.Left;
             headerSecond.Text = "Name";
-            headerSecond.Width = 260;
+            headerSecond.Width = 250;
 
             headerThird.TextAlign = HorizontalAlignment.Left;
             headerThird.Text = "Price";
@@ -746,22 +744,26 @@ namespace ChapeauUI
         }
 
 
+
+
         /*********************** Restaurant/table********************************/
-               /********************* view ***********************/
+        /********************* view ***********************/
 
 
-        private void TablesViewBtn_Click(object sender, EventArgs e)
+        public void TablesViewBtn_Click(object sender, EventArgs e)
         {
-            createNew.Enabled = true; // enable Create New button
+            flag_timer = 0;
             orderViewPanel.Controls.Clear(); // clear the panel
             ShowTables();   // show tables
             ShowRestaurantView(); // show Restaurant view
+
         }
+
 
         private void ShowRestaurantView()
         {
             // add background image to the panel
-            orderViewPanel.BackgroundImage =
+            orderViewPanel.BackgroundImage=
                 new Bitmap(Application.StartupPath + "\\RV.png");
             orderViewPanel.BackgroundImageLayout = ImageLayout.Stretch;
         }
@@ -769,24 +771,32 @@ namespace ChapeauUI
         private void ShowTables()
         {
             List<Table> tables = tableService.GetTables(); // get the table list
-            int lastX = 73; // starting X position for creating the buttons
-            int y = 50; // starting Y position
+
+            int lastX = 100; // starting X position for creating the buttons
+            int y = 40; // starting Y position
 
             // store even table numbers
             for (int i = 0; i < tables.Count; i++)
             {
-                Button btn = new Button();
+                PictureBox pbtnBox = new PictureBox();
+                pbtnBox.Size = new Size(70, 50);
+                pbtnBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                pbtnBox.Cursor = Cursors.Hand;
+
+                Label lbl = new Label();
+                lbl.Size = new Size(70, 30);
+                lbl.TextAlign = ContentAlignment.MiddleCenter;
 
                 if ((i + 1) % 2 == 0)
                 {
-                    btn.Size = new Size(100, 50);
-                    btn.Location = new Point(lastX, y);
-                    orderViewPanel.Controls.Add(btn);
-                    lastX += btn.Width + 36;
-                    
+
+                    pbtnBox.Location = new Point(lastX, y);
+                    lbl.Location = new Point(lastX, 95);
+                    lastX += pbtnBox.Width + 70;
+
                     // create event handler for the buttons
-                    btn.Click += new EventHandler(changeTableStatusBtn_Click);
-                    btn.Tag = tables[i]; // link the table object to the button
+                    pbtnBox.Click += new EventHandler(changeTableStatusPBtnBox_Click);
+                    pbtnBox.Tag = tables[i]; // link the table object to the button
                 }
                 else
                 {
@@ -795,35 +805,40 @@ namespace ChapeauUI
 
                 if (tables[i].occupied == true)
                 {
-                    btn.BackColor = Color.Green;
-                    btn.ForeColor = Color.AliceBlue;
-                    btn.Text = (i+1)+"\nReserved";
+                    lbl.Text = (i + 1) + "\nReserved";
+                    pbtnBox.ImageLocation = @"c:tableRed.png";
                 }
                 else
                 {
-                    btn.Text = (i + 1) + "\nUn-Reserved";
-                    btn.BackColor = Color.Red;
+                    lbl.Text = (i + 1) + "\nUn-Reserved";
+                    pbtnBox.ImageLocation = @"c:tableGreen.png";
                 }
+                orderViewPanel.Controls.Add(pbtnBox);
+                orderViewPanel.Controls.Add(lbl);
             }
 
             // store odd table numbers
-            lastX = 73;
-            y = 200;
+            lastX = 100;
+            y = 170;
             for (int i = 0; i < tables.Count; i++)
             {
-                Button btn = new Button();
+                PictureBox pbtnBox = new PictureBox();
+                pbtnBox.Size = new Size(70, 50);
+                pbtnBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                pbtnBox.Cursor = Cursors.Hand;
+
+                Label lbl = new Label();
+                lbl.Size = new Size(70, 30);
+                lbl.TextAlign = ContentAlignment.MiddleCenter;
 
                 if ((i + 1) % 2 != 0)
                 {
-                    btn.Size = new Size(100, 50);
-                    btn.Location = new Point(lastX, y);
-                    orderViewPanel.Controls.Add(btn);
-                    lastX += btn.Width + 36;
-                    
-
+                    pbtnBox.Location = new Point(lastX, y);
+                    lbl.Location = new Point(lastX, 225);
+                    lastX += pbtnBox.Width + 70;
                     // create event handler for the buttons
-                    btn.Click += new EventHandler(changeTableStatusBtn_Click);
-                    btn.Tag = tables[i]; // link the table object to the button
+                    pbtnBox.Click += new EventHandler(changeTableStatusPBtnBox_Click);
+                    pbtnBox.Tag = tables[i]; // link the table object to the button
                 }
                 else
                 {
@@ -832,43 +847,44 @@ namespace ChapeauUI
 
                 if (tables[i].occupied == true)
                 {
-                    btn.BackColor = Color.Green;
-                    btn.ForeColor = Color.AliceBlue;
-                    btn.Text = (i + 1) + "\nReserved";
+                    lbl.Text = (i + 1) + "\nReserved";
+                    pbtnBox.ImageLocation = @"c:tableRed.png";
                 }
                 else
                 {
-                    btn.BackColor = Color.Red;
-                    btn.Text = (i + 1) + "\nUn-Reserved";
+                    pbtnBox.ImageLocation = @"c:tableGreen.png";
+                    lbl.Text = (i + 1) + "\nUn-Reserved"; 
                 }
+                orderViewPanel.Controls.Add(pbtnBox);
+                orderViewPanel.Controls.Add(lbl);
             }
-
+           
         }
 
         // change tables status
-        private void changeTableStatusBtn_Click(object sender, EventArgs e)
+        private void changeTableStatusPBtnBox_Click(object sender, EventArgs e)
         {
-            Button button = sender as Button;
+            PictureBox button = sender as PictureBox;
             Table table = (Table)button.Tag; // store data in table from the button tag
-            int tableID = table.tableID;
-            bool occupied;
+          
 
-            // show a message to know if the user want to change the table status or not
-            if (MessageBox.Show("Would you like to change the status of table [" + table.tableID + "]?", "Change Table Status",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            Order order = new Order();
+
+            if (table.occupied)
             {
-                if (table.occupied)
-                {
-                    occupied = false;
-                }
-                else
-                {
-                    occupied = true;
-                }
-                tableService.ChangeTableStatus(new Table(tableID, occupied)); // pass data to the logic layer
+                //show an existed order
+                order.tableID = table.tableID;
+                ShowExistedOrder(order);
             }
-            orderViewPanel.Controls.Clear(); // clear the panel
-            ShowTables(); // show the updated tables again
+            else
+            {
+                //create a new order
+                order = orderService.NewOrder(int.Parse(employeeID.Text), table.tableID);
+
+                ShowMenuItemInterface(order);
+
+            }
+
         }
 
         // log off link
