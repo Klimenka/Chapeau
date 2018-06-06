@@ -539,9 +539,8 @@ namespace ChapeauUI
             itemsListView.View = View.Details;
             itemsListView.FullRowSelect = true;
             itemsListView.Left = 450;
-
-
-
+            
+            
             ColumnHeader headerFirst = new ColumnHeader();
             ColumnHeader headerSecond = new ColumnHeader();
             ColumnHeader headerThird = new ColumnHeader();
@@ -575,6 +574,7 @@ namespace ChapeauUI
             foreach (OrderItems item in items)
             {
                 ListViewItem entryListItem = new ListViewItem();
+               
                 entryListItem = itemsListView.Items.Add(item.menuItemID.ToString());
                 entryListItem.SubItems.Add(item.itemName);
                 entryListItem.SubItems.Add(item.amount.ToString());
