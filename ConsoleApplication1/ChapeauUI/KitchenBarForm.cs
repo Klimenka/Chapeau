@@ -15,107 +15,34 @@ namespace ChapeauUI
     public partial class KitchenBarForm : Form
     {
         OrderItemsService orderItemService = new OrderItemsService();
+        List<OrderItems> items = new List<OrderItems>();
+        Position position = new Position();
+
 
         public KitchenBarForm(string employeeName, Position employeePosition)
         {
             InitializeComponent();
 
-            // show the name of the user who logged in
+            // show the name of the employee who logged in
             empNameLbl.Text = "[" + employeeName + " <" + employeePosition + ">" + "]";
-            List<OrderItems> items = new List<OrderItems>();
 
+            position = employeePosition;
 
-            if (employeePosition == Position.Barman)
-            {
-                items = orderItemService.GetBarItems();
-            }
+            Timer timer = new Timer();
 
-            else
-            {
-                items = orderItemService.GetKitchenItems();
-            }
+            timer.Interval = 10000;
 
+            timer.Enabled = true;
 
-        
-
-            // a list and editing its format 
-            
-            listView1.Height = 250;
-            listView1.Width = 500;
-            listView1.Left = 30;
-            listView1.View = View.Details;
-            listView1.FullRowSelect = true;
-            listView1.CheckBoxes = true;
-            listView1.MultiSelect = true;
-
-            ColumnHeader headerFirst = new ColumnHeader();
-            ColumnHeader headerSecond = new ColumnHeader();
-            ColumnHeader headerThird = new ColumnHeader();
-            ColumnHeader headerFourth = new ColumnHeader();
-            ColumnHeader headerFifth = new ColumnHeader();
-            ColumnHeader headerSixth = new ColumnHeader();
-
-            // Set the text, alignment and width for each column header.
-            headerFirst.Text = "OrderID";
-            headerFirst.TextAlign = HorizontalAlignment.Left;
-            headerFirst.Width = 75;
-
-            headerSecond.TextAlign = HorizontalAlignment.Left;
-            headerSecond.Text = "ItemID";
-            headerSecond.Width = 45;
-
-            headerThird.TextAlign = HorizontalAlignment.Left;
-            headerThird.Text = "Name";
-            headerThird.Width = 150;
-
-            headerFourth.TextAlign = HorizontalAlignment.Left;
-            headerFourth.Text = "Comment";
-            headerFourth.Width = 70;
-
-            headerFifth.TextAlign = HorizontalAlignment.Left;
-            headerFifth.Text = "Amount";
-            headerFifth.Width = 150;
-
-            headerSixth.TextAlign = HorizontalAlignment.Left;
-            headerSixth.Text = "Category";
-            headerSixth.Width = 150;
-
-            // adding colums to the list
-            listView1.Columns.Add(headerFirst);
-            listView1.Columns.Add(headerSecond);
-            listView1.Columns.Add(headerThird);
-            listView1.Columns.Add(headerFourth);
-            listView1.Columns.Add(headerFifth);
-
-            // store data to the list view
-            foreach (OrderItems item in items)
-            {
-                ListViewItem entryListItem = listView1.Items.Add(item.orderID.ToString());
-                entryListItem.SubItems.Add(item.orderItemID.ToString());
-                entryListItem.SubItems.Add(item.itemName);
-                entryListItem.SubItems.Add(item.comment);
-                entryListItem.SubItems.Add(item.amount.ToString());
-                entryListItem.SubItems.Add(item.category.ToString());
-
-            }
-
-
-
-
+            timer.Tick += new System.EventHandler(OnTimerEvent);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void OnTimerEvent(object sender, EventArgs e)
+
         {
+            KitchenBarForm_Load(sender, e);
 
         }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-
-        }
-        
-        
-      
 
         // log off link
         private void logoffLink_Click(object sender, EventArgs e)
@@ -135,5 +62,111 @@ namespace ChapeauUI
             Application.Exit();
         }
 
+
+
+        private void KitchenBarForm_Load(object sender, EventArgs e)
+        {
+            ListViewKitchenBar.Clear();
+
+            int counter1 = 0;
+            int counter2 = 0;
+            bool flag = false;
+
+            // BarMan will see Bar form & Chef will see Kitchen form
+            if (position == Position.Barman)
+            {
+                items = orderItemService.GetBarItems();
+            }
+
+            else
+            {
+                items = orderItemService.GetKitchenItems();
+            }
+
+            ListViewKitchenBar.View = View.Details;
+            ColumnHeader headerFirst = new ColumnHeader();
+            ColumnHeader headerSecond = new ColumnHeader();
+            ColumnHeader headerThird = new ColumnHeader();
+            ColumnHeader headerFourth = new ColumnHeader();
+            
+
+            // Set the text, alignment and width for each column header.
+            headerFirst.Text = "ID";
+            headerFirst.TextAlign = HorizontalAlignment.Left;
+            headerFirst.Width = 120;
+
+            headerSecond.TextAlign = HorizontalAlignment.Left;
+            headerSecond.Text = "Name";
+            headerSecond.Width = 500;
+
+            headerThird.TextAlign = HorizontalAlignment.Left;
+            headerThird.Text = "Amount";
+            headerThird.Width = 100;
+
+            headerFourth.TextAlign = HorizontalAlignment.Left;
+            headerFourth.Text = "Category";
+            headerFourth.Width = 200;
+
+
+
+            // adding colums to the list
+            ListViewKitchenBar.Columns.Add(headerFirst);
+            ListViewKitchenBar.Columns.Add(headerSecond);
+            ListViewKitchenBar.Columns.Add(headerThird);
+            ListViewKitchenBar.Columns.Add(headerFourth);
+           
+
+
+            foreach (OrderItems item in items)
+            {
+                    if (counter1 == 0 || (counter1 != item.orderID && counter2 != item.orderID && flag == true))
+                    {
+                        counter1 = item.orderID;
+                        flag = false;
+                    }
+
+
+                    if (counter1 == item.orderID)
+                    {
+                        ListViewItem entryListItem = ListViewKitchenBar.Items.Add(item.orderItemID.ToString());
+                        entryListItem.BackColor = Color.LightBlue;
+                        entryListItem.SubItems.Add(item.itemName);
+                        entryListItem.SubItems.Add(item.amount.ToString());
+                        entryListItem.SubItems.Add(item.category.ToString());
+
+                    }
+                    else
+                    {
+                        counter2 = item.orderID;
+                        flag = true;
+                        ListViewItem entryListItem = ListViewKitchenBar.Items.Add(item.orderItemID.ToString());
+                        entryListItem.BackColor = Color.LightYellow;
+                        entryListItem.SubItems.Add(item.itemName);
+                        entryListItem.SubItems.Add(item.amount.ToString());
+                        entryListItem.SubItems.Add(item.category.ToString());
+                    }
+               
+              
+            }
+
+           
+        }
+
+        private void isReady_btn_Click(object sender, EventArgs e)
+        {
+
+            //save checked ItemsIDs
+            int[] checkedItems = new int[ListViewKitchenBar.CheckedItems.Count];
+            for (int i = 0; i < ListViewKitchenBar.CheckedItems.Count; i++)
+            {
+                checkedItems[i] = int.Parse(ListViewKitchenBar.CheckedItems[i].SubItems[0].Text.ToString());
+            }
+
+            //send to DB items for the update
+            orderItemService.CheckAsReady(checkedItems);
+
+
+            KitchenBarForm_Load(sender, e);
+        }
     }
 }

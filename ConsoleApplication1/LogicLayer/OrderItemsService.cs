@@ -27,7 +27,7 @@ namespace ChapeauLogic
             VAT_06 = (float)0.00;
             VAT_21 = (float)0.00;
 
-            List<ChapeauModel.MenuItem> menuItems = new List<ChapeauModel.MenuItem>();
+            List<MenuItem> menuItems = new List<MenuItem>();
             List<OrderItems> orderItems = new List<OrderItems>();
             menuItems = menuItemDAO.GetAll();
 
@@ -54,17 +54,22 @@ namespace ChapeauLogic
             return orderItems;
         }
 
+        public bool CheckIfExistedOrder(int orderID)
+        {
+           return orderItemDAO.CheckIfExistedOrderDB(orderID);
+        }
+
         public List<OrderItems> GetOrderItems(int ID)
         {
             return orderItemDAO.getOrders(ID);
 
         }
-
+        //get kitchne order from DB
         public List<OrderItems> GetKitchenItems()
         {
             return orderItemDAO.getOrderItemsKitchen();
         }
-
+        //get bar order from DB
         public List<OrderItems> GetBarItems()
         {
             return orderItemDAO.getOrderItemsBar();
@@ -77,10 +82,15 @@ namespace ChapeauLogic
 
         }
 
-        
+
         public void CheckAsServed(int[] checkedItems)
         {
             orderItemDAO.CheckAsServedItems(checkedItems);
+        }
+
+        public void CheckAsReady(int[] checkedItems)
+        {
+            orderItemDAO.CheckAsReadyItems(checkedItems);
         }
     }
 }

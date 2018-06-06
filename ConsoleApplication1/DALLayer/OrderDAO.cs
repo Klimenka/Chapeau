@@ -11,7 +11,7 @@ namespace ChapeauDAL
     public class OrderDAO : BaseDAO
     {
         public Order NewOrder(int empId, int tableID)
-        
+
         {
             Order order = new Order();
 
@@ -35,7 +35,7 @@ namespace ChapeauDAL
             command2.Parameters.AddWithValue("@tableID", tableID);
             command2.ExecuteNonQuery();
 
-            
+
 
             // read from db
             SqlDataReader reader = command2.ExecuteReader();
@@ -44,9 +44,9 @@ namespace ChapeauDAL
             while (reader.Read())
             {
                 order.orderID = (int)reader["OrderId"];
-                
+
             }
-           
+
 
             // close all connections
             reader.Close();
@@ -64,7 +64,7 @@ namespace ChapeauDAL
 
             order.tableID = tableID;
             order.employeeID = empId;
-            
+
             return order;
         }
 
@@ -87,7 +87,7 @@ namespace ChapeauDAL
             // read from db
             SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
+            if (reader.Read())
             {
                 orderID = (int)reader["OrderId"];
 
@@ -100,8 +100,32 @@ namespace ChapeauDAL
 
             return orderID;
         }
-    }
+
+        public void DeleteOrderDB(Order delete_order)
+        {
+            SqlConnection connection = OpeConnection();
+
+            // write a sql query 
+            string SQLquery = @"DELETE FROM Orders 
+                                WHERE OrderId  = @OrderId";
+
+            // execute the sql query
+            SqlCommand command = new SqlCommand(SQLquery, connection);
+            command.Parameters.AddWithValue("@OrderId", delete_order.orderID);
+            command.ExecuteNonQuery();
+
+            string SQLquery2 = @"UPDATE Tables SET Occupied = 0
+                                WHERE tableId = @tableId";
+
+            // execute the sql query
+            SqlCommand command2 = new SqlCommand(SQLquery2, connection);
+            command2.Parameters.AddWithValue("@tableId", delete_order.tableID);
+            command2.ExecuteNonQuery();
+          
+            CloseConnection(connection);
+
+        }
 
 
     }
-
+}
