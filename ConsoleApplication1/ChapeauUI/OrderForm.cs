@@ -24,14 +24,14 @@ namespace ChapeauUI
         List<OrderItems> orderItemsList = new List<OrderItems>();
 
         
-        public orderForm(int ID, string employeeName, Position employeePosition)
+        public orderForm(Employess employee, Form form)
         {
             InitializeComponent();
             // show the name of the user who logged in
-            empNameLbl.Text = "[" + employeeName + " <" + employeePosition + ">" + "]";
+            empNameLbl.Text = "[" + employee.EmployeeName + " <" + (Position)employee.positionID + ">" + "]";
 
             //save the employee ID on the form
-            employeeID.Text = ID.ToString();
+            employeeID.Text = employee.employeeID.ToString();
 
             // Instantiate the timer
            
@@ -220,9 +220,10 @@ namespace ChapeauUI
 
             payment_btn.Click += (s, ee) =>
             {
+                TablesViewBtn_Click(s, ee);
 
                 existedOrder.employeeID = Convert.ToInt32(employeeID.Text);
-                PaymentForm paymentForm = new PaymentForm(existedOrder, orderItemService.totalPrice);
+                PaymentForm paymentForm = new PaymentForm(existedOrder, orderItemService.totalPrice, this);
                 paymentForm.Show();
                
             };
@@ -899,6 +900,7 @@ namespace ChapeauUI
                 this.Hide();
             }
         }
+
 
         private void orderForm_FormClosing(object sender, FormClosingEventArgs e)
         {

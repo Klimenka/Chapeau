@@ -50,14 +50,14 @@ namespace ChapeauUI
                 if (employee.positionID == Position.Waiter) // show the order form if the user is a Waiter
                 {
                     //add Employee info to the OrderFrom in order to know who logged in
-                    orderForm orderForm = new orderForm(employee.employeeID,employee.EmployeeName, Position.Waiter);
+                    orderForm orderForm = new orderForm(employee, this);
                     orderForm.Show();
                     this.Hide(); // hide the login from
                 }
                 else                
                 {
                     // show the kitchen/bar form if the user is a Chef/Barman
-                    KitchenBarForm kitchenForm = new KitchenBarForm(employee.EmployeeName, employee.positionID);
+                    KitchenBarForm kitchenForm = new KitchenBarForm(employee, this);
                     kitchenForm.Show();
                     this.Hide(); // hide the login from
                 }

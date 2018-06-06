@@ -17,7 +17,9 @@ namespace ChapeauUI
         
         private int employeeID;
         private int tableID;
-        public PaymentForm(Order order, float total)
+        Form orderForm = new Form();
+
+        public PaymentForm(Order order, float total, Form form)
         {
             InitializeComponent();
 
@@ -25,6 +27,7 @@ namespace ChapeauUI
             lbl_orderNr.Text = order.orderID.ToString();
             employeeID = order.employeeID;
             tableID = order.tableID;
+            orderForm = form;
         }
 
        
@@ -165,13 +168,17 @@ namespace ChapeauUI
             bill.Controls.Add(lblFeedbackShow);
             bill.Controls.Add(buttoclose_btn);
 
-            bill.ShowDialog();
+            bill.ShowDialog(); 
 
             
         }
         private void buttoclose_btn_Click(object sender, EventArgs e)
         {
-           this.Close();
+            MessageBox.Show("Payment Successful!");
+            orderForm.Activate();
+            this.Close();
+            
+            
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)

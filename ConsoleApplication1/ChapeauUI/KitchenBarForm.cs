@@ -19,14 +19,14 @@ namespace ChapeauUI
         Position position = new Position();
 
 
-        public KitchenBarForm(string employeeName, Position employeePosition)
+        public KitchenBarForm(Employess employee, Form form)
         {
             InitializeComponent();
 
             // show the name of the employee who logged in
-            empNameLbl.Text = "[" + employeeName + " <" + employeePosition + ">" + "]";
+            empNameLbl.Text = "[" + employee.EmployeeName + " <" + (Position)employee.positionID + ">" + "]";
 
-            position = employeePosition;
+            position = (Position)employee.positionID;
 
             Timer timer = new Timer();
 
