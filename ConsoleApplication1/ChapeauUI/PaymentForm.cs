@@ -90,7 +90,6 @@ namespace ChapeauUI
             }
 
             
-
             bill.Controls.Add(billListView);
             bill.ShowDialog();
 
