@@ -37,7 +37,7 @@ namespace ChapeauUI
                 items = orderItemService.GetKitchenItems();
             }
 
-               
+
             // listview and editing its format 
 
             listView1.View = View.Details;
@@ -89,7 +89,7 @@ namespace ChapeauUI
 
             int order_id_counter = items[0].orderID;
 
-          // store data to the list view
+            // store data to the list view
             foreach (OrderItems item in items)
             {
                 if (order_id_counter == item.orderID)
@@ -101,12 +101,12 @@ namespace ChapeauUI
                     entryListItem.SubItems.Add(item.amount.ToString());
                     entryListItem.SubItems.Add(item.category.ToString());
 
-                   
+
                 }
 
                 else
                 {
-                   
+
                     //listView1.check = false;
 
                     //Empty line(Space) between orders
@@ -121,7 +121,7 @@ namespace ChapeauUI
 
                     order_id_counter = item.orderID;
                 }
-            
+
 
             }
 
@@ -145,13 +145,11 @@ namespace ChapeauUI
                 orderItemService.CheckAsServed(checkedItems);
 
 
-                kitchenForm.Show();
+                //kitchenForm.Show();
 
 
             };
-
-.
-
+        
         }
         
         // to add the line between the orders
@@ -178,30 +176,7 @@ namespace ChapeauUI
             
         //    listView1.Controls.Add(ready);
 
-        //    ready.Click += (s, ee) =>
-        //    {
-        //        //if the list of items is empty, show warning message
-        //        if (showOrderItems.CheckedItems.Count == 0)
-        //        {
-        //            MessageBox.Show("Please select items to be served");
-        //            return;
-        //        }
-
-        //        //save checked ItemsID
-        //        int[] checkedItems = new int[showOrderItems.CheckedItems.Count];
-        //        for (int i = 0; i < showOrderItems.CheckedItems.Count; i++)
-        //        {
-        //            checkedItems[i] = int.Parse(showOrderItems.CheckedItems[i].SubItems[0].Text.ToString());
-        //        }
-
-        //        //send to DB items for the update
-        //        orderItemService.CheckAsServed(checkedItems);
-
-
-        //        button1_Click(s, ee);
-
-
-        //    };
+        
 
         //}
 
@@ -227,44 +202,7 @@ namespace ChapeauUI
 
         private void KitchenBarForm_Load(object sender, EventArgs e)
         {
-           
-
-            //    ListView showOrderItems = new ListView();
-            //showOrderItems = ShowOrderItems(int.Parse(ID.Text));
-            //    listView1.Controls.Add(showOrderItems);
-
-            //    Button ready = new Button();
-            //    ready.Text = "SERVED";
-            //    ready.Width = 166;
-            //    ready.Height = 50;
-
-            //    listView1.Controls.Add(ready);
-
-            //    ready.Click += (s, ee) =>
-            //    {
-            //    //if the list of items is empty, show warning message
-            //    if (showOrderItems.CheckedItems.Count == 0)
-            //        {
-            //            MessageBox.Show("Please select items to be served");
-            //            return;
-            //        }
-
-            //    //save checked ItemsID
-            //    int[] checkedItems = new int[showOrderItems.CheckedItems.Count];
-            //        for (int i = 0; i < showOrderItems.CheckedItems.Count; i++)
-            //        {
-            //            checkedItems[i] = int.Parse(showOrderItems.CheckedItems[i].SubItems[0].Text.ToString());
-            //        }
-
-            //    //send to DB items for the update
-            //    orderItemService.CheckAsServed(checkedItems);
-
-
-            //        KitchenBarForm_Load(s, ee);
-
-
-               // };
-
+         
         }
     }
 }
