@@ -165,7 +165,7 @@ namespace ChapeauUI
             bill.Controls.Add(lblFeedbackShow);
             bill.Controls.Add(buttoclose_btn);
 
-            bill.ShowDialog();
+            bill.ShowDialog(); 
 
             
         }
