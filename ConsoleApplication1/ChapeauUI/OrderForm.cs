@@ -901,6 +901,7 @@ namespace ChapeauUI
             }
         }
 
+
         private void orderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit(); // exit the whole app
