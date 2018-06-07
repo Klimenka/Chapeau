@@ -106,6 +106,7 @@ namespace ChapeauUI
             headerFourth.TextAlign = HorizontalAlignment.Left;
             headerFourth.Text = "Category";
             headerFourth.Width = 200;
+        
 
 
 
