@@ -57,7 +57,7 @@ namespace ChapeauUI
                 else                
                 {
                     // show the kitchen/bar form if the user is a Chef/Barman
-                    KitchenBarForm kitchenForm = new KitchenBarForm(employee, this);
+                    KitchenBarForm kitchenForm = new KitchenBarForm(employee);
                     kitchenForm.Show();
                     this.Hide(); // hide the login from
                 }

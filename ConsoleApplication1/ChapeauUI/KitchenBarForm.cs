@@ -17,14 +17,15 @@ namespace ChapeauUI
         OrderItemsService orderItemService = new OrderItemsService();
         List<OrderItems> items = new List<OrderItems>();
         Position position = new Position();
+       
 
-
-        public KitchenBarForm(Employess employee, Form form)
+        public KitchenBarForm(Employess employee)
         {
             InitializeComponent();
 
             // show the name of the employee who logged in
             empNameLbl.Text = "[" + employee.EmployeeName + " <" + (Position)employee.positionID + ">" + "]";
+            
 
             position = (Position)employee.positionID;
 
@@ -88,7 +89,8 @@ namespace ChapeauUI
             ColumnHeader headerSecond = new ColumnHeader();
             ColumnHeader headerThird = new ColumnHeader();
             ColumnHeader headerFourth = new ColumnHeader();
-            
+            ColumnHeader headerFifth = new ColumnHeader();
+
 
             // Set the text, alignment and width for each column header.
             headerFirst.Text = "ID";
@@ -97,7 +99,7 @@ namespace ChapeauUI
 
             headerSecond.TextAlign = HorizontalAlignment.Left;
             headerSecond.Text = "Name";
-            headerSecond.Width = 500;
+            headerSecond.Width = 400;
 
             headerThird.TextAlign = HorizontalAlignment.Left;
             headerThird.Text = "Amount";
@@ -105,8 +107,11 @@ namespace ChapeauUI
 
             headerFourth.TextAlign = HorizontalAlignment.Left;
             headerFourth.Text = "Category";
-            headerFourth.Width = 200;
-        
+            headerFourth.Width = 150;
+
+            headerFifth.TextAlign = HorizontalAlignment.Left;
+            headerFifth.Text = "Comments";
+            headerFifth.Width = 150;
 
 
 
@@ -115,7 +120,8 @@ namespace ChapeauUI
             ListViewKitchenBar.Columns.Add(headerSecond);
             ListViewKitchenBar.Columns.Add(headerThird);
             ListViewKitchenBar.Columns.Add(headerFourth);
-           
+            ListViewKitchenBar.Columns.Add(headerFifth);
+
 
 
             foreach (OrderItems item in items)
@@ -134,8 +140,9 @@ namespace ChapeauUI
                         entryListItem.SubItems.Add(item.itemName);
                         entryListItem.SubItems.Add(item.amount.ToString());
                         entryListItem.SubItems.Add(item.category.ToString());
+                        entryListItem.SubItems.Add(item.comment);
 
-                    }
+                }
                     else
                     {
                         counter2 = item.orderID;
@@ -145,7 +152,8 @@ namespace ChapeauUI
                         entryListItem.SubItems.Add(item.itemName);
                         entryListItem.SubItems.Add(item.amount.ToString());
                         entryListItem.SubItems.Add(item.category.ToString());
-                    }
+                        entryListItem.SubItems.Add(item.comment);
+                }
                
               
             }
