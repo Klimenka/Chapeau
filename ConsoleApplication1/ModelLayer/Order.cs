@@ -12,7 +12,7 @@ namespace ChapeauModel
         public int employeeID { get; set; }
         public int tableID { get; set; }
         public string feedback { get; set; }
-        public List<OrderItems> items;
+        public List<OrderItems> items = new List<OrderItems>();
 
         public Order(int orderID, int employeeID, int tableID)
         {

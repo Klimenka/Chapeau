@@ -30,6 +30,7 @@ namespace ChapeauDAL
             while (reader.Read())
             {
                 MenuItem item = new MenuItem();
+                item.item = new OrderItems();
 
                 item.itemName = Convert.ToString(reader["ItemName"]);
                 item.price = Convert.ToSingle(reader["Price"]);

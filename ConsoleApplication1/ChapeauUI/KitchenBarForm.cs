@@ -14,20 +14,19 @@ namespace ChapeauUI
 {
     public partial class KitchenBarForm : Form
     {
-        OrderItemsService orderItemService = new OrderItemsService();
-        List<OrderItems> items = new List<OrderItems>();
+        List<Order> items = new List<Order>();
         Position position = new Position();
-       
+        OrderService orderService = new OrderService();
 
         public KitchenBarForm(Employess employee)
         {
             InitializeComponent();
 
             // show the name of the employee who logged in
-            empNameLbl.Text = "[" + employee.EmployeeName + " <" + (Position)employee.positionID + ">" + "]";
+            empNameLbl.Text = "[" + employee.EmployeeName + " <" + (Position)employee.position + ">" + "]";
             
 
-            position = (Position)employee.positionID;
+            position = (Position)employee.position;
 
             Timer timer = new Timer();
 
@@ -76,12 +75,12 @@ namespace ChapeauUI
             // BarMan will see Bar form & Chef will see Kitchen form
             if (position == Position.Barman)
             {
-                items = orderItemService.GetBarItems();
+                items = orderService.GetBarItems();
             }
 
             else
             {
-                items = orderItemService.GetKitchenItems();
+                items = orderService.GetKitchenItems();
             }
 
             ListViewKitchenBar.View = View.Details;
@@ -123,7 +122,7 @@ namespace ChapeauUI
 
 
 
-            foreach (OrderItems item in items)
+            foreach (Order item in items)
             {
                     if (counter1 == 0 || (counter1 != item.orderID && counter2 != item.orderID && flag == true))
                     {
@@ -134,24 +133,24 @@ namespace ChapeauUI
 
                     if (counter1 == item.orderID)
                     {
-                        ListViewItem entryListItem = ListViewKitchenBar.Items.Add(item.orderItemID.ToString());
+                        ListViewItem entryListItem = ListViewKitchenBar.Items.Add(item.items[0].orderItemID.ToString());
                         entryListItem.BackColor = Color.LightBlue;
-                        entryListItem.SubItems.Add(item.itemName);
-                        entryListItem.SubItems.Add(item.amount.ToString());
-                        entryListItem.SubItems.Add(item.category.ToString());
-                        entryListItem.SubItems.Add(item.comment);
+                        entryListItem.SubItems.Add(item.items[0].itemName);
+                        entryListItem.SubItems.Add(item.items[0].amount.ToString());
+                        entryListItem.SubItems.Add(item.items[0].category.ToString());
+                        entryListItem.SubItems.Add(item.items[0].comment);
 
                 }
                     else
                     {
                         counter2 = item.orderID;
                         flag = true;
-                        ListViewItem entryListItem = ListViewKitchenBar.Items.Add(item.orderItemID.ToString());
+                        ListViewItem entryListItem = ListViewKitchenBar.Items.Add(item.items[0].orderItemID.ToString());
                         entryListItem.BackColor = Color.LightYellow;
-                        entryListItem.SubItems.Add(item.itemName);
-                        entryListItem.SubItems.Add(item.amount.ToString());
-                        entryListItem.SubItems.Add(item.category.ToString());
-                        entryListItem.SubItems.Add(item.comment);
+                        entryListItem.SubItems.Add(item.items[0].itemName);
+                        entryListItem.SubItems.Add(item.items[0].amount.ToString());
+                        entryListItem.SubItems.Add(item.items[0].category.ToString());
+                        entryListItem.SubItems.Add(item.items[0].comment);
                 }
                
               
@@ -171,7 +170,7 @@ namespace ChapeauUI
             }
 
             //send to DB items for the update
-            orderItemService.CheckAsReady(checkedItems);
+            orderService.CheckAsReady(checkedItems);
 
 
             KitchenBarForm_Load(sender, e);
