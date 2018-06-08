@@ -19,8 +19,8 @@ namespace ChapeauLogic
 
             for (int i = 0; i < menuItems.Count; i++)
             {
-                VAT = (menuItems[i].price * menuItems[i].amount) * menuItems[i].vatPercentage;
-                menuItems[i].price = (menuItems[i].price * menuItems[i].amount) + VAT;
+                VAT = (menuItems[i].price * menuItems[i].item.amount) * menuItems[i].vatPercentage;
+                menuItems[i].price = (menuItems[i].price * menuItems[i].item.amount) + VAT;
 
                 menuItems[i].totalPrice += menuItems[i].price;
                 VAT = 0;

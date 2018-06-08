@@ -24,9 +24,9 @@ namespace ChapeauUI
             InitializeComponent();
 
             // show the name of the employee who logged in
-            empNameLbl.Text = "[" + employee.EmployeeName + " <" + (Position)employee.positionID + ">" + "]";
+            empNameLbl.Text = "[" + employee.EmployeeName + " <" + (Position)employee.position + ">" + "]";
 
-            position = (Position)employee.positionID;
+            position = (Position)employee.position;
 
             Timer timer = new Timer();
 

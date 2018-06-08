@@ -22,17 +22,17 @@ namespace ChapeauUI
         MenuItemService menuItemService = new MenuItemService();
         TableService tableService = new TableService();
         List<OrderItems> orderItemsList = new List<OrderItems>();
-
+        
         
         public orderForm(Employess employee, Form form)
         {
             InitializeComponent();
             // show the name of the user who logged in
-            empNameLbl.Text = "[" + employee.EmployeeName + " <" + (Position)employee.positionID + ">" + "]";
+            empNameLbl.Text = @"[" + employee.EmployeeName + @" <" + (Position)employee.position + @">" + @"]";
 
             //save the employee ID on the form
             employeeID.Text = employee.employeeID.ToString();
-
+            
             // Instantiate the timer
            
             Timer t = new Timer();
@@ -427,6 +427,11 @@ namespace ChapeauUI
                 ordersView.Enabled = true;
                 tablesViewBtn.Enabled = true;
                 TablesViewBtn_Click(s, ee);
+
+                //if ()
+                //{
+                    
+                //}
             };
         }
 
@@ -779,14 +784,18 @@ namespace ChapeauUI
             // store even table numbers
             for (int i = 0; i < tables.Count; i++)
             {
-                PictureBox pbtnBox = new PictureBox();
-                pbtnBox.Size = new Size(70, 50);
-                pbtnBox.SizeMode = PictureBoxSizeMode.CenterImage;
-                pbtnBox.Cursor = Cursors.Hand;
+                PictureBox pbtnBox = new PictureBox // object initializer
+                {
+                    Size = new Size(70, 50),
+                    SizeMode = PictureBoxSizeMode.CenterImage,
+                    Cursor = Cursors.Hand
+                };
 
-                Label lbl = new Label();
-                lbl.Size = new Size(70, 30);
-                lbl.TextAlign = ContentAlignment.MiddleCenter;
+                Label lbl = new Label
+                {
+                    Size = new Size(70, 30),
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
 
                 if ((i + 1) % 2 == 0)
                 {
@@ -823,14 +832,18 @@ namespace ChapeauUI
             y = 170;
             for (int i = 0; i < tables.Count; i++)
             {
-                PictureBox pbtnBox = new PictureBox();
-                pbtnBox.Size = new Size(70, 50);
-                pbtnBox.SizeMode = PictureBoxSizeMode.CenterImage;
-                pbtnBox.Cursor = Cursors.Hand;
+                PictureBox pbtnBox = new PictureBox
+                {
+                    Size = new Size(70, 50),
+                    SizeMode = PictureBoxSizeMode.CenterImage,
+                    Cursor = Cursors.Hand
+                };
 
-                Label lbl = new Label();
-                lbl.Size = new Size(70, 30);
-                lbl.TextAlign = ContentAlignment.MiddleCenter;
+                Label lbl = new Label
+                {
+                    Size = new Size(70, 30),
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
 
                 if ((i + 1) % 2 != 0)
                 {
@@ -881,9 +894,7 @@ namespace ChapeauUI
             {
                 //create a new order
                 order = orderService.NewOrder(int.Parse(employeeID.Text), table.tableID);
-
                 ShowMenuItemInterface(order);
-
             }
 
         }
@@ -892,7 +903,7 @@ namespace ChapeauUI
         private void logoffLink_Click(object sender, EventArgs e)
         {
             // to show a confirmation message
-            if (MessageBox.Show("Are you sure you want to log off?", "Logging off",
+            if (MessageBox.Show(@"Are you sure you want to log off?", @"Logging off",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 LoginForm loginForm = new LoginForm();

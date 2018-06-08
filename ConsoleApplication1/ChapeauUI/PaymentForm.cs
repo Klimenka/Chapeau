@@ -107,7 +107,7 @@ namespace ChapeauUI
             {
 
                 entryListItem = billListView.Items.Add(item.itemName);
-                entryListItem.SubItems.Add(item.amount.ToString());
+                entryListItem.SubItems.Add(item.item.amount.ToString());
                 entryListItem.SubItems.Add(item.price.ToString("0.00"));
                 entryListItem.SubItems.Add(item.vatPercentage.ToString("0.00"));
 

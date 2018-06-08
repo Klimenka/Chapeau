@@ -34,7 +34,7 @@ namespace ChapeauDAL
                 item.itemName = Convert.ToString(reader["ItemName"]);
                 item.price = Convert.ToSingle(reader["Price"]);
                 item.vatPercentage = Convert.ToSingle(reader["VAT"]);
-                item.amount = Convert.ToInt32(reader["Amount"]);
+                item.item.amount = Convert.ToInt32(reader["Amount"]);
 
                 menuItems.Add(item);
             }

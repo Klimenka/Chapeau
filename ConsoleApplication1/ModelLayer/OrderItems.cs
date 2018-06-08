@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChapeauModel
 {
-    public class OrderItems:Order
+    public class OrderItems
     {
         public int orderItemID { get; set; }
         public int menuItemID { get; set; }
@@ -16,6 +16,8 @@ namespace ChapeauModel
         public bool isReady { get; set; }
         public bool isServed { get; set; }
         public Category category { get; set; }
+        public MenuItem menuItem;
+       
 
 
         private DateTime dateTaken { get; set; }
@@ -23,8 +25,8 @@ namespace ChapeauModel
 
         public string comment { get; set; }
 
-        public OrderItems(int orderID, int employeeID, int tableID, int orderItemID, int menuItemID, DateTime dateTaken, int amount, 
-            bool isReady, DateTime dateReady):base(orderID, employeeID, tableID)
+        public OrderItems(int orderItemID, int menuItemID, DateTime dateTaken, int amount, 
+            bool isReady, DateTime dateReady)
         {
             this.orderItemID = orderItemID;
             this.menuItemID = menuItemID;

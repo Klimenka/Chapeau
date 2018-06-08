@@ -11,7 +11,7 @@ namespace ChapeauModel
         public int employeeID { get; set; }
         public string name { get; set; }
         public string lastName { get; set; }
-        public Position positionID { get; set; }
+        public Position position { get; set; }
 
         public string EmployeeName
         {
@@ -21,12 +21,12 @@ namespace ChapeauModel
             }
         }
 
-        public Employess(int employeeID, string name, string lastName, Position positionID)
+        public Employess(int employeeID, string name, string lastName, Position position)
         {
             this.employeeID = employeeID;
             this.name = name;
             this.lastName = lastName;
-            this.positionID = positionID;
+            this.position = position;
         }
 
         public Employess()

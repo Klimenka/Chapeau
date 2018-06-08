@@ -47,7 +47,7 @@ namespace ChapeauUI
                     throw new Exception("Please check your credentials");
                 }
 
-                if (employee.positionID == Position.Waiter) // show the order form if the user is a Waiter
+                if (employee.position == Position.Waiter) // show the order form if the user is a Waiter
                 {
                     //add Employee info to the OrderFrom in order to know who logged in
                     orderForm orderForm = new orderForm(employee, this);
@@ -65,7 +65,7 @@ namespace ChapeauUI
             catch (Exception exception)
             {
                 // show the message
-                MessageBox.Show(exception.Message,"Warnning",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(exception.Message,@"Warnning",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
