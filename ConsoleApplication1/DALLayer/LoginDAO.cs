@@ -39,7 +39,7 @@ namespace ChapeauDAL
                 employee.employeeID = (int)reader["EmployeeId"];
                 employee.name = Convert.ToString(reader["Name"]);
                 employee.lastName = Convert.ToString(reader["LastName"]);
-                employee.positionID = (Position)reader["PositionId"];
+                employee.position = (Position)reader["PositionId"];
             }
             // close all connections
             reader.Close();

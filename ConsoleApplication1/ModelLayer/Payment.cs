@@ -15,6 +15,7 @@ namespace ChapeauModel
         public int employeeID { get; set; }
         public PaymentMethod paymentMethod { get; set; }
         public string feedback { get; set; }
+        //public OrderItems item;
 
         public Payment(int paymentID, int orderID, DateTime date, float tip, int employeeID,
             PaymentMethod paymentMethod)

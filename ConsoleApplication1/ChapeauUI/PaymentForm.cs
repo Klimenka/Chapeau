@@ -42,7 +42,7 @@ namespace ChapeauUI
             if (txtBox_tip.Text != "")
             {
                 tip = float.Parse(txtBox_tip.Text);
-                lblTip.Text = tip.ToString();
+                lblTip.Text = tip.ToString() + " euro";
             }
             else
             {
@@ -107,7 +107,7 @@ namespace ChapeauUI
             {
 
                 entryListItem = billListView.Items.Add(item.itemName);
-                entryListItem.SubItems.Add(item.amount.ToString());
+                entryListItem.SubItems.Add(item.item.amount.ToString());
                 entryListItem.SubItems.Add(item.price.ToString("0.00"));
                 entryListItem.SubItems.Add(item.vatPercentage.ToString("0.00"));
 
@@ -115,30 +115,30 @@ namespace ChapeauUI
 
             }
             
+            Label lblTip = new Label();
+            lblTip.Text = "Tip:";
+            lblTip.Location = new Point(0, billListView.Bottom + 10);
+
+            Label lblTipShow = new Label();
+            lblTipShow.Text = tip.ToString("0.00" + " euro");
+            lblTipShow.Location = new Point(250, billListView.Bottom + 10);
+
             Label lblTotalPrice = new Label();
-            lblTotalPrice.Text = "Total price:";
-            lblTotalPrice.Location = new Point(0, billListView.Bottom + 10);
+            lblTotalPrice.Text = "Total Price:";
+            lblTotalPrice.Location = new Point(0, billListView.Bottom + 40);
 
             Label lblTotalPriceShow = new Label();
-            lblTotalPriceShow.Text = totalPrice.ToString("0.00");
-            lblTotalPriceShow.Location = new Point(250, billListView.Bottom + 10);
+            lblTotalPriceShow.Text = (tip + totalPrice).ToString("0.00" + " euro");
+            lblTotalPriceShow.Location = new Point(250, billListView.Bottom + 40);
 
             Label lblPayMethod = new Label();
             lblPayMethod.Text = "Payment Method:";
-            lblPayMethod.Location = new Point(0, billListView.Bottom + 40);
+            lblPayMethod.Location = new Point(0, billListView.Bottom + 70);
 
 
             Label lblPayMethodShow = new Label();
             lblPayMethodShow.Text = payment.paymentMethod.ToString();
-            lblPayMethodShow.Location = new Point(250, billListView.Bottom + 40);
-
-            Label lblTip = new Label();
-            lblTip.Text = "Tip:";
-            lblTip.Location = new Point(0, billListView.Bottom + 70);
-
-            Label lblTipShow = new Label();
-            lblTipShow.Text = tip.ToString("0.00");
-            lblTipShow.Location = new Point(250, billListView.Bottom + 70);
+            lblPayMethodShow.Location = new Point(250, billListView.Bottom + 70);
 
             Label lblFeedback = new Label();
             lblFeedback.Text = "Comment:";
@@ -146,12 +146,16 @@ namespace ChapeauUI
 
             Label lblFeedbackShow = new Label();
             lblFeedbackShow.Text = payment.feedback;
+            lblFeedbackShow.AutoSize = true;
+            lblFeedbackShow.TextAlign = ContentAlignment.TopLeft;
+            lblFeedbackShow.MaximumSize = new Size(100, 0);
+
             lblFeedbackShow.Location = new Point(250, billListView.Bottom + 100);
 
             Button buttoclose_btn = new Button();
             buttoclose_btn.Text = "Close";
             buttoclose_btn.BackColor = Color.Red;
-            buttoclose_btn.Location = new Point(250, billListView.Bottom + 130);
+            buttoclose_btn.Location = new Point(250, billListView.Bottom + 150);
             buttoclose_btn.Width = 100;
             buttoclose_btn.Height = 50;
             buttoclose_btn.Click += new EventHandler(this.buttoclose_btn_Click);

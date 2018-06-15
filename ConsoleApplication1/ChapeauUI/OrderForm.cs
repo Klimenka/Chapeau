@@ -17,22 +17,21 @@ namespace ChapeauUI
     public partial class orderForm : Form
     {
         int flag_timer = 0; // 0 - initial form (tables view), 1 - orders_view
-        OrderItemsService orderItemService = new OrderItemsService();
         OrderService orderService = new OrderService();
         MenuItemService menuItemService = new MenuItemService();
         TableService tableService = new TableService();
         List<OrderItems> orderItemsList = new List<OrderItems>();
-
+        
         
         public orderForm(Employess employee, Form form)
         {
             InitializeComponent();
             // show the name of the user who logged in
-            empNameLbl.Text = "[" + employee.EmployeeName + " <" + (Position)employee.positionID + ">" + "]";
+            empNameLbl.Text = @"[" + employee.EmployeeName + @" <" + (Position)employee.position + @">" + @"]";
 
             //save the employee ID on the form
             employeeID.Text = employee.employeeID.ToString();
-
+            
             // Instantiate the timer
            
             Timer t = new Timer();
@@ -95,7 +94,7 @@ namespace ChapeauUI
                 }
 
                 //send to DB items for the update
-                orderItemService.CheckAsServed(checkedItems);
+                orderService.CheckAsServed(checkedItems);
 
 
                 orderForm_Load(s, ee);
@@ -165,13 +164,13 @@ namespace ChapeauUI
             orderViewPanel.Controls.Add(subtotal_lbl);
 
             Label subtotal_value_lbl = new Label();
-            subtotal_value_lbl.Text = orderItemService.subtotalPrice.ToString("0.00") + " euro";
+            subtotal_value_lbl.Text = orderService.subtotalPrice.ToString("0.00") + " euro";
             subtotal_value_lbl.AutoSize = true;
             subtotal_value_lbl.Location = new Point(460, 230);
             orderViewPanel.Controls.Add(subtotal_value_lbl);
 
             //if items with 0.06% VAT exists ----> add to the label
-            if (orderItemService.VAT_06 != 0)
+            if (orderService.VAT_06 != 0)
             {
                 Label VAT_06_lbl = new Label();
                 VAT_06_lbl.Text = "VAT 0.06 %: ";
@@ -180,14 +179,14 @@ namespace ChapeauUI
                 orderViewPanel.Controls.Add(VAT_06_lbl);
 
                 Label VAT_06_value_lbl = new Label();
-                VAT_06_value_lbl.Text = orderItemService.VAT_06.ToString("0.00") + " euro";
+                VAT_06_value_lbl.Text = orderService.VAT_06.ToString("0.00") + " euro";
                 VAT_06_value_lbl.AutoSize = true;
                 VAT_06_value_lbl.Location = new Point(460, 250);
                 orderViewPanel.Controls.Add(VAT_06_value_lbl);
             }
 
             //if items with 0.21% VAT exists ----> add to the label
-            if (orderItemService.VAT_21 != 0)
+            if (orderService.VAT_21 != 0)
             {
                 Label VAT_21_lbl = new Label();
                 VAT_21_lbl.Text = "VAT 0.21 %: ";
@@ -196,7 +195,7 @@ namespace ChapeauUI
                 orderViewPanel.Controls.Add(VAT_21_lbl);
 
                 Label VAT_21_value_lbl = new Label();
-                VAT_21_value_lbl.Text = orderItemService.VAT_21.ToString("0.00") + " euro";
+                VAT_21_value_lbl.Text = orderService.VAT_21.ToString("0.00") + " euro";
                 VAT_21_value_lbl.AutoSize = true;
                 VAT_21_value_lbl.Location = new Point(460, 270);
                 orderViewPanel.Controls.Add(VAT_21_value_lbl);
@@ -211,7 +210,7 @@ namespace ChapeauUI
             orderViewPanel.Controls.Add(totalPrice_lbl);
 
             Label totalPrice_value_lbl = new Label();
-            totalPrice_value_lbl.Text = orderItemService.totalPrice.ToString("0.00") + " euro";
+            totalPrice_value_lbl.Text = orderService.totalPrice.ToString("0.00") + " euro";
             totalPrice_value_lbl.AutoSize = true;
             totalPrice_value_lbl.Location = new Point(460, 300);
             orderViewPanel.Controls.Add(totalPrice_value_lbl);
@@ -223,7 +222,7 @@ namespace ChapeauUI
                 TablesViewBtn_Click(s, ee);
 
                 existedOrder.employeeID = Convert.ToInt32(employeeID.Text);
-                PaymentForm paymentForm = new PaymentForm(existedOrder, orderItemService.totalPrice, this);
+                PaymentForm paymentForm = new PaymentForm(existedOrder, orderService.totalPrice, this);
                 paymentForm.Show();
                
             };
@@ -348,7 +347,7 @@ namespace ChapeauUI
                 }
 
                 //send to DB new order items
-                orderItemService.AddNewOrderItemsToDB(orderItemsList, order);
+                orderService.AddNewOrderItemsToDB(orderItemsList, order);
 
                 //clear the list of items
                 orderItemsList.Clear();
@@ -419,7 +418,7 @@ namespace ChapeauUI
             cancel_btn.Click += (s, ee) =>
             {
                 //if we are trying to add items in an existed order, we cannot delete the order, so we need to check it
-                if (!orderItemService.CheckIfExistedOrder(order.orderID))
+                if (!orderService.CheckIfExistedOrder(order.orderID))
                 {
                     orderService.DeleteOrder(order);
                 }
@@ -427,13 +426,18 @@ namespace ChapeauUI
                 ordersView.Enabled = true;
                 tablesViewBtn.Enabled = true;
                 TablesViewBtn_Click(s, ee);
+
+                //if ()
+                //{
+                    
+                //}
             };
         }
 
         //ListView for items what need to be served
         private ListView ShowOrderItems(int ID)
         {
-            List<OrderItems> orders = orderItemService.GetOrderItems(ID);
+            List<Order> orders = orderService.GetOrderItems(ID);
 
             //for separate colors
             int counter1 = 0;
@@ -487,10 +491,10 @@ namespace ChapeauUI
 
 
             // storing data into the list
-            foreach (OrderItems item in orders)
+            foreach (Order item in orders)
             {
                 //if items are needed to be served
-                if (item.isServed == false && item.isReady == true)
+                if (item.items[0].isServed == false && item.items[0].isReady == true)
                 {
                     //if it's the first unserved order OR we need to reset counters
                     if (counter1 == 0 || (counter1 != item.orderID && counter2 != item.orderID && flag == true))
@@ -502,11 +506,11 @@ namespace ChapeauUI
 
                     if (counter1 == item.orderID)
                     {
-                        ListViewItem entryListItem = ordersListView.Items.Add(item.orderItemID.ToString());
+                        ListViewItem entryListItem = ordersListView.Items.Add(item.items[0].orderItemID.ToString());
                         entryListItem.BackColor = Color.LightBlue;
                         entryListItem.SubItems.Add(item.tableID.ToString());
-                        entryListItem.SubItems.Add(item.itemName);
-                        entryListItem.SubItems.Add(item.amount.ToString());
+                        entryListItem.SubItems.Add(item.items[0].itemName);
+                        entryListItem.SubItems.Add(item.items[0].amount.ToString());
                         entryListItem.SubItems.Add("Needs to be served");
 
                     }
@@ -514,11 +518,11 @@ namespace ChapeauUI
                     {
                         counter2 = item.orderID;
                         flag = true;
-                        ListViewItem entryListItem = ordersListView.Items.Add(item.orderItemID.ToString());
+                        ListViewItem entryListItem = ordersListView.Items.Add(item.items[0].orderItemID.ToString());
                         entryListItem.BackColor = Color.LightYellow;
                         entryListItem.SubItems.Add(item.tableID.ToString());
-                        entryListItem.SubItems.Add(item.itemName);
-                        entryListItem.SubItems.Add(item.amount.ToString());
+                        entryListItem.SubItems.Add(item.items[0].itemName);
+                        entryListItem.SubItems.Add(item.items[0].amount.ToString());
                         entryListItem.SubItems.Add("Needs to be served");
                     }
                 }
@@ -654,7 +658,7 @@ namespace ChapeauUI
         //listview for an existed order
         private ListView ShowOrderItemsExisted(Order existedOrder)
         {
-            List<OrderItems> orderItems = orderItemService.OrderItemsExistedLogic(existedOrder);
+            List<OrderItems> orderItems = orderService.OrderItemsExistedLogic(existedOrder);
             List<ChapeauModel.MenuItem> menuItems = menuItemService.GetMenuItems();
 
             ListView itemsListView = new ListView();
@@ -779,14 +783,18 @@ namespace ChapeauUI
             // store even table numbers
             for (int i = 0; i < tables.Count; i++)
             {
-                PictureBox pbtnBox = new PictureBox();
-                pbtnBox.Size = new Size(70, 50);
-                pbtnBox.SizeMode = PictureBoxSizeMode.CenterImage;
-                pbtnBox.Cursor = Cursors.Hand;
+                PictureBox pbtnBox = new PictureBox // object initializer
+                {
+                    Size = new Size(70, 50),
+                    SizeMode = PictureBoxSizeMode.CenterImage,
+                    Cursor = Cursors.Hand
+                };
 
-                Label lbl = new Label();
-                lbl.Size = new Size(70, 30);
-                lbl.TextAlign = ContentAlignment.MiddleCenter;
+                Label lbl = new Label
+                {
+                    Size = new Size(70, 30),
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
 
                 if ((i + 1) % 2 == 0)
                 {
@@ -823,14 +831,18 @@ namespace ChapeauUI
             y = 170;
             for (int i = 0; i < tables.Count; i++)
             {
-                PictureBox pbtnBox = new PictureBox();
-                pbtnBox.Size = new Size(70, 50);
-                pbtnBox.SizeMode = PictureBoxSizeMode.CenterImage;
-                pbtnBox.Cursor = Cursors.Hand;
+                PictureBox pbtnBox = new PictureBox
+                {
+                    Size = new Size(70, 50),
+                    SizeMode = PictureBoxSizeMode.CenterImage,
+                    Cursor = Cursors.Hand
+                };
 
-                Label lbl = new Label();
-                lbl.Size = new Size(70, 30);
-                lbl.TextAlign = ContentAlignment.MiddleCenter;
+                Label lbl = new Label
+                {
+                    Size = new Size(70, 30),
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
 
                 if ((i + 1) % 2 != 0)
                 {
@@ -881,9 +893,7 @@ namespace ChapeauUI
             {
                 //create a new order
                 order = orderService.NewOrder(int.Parse(employeeID.Text), table.tableID);
-
                 ShowMenuItemInterface(order);
-
             }
 
         }
@@ -892,7 +902,7 @@ namespace ChapeauUI
         private void logoffLink_Click(object sender, EventArgs e)
         {
             // to show a confirmation message
-            if (MessageBox.Show("Are you sure you want to log off?", "Logging off",
+            if (MessageBox.Show(@"Are you sure you want to log off?", @"Logging off",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 LoginForm loginForm = new LoginForm();

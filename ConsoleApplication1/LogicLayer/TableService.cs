@@ -21,10 +21,10 @@ namespace ChapeauLogic
             return tables;
         }
 
-        public void ChangeTableStatus(Table table)
-        {
-            tableDao.ChangeTableStatus(table);
-        }
+        //public void ChangeTableStatus(Table table)
+        //{
+        //    tableDao.ChangeTableStatus(table);
+        //}
     }
 
 

@@ -45,7 +45,6 @@
     <Compile Include="LoginDAO.cs" />
     <Compile Include="MenuItemDAO.cs" />
     <Compile Include="OrderDAO.cs" />
-    <Compile Include="OrderItemsDAO.cs" />
     <Compile Include="PaymentDAO.cs" />
     <Compile Include="BaseDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,10 +55,6 @@
       <Project>{0ca1f993-953c-49d7-be90-4227149d0068}</Project>
       <Name>ChapeauModel</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram3.cd" />
-    <None Include="ClassDiagramDAO.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

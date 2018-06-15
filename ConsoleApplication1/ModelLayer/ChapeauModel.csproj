@@ -52,8 +52,5 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Table.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagramModel.cd" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
