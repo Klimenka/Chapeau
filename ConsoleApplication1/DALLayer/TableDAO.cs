@@ -35,18 +35,18 @@ namespace ChapeauDAL
             return tables;
         }
 
-        public void ChangeTableStatus(Table table)
-        {
-            SqlConnection connection = OpeConnection();
-            string sqlQuery = @"UPDATE Tables SET Occupied = @Occupied WHERE TableId = @TableId";
+        //public void ChangeTableStatus(Table table)
+        //{
+        //    SqlConnection connection = OpeConnection();
+        //    string sqlQuery = @"UPDATE Tables SET Occupied = @Occupied WHERE TableId = @TableId";
 
-            SqlCommand command = new SqlCommand(sqlQuery, connection);
-            command.Parameters.AddWithValue("@Occupied", table.occupied);
-            command.Parameters.AddWithValue("@TableId", table.tableID);
-            command.ExecuteNonQuery();
+        //    SqlCommand command = new SqlCommand(sqlQuery, connection);
+        //    command.Parameters.AddWithValue("@Occupied", table.occupied);
+        //    command.Parameters.AddWithValue("@TableId", table.tableID);
+        //    command.ExecuteNonQuery();
 
-            CloseConnection(connection);
-        }
+        //    CloseConnection(connection);
+        //}
 
 
     }

@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace ChapeauModel
 {
-    public class MenuItem: OrderItems
+    public class MenuItem
     {
-       // public int menuItemID { get; set; }
-       // public string itemName { get; set; }
+        public int menuItemID { get; set; }
+        public string itemName { get; set; }
         public float price { get; set; }
         public float vatPercentage { get; set; }
         public int amountOnStock { get; set; }
         public bool barOrKitchen { get; set; } // true is kitchen while false is bar
-      //  public Category category { get; set; }
+        public Category category { get; set; }
         public float totalPrice { get; set; }
+        public OrderItems item;
 
         public MenuItem(int menuItemID, string itemName, float price, float vatPercentage,
             int amountOnStock, bool barOrKitchen, Category category)

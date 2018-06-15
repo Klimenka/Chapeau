@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="LoginService.cs" />
     <Compile Include="MenuItemService.cs" />
-    <Compile Include="OrderItemsService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="PaymentService.cs" />
     <Compile Include="TableService.cs" />
@@ -58,9 +57,6 @@
       <Project>{0ca1f993-953c-49d7-be90-4227149d0068}</Project>
       <Name>ChapeauModel</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagramLogic.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
