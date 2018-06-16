@@ -178,7 +178,7 @@ namespace ChapeauUI
         }
         private void buttoclose_btn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Payment Successful!");
+           
             orderForm.Activate();
             this.Close();
             
