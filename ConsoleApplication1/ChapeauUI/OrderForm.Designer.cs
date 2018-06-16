@@ -42,7 +42,7 @@
             // 
             // ordersView
             // 
-            this.ordersView.Location = new System.Drawing.Point(55, 62);
+            this.ordersView.Location = new System.Drawing.Point(44, 62);
             this.ordersView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ordersView.Name = "ordersView";
             this.ordersView.Size = new System.Drawing.Size(166, 48);

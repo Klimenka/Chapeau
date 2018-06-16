@@ -123,7 +123,7 @@ namespace ChapeauUI
             add_btn.Text = "ADD TO ORDER";
             add_btn.Width = 166;
             add_btn.Height = 50;
-            add_btn.Location = new Point(30, 220);
+            add_btn.Location = new Point(180, 220);
             add_btn.ForeColor = Color.White;
             add_btn.BackColor = Color.Green;
             orderViewPanel.Controls.Add(add_btn);
@@ -132,7 +132,7 @@ namespace ChapeauUI
             cancel_btn.Text = "CANCEL";
             cancel_btn.Width = 120;
             cancel_btn.Height = 45;
-            cancel_btn.Location = new Point(05, 290);
+            cancel_btn.Location = new Point(30, 290);
             cancel_btn.BackColor = Color.Red;
             orderViewPanel.Controls.Add(cancel_btn);
 
@@ -270,7 +270,7 @@ namespace ChapeauUI
             cancel_btn.Text = "CANCEL";
             cancel_btn.Width = 140;
             cancel_btn.Height = 47;
-            cancel_btn.Location = new Point(05, 290);
+            cancel_btn.Location = new Point(30, 290);
             cancel_btn.BackColor = Color.Red;
             orderViewPanel.Controls.Add(cancel_btn);
 
