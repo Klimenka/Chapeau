@@ -27,7 +27,7 @@ namespace ChapeauUI
         {
             InitializeComponent();
             // show the name of the user who logged in
-            empNameLbl.Text = @"[" + employee.EmployeeName + @" <" + (Position)employee.position + @">" + @"]";
+            empNameLbl.Text = @"[" + employee.EmployeeName + @" <" + employee.position + @">" + @"]";
 
             //save the employee ID on the form
             employeeID.Text = employee.employeeID.ToString();
