@@ -17,23 +17,26 @@ namespace ChapeauUI
         List<Order> items = new List<Order>();
         Position position = new Position();
         OrderService orderService = new OrderService();
-
+        
         public KitchenBarForm(Employess employee)
         {
             InitializeComponent();
 
             // show the name of the employee who logged in
-            empNameLbl.Text = "[" + employee.EmployeeName + " <" + (Position)employee.position + ">" + "]";
-            
+            empNameLbl.Text = @"[" + employee.EmployeeName + @" <" + (Position)employee.position + @">" + @"]";
+            if (employee.position == Position.Chef)
+            {
+                this.Text = @"Restaurant Chapeau/ Kitchen";
+            }
+            else
+            {
+                this.Text = @"Restaurant Chapeau/ Bar";
+            }
 
             position = (Position)employee.position;
-
             Timer timer = new Timer();
-
             timer.Interval = 10000;
-
             timer.Enabled = true;
-
             timer.Tick += new System.EventHandler(OnTimerEvent);
         }
 

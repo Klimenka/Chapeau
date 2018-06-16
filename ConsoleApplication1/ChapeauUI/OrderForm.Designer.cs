@@ -115,7 +115,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "orderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Restaurant Chapeau-Ordering";
+            this.Text = "Restaurant Chapeau/ Ordering";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.orderForm_FormClosing);
             this.Load += new System.EventHandler(this.TablesViewBtn_Click);
             this.statusStrip1.ResumeLayout(false);

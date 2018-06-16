@@ -812,7 +812,7 @@ namespace ChapeauUI
                     continue;
                 }
 
-                if (tables[i].occupied == true)
+                if (tables[i].occupied)
                 {
                     lbl.Text = (i + 1) + "\nReserved";
                     pbtnBox.ImageLocation = @"c:tableRed.png";
@@ -858,7 +858,7 @@ namespace ChapeauUI
                     continue;
                 }
 
-                if (tables[i].occupied == true)
+                if (tables[i].occupied)
                 {
                     lbl.Text = (i + 1) + "\nReserved";
                     pbtnBox.ImageLocation = @"c:tableRed.png";

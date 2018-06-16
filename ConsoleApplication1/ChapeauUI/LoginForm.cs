@@ -13,7 +13,7 @@ using ChapeauLogic;
 
 namespace ChapeauUI
 {
-    
+
     public partial class LoginForm : Form
     {
         public LoginForm()
@@ -54,7 +54,13 @@ namespace ChapeauUI
                     orderForm.Show();
                     this.Hide(); // hide the login from
                 }
-                else                
+                else if (employee.position == Position.Manager)
+                {
+                    ManageForm manageForm = new ManageForm();
+                    manageForm.Show();
+                    this.Hide();
+                }
+                else
                 {
                     // show the kitchen/bar form if the user is a Chef/Barman
                     KitchenBarForm kitchenForm = new KitchenBarForm(employee);
@@ -65,7 +71,7 @@ namespace ChapeauUI
             catch (Exception exception)
             {
                 // show the message
-                MessageBox.Show(exception.Message,@"Warnning",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(exception.Message, @"Warnning", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

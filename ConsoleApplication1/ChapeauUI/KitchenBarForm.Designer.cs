@@ -43,10 +43,10 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.empNameLbl,
             this.logoffLink});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 794);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 994);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 11, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1687, 25);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1898, 30);
             this.statusStrip1.TabIndex = 12;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -57,7 +57,7 @@
             this.empNameLbl.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.empNameLbl.ImageTransparentColor = System.Drawing.Color.Transparent;
             this.empNameLbl.Name = "empNameLbl";
-            this.empNameLbl.Size = new System.Drawing.Size(14, 20);
+            this.empNameLbl.Size = new System.Drawing.Size(14, 25);
             // 
             // logoffLink
             // 
@@ -67,7 +67,7 @@
             this.logoffLink.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.logoffLink.LinkColor = System.Drawing.Color.Maroon;
             this.logoffLink.Name = "logoffLink";
-            this.logoffLink.Size = new System.Drawing.Size(52, 20);
+            this.logoffLink.Size = new System.Drawing.Size(65, 25);
             this.logoffLink.Text = "Log off";
             this.logoffLink.VisitedLinkColor = System.Drawing.Color.Maroon;
             this.logoffLink.Click += new System.EventHandler(this.logoffLink_Click);
@@ -77,10 +77,10 @@
             this.ListViewKitchenBar.CheckBoxes = true;
             this.ListViewKitchenBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ListViewKitchenBar.FullRowSelect = true;
-            this.ListViewKitchenBar.Location = new System.Drawing.Point(218, 58);
+            this.ListViewKitchenBar.Location = new System.Drawing.Point(245, 72);
             this.ListViewKitchenBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ListViewKitchenBar.Name = "ListViewKitchenBar";
-            this.ListViewKitchenBar.Size = new System.Drawing.Size(1271, 562);
+            this.ListViewKitchenBar.Size = new System.Drawing.Size(1429, 702);
             this.ListViewKitchenBar.TabIndex = 12;
             this.ListViewKitchenBar.UseCompatibleStateImageBehavior = false;
             // 
@@ -89,10 +89,10 @@
             this.isReady_btn.BackColor = System.Drawing.Color.Green;
             this.isReady_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.isReady_btn.ForeColor = System.Drawing.Color.White;
-            this.isReady_btn.Location = new System.Drawing.Point(692, 670);
+            this.isReady_btn.Location = new System.Drawing.Point(778, 838);
             this.isReady_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.isReady_btn.Name = "isReady_btn";
-            this.isReady_btn.Size = new System.Drawing.Size(323, 83);
+            this.isReady_btn.Size = new System.Drawing.Size(363, 104);
             this.isReady_btn.TabIndex = 13;
             this.isReady_btn.Text = "READY";
             this.isReady_btn.UseVisualStyleBackColor = false;
@@ -100,9 +100,9 @@
             // 
             // KitchenBarForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1687, 819);
+            this.ClientSize = new System.Drawing.Size(1898, 1024);
             this.Controls.Add(this.isReady_btn);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ListViewKitchenBar);
@@ -110,7 +110,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "KitchenBarForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Restaurant Chapeau-Kitchen/Bar";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.KitchenBarForm_FormClosing);
             this.Load += new System.EventHandler(this.KitchenBarForm_Load);

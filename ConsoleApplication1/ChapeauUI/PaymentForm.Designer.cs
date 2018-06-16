@@ -298,7 +298,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "PaymentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Restaurant Chapeau-Payment";
+            this.Text = "Restaurant Chapeau/ Payment";
             ((System.ComponentModel.ISupportInitialize)(this.visa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.amex)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

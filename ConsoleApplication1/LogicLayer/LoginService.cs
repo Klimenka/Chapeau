@@ -20,6 +20,11 @@ namespace ChapeauLogic
             return employeee;
         }
 
+        public void RegisterEmployee(Employess employee, Login loginInfo)
+        {
+            loginDAO.RegisterEmployee(employee, loginInfo);
+        }
+
     }
 
 
