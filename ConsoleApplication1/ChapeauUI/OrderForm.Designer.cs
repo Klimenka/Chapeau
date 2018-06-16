@@ -35,8 +35,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.empNameLbl = new System.Windows.Forms.ToolStripStatusLabel();
             this.logoffLink = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.employeeID = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,23 +102,6 @@
             this.logoffLink.VisitedLinkColor = System.Drawing.Color.Maroon;
             this.logoffLink.Click += new System.EventHandler(this.logoffLink_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1045, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 20);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "EmployeeID";
-            // 
-            // employeeID
-            // 
-            this.employeeID.AutoSize = true;
-            this.employeeID.Location = new System.Drawing.Point(1147, 24);
-            this.employeeID.Name = "employeeID";
-            this.employeeID.Size = new System.Drawing.Size(0, 20);
-            this.employeeID.TabIndex = 5;
-            // 
             // orderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -129,8 +110,6 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.orderViewPanel);
             this.Controls.Add(this.tablesViewBtn);
-            this.Controls.Add(this.employeeID);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.ordersView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -153,8 +132,6 @@
         private System.Windows.Forms.Panel orderViewPanel;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel logoffLink;
-        private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.Label employeeID;
         private System.Windows.Forms.ToolStripStatusLabel empNameLbl;
     }
 }

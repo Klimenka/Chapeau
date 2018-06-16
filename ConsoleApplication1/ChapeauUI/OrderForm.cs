@@ -21,7 +21,7 @@ namespace ChapeauUI
         MenuItemService menuItemService = new MenuItemService();
         TableService tableService = new TableService();
         List<OrderItems> orderItemsList = new List<OrderItems>();
-        
+        int employeeID_login = 0;
         
         public orderForm(Employess employee, Form form)
         {
@@ -30,10 +30,10 @@ namespace ChapeauUI
             empNameLbl.Text = @"[" + employee.EmployeeName + @" <" + (Position)employee.position + @">" + @"]";
 
             //save the employee ID on the form
-            employeeID.Text = employee.employeeID.ToString();
             
+            employeeID_login = employee.employeeID;
             // Instantiate the timer
-           
+
             Timer t = new Timer();
 
             t.Interval = 10000;
@@ -65,7 +65,7 @@ namespace ChapeauUI
 
             //items that need to be served
             ListView showOrderItems = new ListView();
-            showOrderItems = ShowOrderItems(int.Parse(employeeID.Text));
+            showOrderItems = ShowOrderItems(employeeID_login);
             orderViewPanel.Controls.Add(showOrderItems);
 
             Button served = new Button();
@@ -221,7 +221,7 @@ namespace ChapeauUI
             {
                 TablesViewBtn_Click(s, ee);
 
-                existedOrder.employeeID = Convert.ToInt32(employeeID.Text);
+                existedOrder.employeeID = employeeID_login;
                 PaymentForm paymentForm = new PaymentForm(existedOrder, orderService.totalPrice, this);
                 paymentForm.Show();
                
@@ -892,7 +892,7 @@ namespace ChapeauUI
             else
             {
                 //create a new order
-                order = orderService.NewOrder(int.Parse(employeeID.Text), table.tableID);
+                order = orderService.NewOrder(employeeID_login, table.tableID);
                 ShowMenuItemInterface(order);
             }
 
