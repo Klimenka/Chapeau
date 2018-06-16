@@ -38,8 +38,8 @@
       <FileName>OrderService.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="menuItemDAO" />
       <Field Name="orderDAO" />
+      <Field Name="menuItemDAO" />
     </ShowAsAssociation>
   </Class>
   <Class Name="ChapeauLogic.PaymentService">
@@ -64,10 +64,6 @@
   </Class>
   <Class Name="ChapeauDAL.BaseDAO">
     <Position X="6" Y="0.5" Width="1.5" />
-    <TypeIdentifier />
-  </Class>
-  <Class Name="ChapeauDAL.EmployeeDAO">
-    <Position X="5" Y="2.5" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="ChapeauDAL.LoginDAO">

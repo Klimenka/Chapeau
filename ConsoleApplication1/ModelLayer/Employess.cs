@@ -17,7 +17,7 @@ namespace ChapeauModel
         {
             get
             {
-                return $"{name} {lastName}";
+                return $"{name} {lastName}"; // string interpolation $
             }
         }
 
