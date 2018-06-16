@@ -11,7 +11,7 @@ namespace ChapeauLogic
 {
     public class OrderService
     {
-        OrderDAO order = new OrderDAO();
+        private OrderDAO order = new OrderDAO();
 
         public float totalPrice;
         public float subtotalPrice;
@@ -19,7 +19,7 @@ namespace ChapeauLogic
         public float VAT_21;
 
         OrderDAO orderDAO = new OrderDAO();
-        MenuItemDAO menuItemDAO = new MenuItemDAO();
+        private MenuItemDAO menuItemDAO = new MenuItemDAO();
 
         public List<OrderItems> OrderItemsExistedLogic(Order existedOrder)
         {

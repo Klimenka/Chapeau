@@ -11,7 +11,7 @@ namespace ChapeauLogic
 {
     public class MenuItemService
     {
-        public MenuItemDAO menuItemDAO = new MenuItemDAO();
+        private MenuItemDAO menuItemDAO = new MenuItemDAO();
        
 
         public List<MenuItem> GetMenuItems()

@@ -111,6 +111,7 @@
             this.Name = "KitchenBarForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Restaurant Chapeau-Kitchen/Bar";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.KitchenBarForm_FormClosing);
             this.Load += new System.EventHandler(this.KitchenBarForm_Load);
             this.statusStrip1.ResumeLayout(false);

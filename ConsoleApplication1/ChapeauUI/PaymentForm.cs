@@ -17,7 +17,7 @@ namespace ChapeauUI
         
         private int employeeID;
         private int tableID;
-        Form orderForm = new Form();
+        private Form orderForm;
 
         public PaymentForm(Order order, float total, Form form)
         {

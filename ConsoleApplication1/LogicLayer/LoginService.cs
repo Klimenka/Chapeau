@@ -10,11 +10,12 @@ namespace ChapeauLogic
 {
     public class LoginService
     {
-        private LoginDAO login = new LoginDAO();
+        private LoginDAO loginDAO = new LoginDAO();
+         
 
         public Employess CheckCredentials(Login user)
         {
-            Employess employeee = login.CheckCredentials(user);
+            Employess employeee = loginDAO.CheckCredentials(user);
 
             return employeee;
         }
