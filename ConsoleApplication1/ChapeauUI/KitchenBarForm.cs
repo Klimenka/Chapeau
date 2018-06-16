@@ -113,6 +113,7 @@ namespace ChapeauUI
             headerFifth.Width = 150;
 
 
+
             // adding colums to the list
             ListViewKitchenBar.Columns.Add(headerFirst);
             ListViewKitchenBar.Columns.Add(headerSecond);
