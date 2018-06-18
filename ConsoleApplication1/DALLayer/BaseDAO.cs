@@ -32,7 +32,7 @@ namespace ChapeauDAL
             catch (SqlException e)
             {
                 SqlConnection connection = null;
-                Console.WriteLine(e.ToString());
+                //Console.WriteLine(e.ToString());
                 return connection;
             }
         }

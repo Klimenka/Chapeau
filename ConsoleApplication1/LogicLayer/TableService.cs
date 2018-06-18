@@ -13,7 +13,6 @@ namespace ChapeauLogic
     {
         private TableDAO tableDao = new TableDAO();
 
-
         public List<Table> GetTables()
         {
             List<Table> tables = tableDao.GetTables();
@@ -21,10 +20,6 @@ namespace ChapeauLogic
             return tables;
         }
 
-        //public void ChangeTableStatus(Table table)
-        //{
-        //    tableDao.ChangeTableStatus(table);
-        //}
     }
 
 

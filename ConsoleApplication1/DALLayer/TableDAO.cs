@@ -22,6 +22,7 @@ namespace ChapeauDAL
 
             List<Table> tables = new List<Table>();
 
+            // read data from database
             while (reader.Read())
             {
                 int tableID = Convert.ToInt32(reader["TableId"]);
@@ -29,25 +30,12 @@ namespace ChapeauDAL
                 tables.Add(new Table(tableID, occupied));
             }
 
+            // close all connections
             reader.Close();
             CloseConnection(connection);
 
             return tables;
         }
-
-        //public void ChangeTableStatus(Table table)
-        //{
-        //    SqlConnection connection = OpeConnection();
-        //    string sqlQuery = @"UPDATE Tables SET Occupied = @Occupied WHERE TableId = @TableId";
-
-        //    SqlCommand command = new SqlCommand(sqlQuery, connection);
-        //    command.Parameters.AddWithValue("@Occupied", table.occupied);
-        //    command.Parameters.AddWithValue("@TableId", table.tableID);
-        //    command.ExecuteNonQuery();
-
-        //    CloseConnection(connection);
-        //}
-
 
     }
 }

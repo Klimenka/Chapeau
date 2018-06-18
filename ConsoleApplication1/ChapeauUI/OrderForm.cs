@@ -777,13 +777,13 @@ namespace ChapeauUI
         {
             List<Table> tables = tableService.GetTables(); // get the table list
 
-            int lastX = 100; // starting X position for creating the buttons
-            int y = 40; // starting Y position
+            int lastXPosition = 100; // starting X position for creating the buttons
+            int yPosition = 40; // starting Y position
 
             // store even table numbers
             for (int i = 0; i < tables.Count; i++)
             {
-                PictureBox pbtnBox = new PictureBox // object initializer
+                PictureBox pictureBox = new PictureBox // object initializer
                 {
                     Size = new Size(70, 50),
                     SizeMode = PictureBoxSizeMode.CenterImage,
@@ -799,13 +799,13 @@ namespace ChapeauUI
                 if ((i + 1) % 2 == 0)
                 {
 
-                    pbtnBox.Location = new Point(lastX, y);
-                    lbl.Location = new Point(lastX, 95);
-                    lastX += pbtnBox.Width + 70;
+                    pictureBox.Location = new Point(lastXPosition, yPosition);
+                    lbl.Location = new Point(lastXPosition, 95);
+                    lastXPosition += pictureBox.Width + 70;
 
-                    // create event handler for the buttons
-                    pbtnBox.Click += new EventHandler(changeTableStatusPBtnBox_Click);
-                    pbtnBox.Tag = tables[i]; // link the table object to the button
+                    // create event handler for the pictureBox
+                    pictureBox.Click += new EventHandler(changeTableStatusPBtnBox_Click);
+                    pictureBox.Tag = tables[i]; // link the table object to the pictureBox
                 }
                 else
                 {
@@ -815,23 +815,23 @@ namespace ChapeauUI
                 if (tables[i].occupied)
                 {
                     lbl.Text = (i + 1) + "\nReserved";
-                    pbtnBox.ImageLocation = @"c:tableRed.png";
+                    pictureBox.ImageLocation = @"c:tableRed.png";
                 }
                 else
                 {
                     lbl.Text = (i + 1) + "\nUn-Reserved";
-                    pbtnBox.ImageLocation = @"c:tableGreen.png";
+                    pictureBox.ImageLocation = @"c:tableGreen.png";
                 }
-                orderViewPanel.Controls.Add(pbtnBox);
+                orderViewPanel.Controls.Add(pictureBox);
                 orderViewPanel.Controls.Add(lbl);
             }
 
             // store odd table numbers
-            lastX = 100;
-            y = 170;
+            lastXPosition = 100;
+            yPosition = 170;
             for (int i = 0; i < tables.Count; i++)
             {
-                PictureBox pbtnBox = new PictureBox
+                PictureBox pictureBox = new PictureBox
                 {
                     Size = new Size(70, 50),
                     SizeMode = PictureBoxSizeMode.CenterImage,
@@ -846,12 +846,13 @@ namespace ChapeauUI
 
                 if ((i + 1) % 2 != 0)
                 {
-                    pbtnBox.Location = new Point(lastX, y);
-                    lbl.Location = new Point(lastX, 225);
-                    lastX += pbtnBox.Width + 70;
-                    // create event handler for the buttons
-                    pbtnBox.Click += new EventHandler(changeTableStatusPBtnBox_Click);
-                    pbtnBox.Tag = tables[i]; // link the table object to the button
+                    pictureBox.Location = new Point(lastXPosition, yPosition);
+                    lbl.Location = new Point(lastXPosition, 225);
+                    lastXPosition += pictureBox.Width + 70;
+
+                    // create event handler for the pictureBox
+                    pictureBox.Click += new EventHandler(changeTableStatusPBtnBox_Click);
+                    pictureBox.Tag = tables[i]; // link the table object to the pictureBox
                 }
                 else
                 {
@@ -861,14 +862,14 @@ namespace ChapeauUI
                 if (tables[i].occupied)
                 {
                     lbl.Text = (i + 1) + "\nReserved";
-                    pbtnBox.ImageLocation = @"c:tableRed.png";
+                    pictureBox.ImageLocation = @"c:tableRed.png";
                 }
                 else
                 {
-                    pbtnBox.ImageLocation = @"c:tableGreen.png";
+                    pictureBox.ImageLocation = @"c:tableGreen.png";
                     lbl.Text = (i + 1) + "\nUn-Reserved"; 
                 }
-                orderViewPanel.Controls.Add(pbtnBox);
+                orderViewPanel.Controls.Add(pictureBox);
                 orderViewPanel.Controls.Add(lbl);
             }
            
@@ -877,8 +878,8 @@ namespace ChapeauUI
         // change tables status
         private void changeTableStatusPBtnBox_Click(object sender, EventArgs e)
         {
-            PictureBox button = sender as PictureBox;
-            Table table = (Table)button.Tag; // store data in table from the button tag
+            PictureBox pictureBox = sender as PictureBox;
+            Table table = (Table)pictureBox.Tag; // store data in table from the button tag
           
 
             Order order = new Order();

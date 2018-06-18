@@ -63,15 +63,15 @@ namespace ChapeauUI
                 else
                 {
                     // show the kitchen/bar form if the user is a Chef/Barman
-                    KitchenBarForm kitchenForm = new KitchenBarForm(employee);
-                    kitchenForm.Show();
+                    KitchenBarForm kitchenBarForm = new KitchenBarForm(employee);
+                    kitchenBarForm.Show();
                     this.Hide(); // hide the login from
                 }
             }
             catch (Exception exception)
             {
                 // show the message
-                MessageBox.Show(exception.Message, @"Warnning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(exception.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
