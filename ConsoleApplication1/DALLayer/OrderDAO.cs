@@ -121,7 +121,7 @@ namespace ChapeauDAL
             SqlCommand command2 = new SqlCommand(SQLquery2, connection);
             command2.Parameters.AddWithValue("@tableId", delete_order.tableID);
             command2.ExecuteNonQuery();
-          
+
             CloseConnection(connection);
 
         }
@@ -480,4 +480,4 @@ namespace ChapeauDAL
     }
 }
 
-   
+

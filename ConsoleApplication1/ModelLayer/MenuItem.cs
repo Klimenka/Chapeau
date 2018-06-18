@@ -32,7 +32,7 @@ namespace ChapeauModel
 
         public MenuItem()
         {
-            
+
         }
 
 

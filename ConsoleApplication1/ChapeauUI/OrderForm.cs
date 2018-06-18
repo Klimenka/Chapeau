@@ -22,7 +22,7 @@ namespace ChapeauUI
         TableService tableService = new TableService();
         List<OrderItems> orderItemsList = new List<OrderItems>();
         int employeeID_login = 0;
-        
+
         public orderForm(Employess employee, Form form)
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace ChapeauUI
             empNameLbl.Text = @"[" + employee.EmployeeName + @" <" + employee.position + @">" + @"]";
 
             //save the employee ID on the form
-            
+
             employeeID_login = employee.employeeID;
             // Instantiate the timer
 
@@ -223,8 +223,8 @@ namespace ChapeauUI
 
                 existedOrder.employeeID = employeeID_login;
                 PaymentForm paymentForm = new PaymentForm(existedOrder, orderService.totalPrice, this);
-                paymentForm.ShowDialog();
-               
+                paymentForm.Show();
+
             };
 
             add_btn.Click += (s, ee) =>
@@ -429,7 +429,7 @@ namespace ChapeauUI
 
                 //if ()
                 //{
-                    
+
                 //}
             };
         }
@@ -543,8 +543,8 @@ namespace ChapeauUI
             itemsListView.View = View.Details;
             itemsListView.FullRowSelect = true;
             itemsListView.Left = 450;
-            
-            
+
+
             ColumnHeader headerFirst = new ColumnHeader();
             ColumnHeader headerSecond = new ColumnHeader();
             ColumnHeader headerThird = new ColumnHeader();
@@ -578,7 +578,7 @@ namespace ChapeauUI
             foreach (OrderItems item in items)
             {
                 ListViewItem entryListItem = new ListViewItem();
-               
+
                 entryListItem = itemsListView.Items.Add(item.menuItemID.ToString());
                 entryListItem.SubItems.Add(item.itemName);
                 entryListItem.SubItems.Add(item.amount.ToString());
@@ -768,7 +768,7 @@ namespace ChapeauUI
         private void ShowRestaurantView()
         {
             // add background image to the panel
-            orderViewPanel.BackgroundImage=
+            orderViewPanel.BackgroundImage =
                 new Bitmap(Application.StartupPath + "\\RV.png");
             orderViewPanel.BackgroundImageLayout = ImageLayout.Stretch;
         }
@@ -867,12 +867,12 @@ namespace ChapeauUI
                 else
                 {
                     pictureBox.ImageLocation = @"c:tableGreen.png";
-                    lbl.Text = (i + 1) + "\nUn-Reserved"; 
+                    lbl.Text = (i + 1) + "\nUn-Reserved";
                 }
                 orderViewPanel.Controls.Add(pictureBox);
                 orderViewPanel.Controls.Add(lbl);
             }
-           
+
         }
 
         // change tables status
@@ -880,7 +880,7 @@ namespace ChapeauUI
         {
             PictureBox pictureBox = sender as PictureBox;
             Table table = (Table)pictureBox.Tag; // store data in table from the button tag
-          
+
 
             Order order = new Order();
 

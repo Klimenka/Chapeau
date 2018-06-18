@@ -97,9 +97,9 @@ namespace ChapeauLogic
         //sending to DB request for the creation a new order and returning an object Order
         public Order NewOrder(int EmpId, int tableID)
         {
-            
+
             return order.NewOrder(EmpId, tableID);
-           
+
         }
 
         public int GetOrderID(int tableIdExistedOrder)

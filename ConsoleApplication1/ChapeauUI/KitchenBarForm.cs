@@ -17,7 +17,7 @@ namespace ChapeauUI
         List<Order> items = new List<Order>();
         Position position = new Position();
         OrderService orderService = new OrderService();
-        
+
         public KitchenBarForm(Employess employee)
         {
             InitializeComponent();
@@ -128,39 +128,39 @@ namespace ChapeauUI
 
             foreach (Order item in items)
             {
-                    if (counter1 == 0 || (counter1 != item.orderID && counter2 != item.orderID && flag == true))
-                    {
-                        counter1 = item.orderID;
-                        flag = false;
-                    }
+                if (counter1 == 0 || (counter1 != item.orderID && counter2 != item.orderID && flag == true))
+                {
+                    counter1 = item.orderID;
+                    flag = false;
+                }
 
 
-                    if (counter1 == item.orderID)
-                    {
-                        ListViewItem entryListItem = ListViewKitchenBar.Items.Add(item.items[0].orderItemID.ToString());
-                        entryListItem.BackColor = Color.LightBlue;
-                        entryListItem.SubItems.Add(item.items[0].itemName);
-                        entryListItem.SubItems.Add(item.items[0].amount.ToString());
-                        entryListItem.SubItems.Add(item.items[0].category.ToString());
-                        entryListItem.SubItems.Add(item.items[0].comment);
+                if (counter1 == item.orderID)
+                {
+                    ListViewItem entryListItem = ListViewKitchenBar.Items.Add(item.items[0].orderItemID.ToString());
+                    entryListItem.BackColor = Color.LightBlue;
+                    entryListItem.SubItems.Add(item.items[0].itemName);
+                    entryListItem.SubItems.Add(item.items[0].amount.ToString());
+                    entryListItem.SubItems.Add(item.items[0].category.ToString());
+                    entryListItem.SubItems.Add(item.items[0].comment);
 
                 }
-                    else
-                    {
-                        counter2 = item.orderID;
-                        flag = true;
-                        ListViewItem entryListItem = ListViewKitchenBar.Items.Add(item.items[0].orderItemID.ToString());
-                        entryListItem.BackColor = Color.LightYellow;
-                        entryListItem.SubItems.Add(item.items[0].itemName);
-                        entryListItem.SubItems.Add(item.items[0].amount.ToString());
-                        entryListItem.SubItems.Add(item.items[0].category.ToString());
-                        entryListItem.SubItems.Add(item.items[0].comment);
+                else
+                {
+                    counter2 = item.orderID;
+                    flag = true;
+                    ListViewItem entryListItem = ListViewKitchenBar.Items.Add(item.items[0].orderItemID.ToString());
+                    entryListItem.BackColor = Color.LightYellow;
+                    entryListItem.SubItems.Add(item.items[0].itemName);
+                    entryListItem.SubItems.Add(item.items[0].amount.ToString());
+                    entryListItem.SubItems.Add(item.items[0].category.ToString());
+                    entryListItem.SubItems.Add(item.items[0].comment);
                 }
-               
-              
+
+
             }
 
-           
+
         }
 
         private void isReady_btn_Click(object sender, EventArgs e)

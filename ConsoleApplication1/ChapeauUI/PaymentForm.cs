@@ -14,7 +14,7 @@ namespace ChapeauUI
 {
     public partial class PaymentForm : Form
     {
-        
+
         private int employeeID;
         private int tableID;
         private Form orderForm;
@@ -30,7 +30,7 @@ namespace ChapeauUI
             orderForm = form;
         }
 
-       
+
         private PaymentService paymentService = new PaymentService();
         private Payment payment = new Payment();
         private float tip;
@@ -101,7 +101,7 @@ namespace ChapeauUI
 
             List<ChapeauModel.MenuItem> items = paymentService.menuItems(Convert.ToInt32(lbl_orderNr.Text));
             ListViewItem entryListItem = new ListViewItem();
-            float totalPrice=0;
+            float totalPrice = 0;
 
             foreach (ChapeauModel.MenuItem item in items)
             {
@@ -114,7 +114,7 @@ namespace ChapeauUI
                 totalPrice += item.totalPrice;
 
             }
-            
+
             Label lblTip = new Label();
             lblTip.Text = "Tip:";
             lblTip.Location = new Point(0, billListView.Bottom + 10);
@@ -172,17 +172,14 @@ namespace ChapeauUI
             bill.Controls.Add(lblFeedbackShow);
             bill.Controls.Add(buttoclose_btn);
 
-            bill.ShowDialog(); 
+            bill.ShowDialog();
 
-            
+
         }
         private void buttoclose_btn_Click(object sender, EventArgs e)
         {
-           
             orderForm.Activate();
             this.Close();
-            
-            
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)

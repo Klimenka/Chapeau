@@ -31,15 +31,18 @@ namespace ChapeauDAL
 
             // read from db
             SqlDataReader reader = command.ExecuteReader();
-            reader.Read();
 
-            Employess employee = new Employess // object initializer
+            Employess employee = null;
+            if (reader.Read())
             {
-                employeeID = (int) reader["EmployeeId"],
-                name = Convert.ToString(reader["Name"]),
-                lastName = Convert.ToString(reader["LastName"]),
-                position = (Position) reader["PositionId"]
-            };
+                employee = new Employess // object initializer
+                {
+                    employeeID = (int)reader["EmployeeId"],
+                    name = Convert.ToString(reader["Name"]),
+                    lastName = Convert.ToString(reader["LastName"]),
+                    position = (Position)reader["PositionId"]
+                };
+            }
 
             // close all connections
             reader.Close();
@@ -61,8 +64,16 @@ namespace ChapeauDAL
             SqlCommand command = new SqlCommand(sqlQuery, connection);
             command.Parameters.AddWithValue("@Login", loginInfo.loginName);
             command.Parameters.AddWithValue("@Password", loginInfo.password);
-            int employeeID = (int)command.ExecuteScalar(); // executing an getting the first value
+            SqlDataReader reader = command.ExecuteReader();
+           
+            int employeeID = 0;
 
+            if (reader.Read())
+            {
+                employeeID = (int)reader["EmployeeId"];
+            }
+
+            reader.Close();
             CloseConnection(connection);
 
             return employeeID;

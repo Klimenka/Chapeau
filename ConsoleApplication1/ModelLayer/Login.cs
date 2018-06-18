@@ -20,7 +20,7 @@ namespace ChapeauModel
 
         public Login()
         {
-          
+
         }
     }
 }
