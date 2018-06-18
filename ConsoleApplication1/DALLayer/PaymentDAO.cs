@@ -19,9 +19,9 @@ namespace ChapeauDAL
                                 as O join MenuItems as M on O.MenuItemId = M.MenuItemId
                                 where OrderId = @orderID"; //order ID from the table equals the order ID parameter
 
-            SqlCommand command = new SqlCommand(sqlQuery, connection);
-            command.Parameters.AddWithValue("orderID", orderID);
-            command.ExecuteNonQuery();
+            SqlCommand command = new SqlCommand(sqlQuery, connection); //initializes a new instance of the SqlCommand class
+            command.Parameters.AddWithValue("orderID", orderID); //adds a parameter by specifying its name and value
+            command.ExecuteNonQuery(); //performs catalog operations
 
             SqlDataReader reader = command.ExecuteReader(); //execute the query
 
@@ -56,14 +56,15 @@ namespace ChapeauDAL
             string sqlQuery = @"Insert into Payments(OrderId, DateTime, PaymentMethodId, Tips, EmployeeId, feedback)
                                 values (@OrderId, GETDATE(), @PaymentMethodId, @Tips, @EmployeeId, @feedback)";
 
-            SqlCommand command = new SqlCommand(sqlQuery, connection);
-            command.Parameters.AddWithValue("@OrderId",payment.orderID);
+            SqlCommand command = new SqlCommand(sqlQuery, connection); //initializes a new instance of the SqlCommand class
+
+            command.Parameters.AddWithValue("@OrderId", payment.orderID); //adds a parameter by specifying its name and value
             command.Parameters.AddWithValue("@PaymentMethodId", (int)payment.paymentMethod);
             command.Parameters.AddWithValue("@Tips", payment.tip);
             command.Parameters.AddWithValue("@EmployeeId", payment.employeeID);
             command.Parameters.AddWithValue("@feedback", payment.feedback);
 
-            command.ExecuteNonQuery();
+            command.ExecuteNonQuery(); //performs catalog operations
 
             //Occupied ----> set as 0
             string SQLquery2 = @"UPDATE Tables SET Occupied = 0
