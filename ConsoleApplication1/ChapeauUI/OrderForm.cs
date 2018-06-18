@@ -223,7 +223,7 @@ namespace ChapeauUI
 
                 existedOrder.employeeID = employeeID_login;
                 PaymentForm paymentForm = new PaymentForm(existedOrder, orderService.totalPrice, this);
-                paymentForm.Show();
+                paymentForm.ShowDialog();
                
             };
 
