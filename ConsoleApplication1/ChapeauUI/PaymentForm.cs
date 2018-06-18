@@ -30,7 +30,6 @@ namespace ChapeauUI
             orderForm = form;
         }
 
-       
         private PaymentService paymentService = new PaymentService();
         private Payment payment = new Payment();
         private float tip;

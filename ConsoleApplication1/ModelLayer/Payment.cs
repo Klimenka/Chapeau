@@ -8,6 +8,7 @@ namespace ChapeauModel
 {
     public class Payment
     {
+        //auto-property
         public int paymentID { get; set; }
         public int orderID { get; set; }
         public DateTime date { get; set; }
@@ -15,11 +16,12 @@ namespace ChapeauModel
         public int employeeID { get; set; }
         public PaymentMethod paymentMethod { get; set; }
         public string feedback { get; set; }
-        //public OrderItems item;
+
 
         public Payment(int paymentID, int orderID, DateTime date, float tip, int employeeID,
             PaymentMethod paymentMethod)
         {
+            //this belongs to the parameter
             this.paymentID = paymentID;
             this.orderID = orderID;
             this.date = date;
@@ -28,8 +30,5 @@ namespace ChapeauModel
             this.paymentMethod = paymentMethod;
         }
 
-        public Payment()
-
-        { }
     }
 }
